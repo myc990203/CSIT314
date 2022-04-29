@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Five stars evaluation</title>
+        <link rel="stylesheet" type="text/css" href="../css/comment.css"/>  
+        <script src="../js/comment.js"></script>
+    </head>
+<!-- -->
+    <body>
+        <div class="form">
+            <h1>Please make a comment for the service:</h1>
+        <div class="order-evaluation clearfix">
+            <p>Please take this evaluation seriously! Your comments are important to us!</p>
+            <div class="block">
+                <ul>
+                    <li data-default-index="0">
+                        <span>
+                            <img src="img/x1.png">
+                            <img src="img/x1.png">
+                            <img src="img/x1.png">
+                            <img src="img/x1.png">
+                            <img src="img/x1.png">
+                        </span>
+                        <em class="level"></em>
+                    </li>
+                </ul>
+            </div>
+
+        <div class="order-evaluation-text">
+           <h5>What impression does this transaction leave on you? ('There are few comments easy to say')</h5>
+        </div>
+        
+    <!-- shortcut key are easier for evaluator --> 
+        <div class="order-evaluation-checkbox">
+            <ul class="clearfix">
+                <li class="order-evaluation-check" data-impression="1">High professional level<i class="iconfont icon-checked"></i></li>
+                <li class="order-evaluation-check" data-impression="2">Delivery on time<i class="iconfont icon-checked"></i></li>
+                <li class="order-evaluation-check" data-impression="3">Obvious effects<i class="iconfont icon-checked"></i></li>
+                <li class="order-evaluation-check" data-impression="4">Accurate data analysis<i class="iconfont icon-checked"></i></li>
+                <li class="order-evaluation-check" data-impression="5">Ability to be improved<i class="iconfont icon-checked"></i></li>
+                <li class="order-evaluation-check" data-impression="6">Delays<i class="iconfont icon-checked"></i></li>
+            </ul>
+        </div>
+
+    <!-- create textarea for comment publish -->
+        <div class="order-evaluation-textarea">
+            <textarea name="content" id="TextArea1" onKeyUp="words_deal();" ></textarea>
+            <span> Still can input <em id="textCount"> 140 </em> words </span>
+        </div>
+
+    <!-- link function "<a></a>" -->
+        <a href="javascript:;" id="order_evaluation">Finish attempt</a>
+
+        <div id="order_evaluate_modal" class="dmlei_tishi_info"></div>
+        <button onclick="back()">Back</button>
+        </div>
+    </div>
+    </body>
+</html>

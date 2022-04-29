@@ -1,0 +1,134 @@
+h1{
+    text-align: center;
+    margin:20px;
+    color:gray;
+}
+/*
+span{
+    font-size:20px;
+    cursor:pointer;
+    color:gray;
+    margin:20px;
+} */
+.container{
+    align-items:start;
+    display: flex;
+    margin:40px; 
+    transition:margin-left .5s;
+    padding:16px;
+}
+.sideNav{
+    height:500px;
+    position:fixed;
+    width:0;
+    z-index:1;
+    top:0;
+    left:0;
+    background-color:#F79E7D;
+    overflow-x:hidden;
+    transition:0.5s;
+    padding-top:80px;
+}
+.sideNav a{
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+.sideNav a:hover {
+    color: #f1f1f1;
+} 
+.sideNav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+@media screen and (max-height: 450px) {
+    .sideNav {padding-top: 15px;}
+    .sideNav a {font-size: 18px;}
+}
+.user_photo{
+    margin-right: 16px;
+    width:200px;
+}
+ /*
+.container_info{
+    flex:1;
+} */
+img{
+    border-radius: 50%;
+    box-shadow:10px 10px 8px 6px #EAE1DE;
+}
+label{
+    color:#757676;
+    display:inline-block;
+    margin-bottom:5px;
+}
+.form-group{
+    margin:9px;
+    margin-left: 20px;
+    padding:10px;
+    width:40%;
+}
+.one-row{
+    display:flex;
+    padding-bottom: 20px;
+}
+.form-group input{
+    background-color: white;
+    width:100%; 
+    border: 1px solid grey;
+    border-radius: 4px;
+    padding:12px;
+    box-shadow: 4px 3px 5px gray;
+}
+button{
+    color:white;
+    background-color:#FE4D0C;
+    padding:10px;
+    border:1px solid gray;
+    border-radius:15px;
+    box-shadow: 4px 3px 5px orange;
+}
+.button-center{
+    text-align: center;
+}
+.info-form{
+    position:absolute;
+    top:15%;
+    left:20%;
+    margin-top:auto;
+    margin-left: auto;
+}
+.wrapper{
+    display:flex;
+    position: relative;
+}
+.wrapper .sideNav{
+    width:250px;
+    height:100%;
+    background:rgb(235, 96, 15);
+    padding:30px 0px;
+    position:fixed;
+}
+.wrapper .sideNav h2{
+    color: rgba(29, 28, 28, 0.925);
+    text-transform: uppercase;
+    text-align:center;
+    margin-bottom:30px;
+}
+.wrapper .sideNav ul{
+   /* padding:15px; */
+    border-bottom:1px solid #bdb8d7;
+    border-bottom:1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+.wrapper .sideNav ul a{
+    color:white;
+    display:block;
+}
+

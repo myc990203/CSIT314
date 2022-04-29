@@ -1,0 +1,63 @@
+body{
+    background-image: url(../image/bg1.jpg);
+    background-size: cover;
+}
+.top{
+    padding: 10px 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.title h1{
+    line-height:60px;
+}
+.logo{
+    height: 60px;
+    margin-right: 5px;
+}
+.logo img{
+    height: 60px;
+}
+.back{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+button{
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: cornflowerblue;
+    color: white;
+}
+.topright{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.mid{
+    width: 96%;
+    margin: 0 auto;
+}
+.nav h2{
+    line-height: 40px;
+}
+.orderper{
+    background-color: white;
+    padding: 2%;
+    width: 96%;
+    border-radius: 10px;
+    margin-top: 2%;
+}
+
+.address p,.problem p,.text p{
+    line-height: 30px;
+    font-size: 14px;
+}
+.price{
+    text-align: right;
+}
+.price p{
+    line-height: 30px;
+    font-size: 14px;
+}

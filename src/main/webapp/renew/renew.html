@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Renew Membership</title>
+        <link rel ="stylesheet" href="../renew/renew.css"/>
+        <script type="text/javascript" src="../renew/renew.js"></script>
+    </head>
+    <body>
+        <div class="renewInfo">
+        <h1>Renew My Membership</h1>
+        </div>
+        <div class="renewForm">
+            <h3>Fill out the form below to renew your membership.</h3>
+            <p>Renewal Types: </p>
+            <div>
+               <input type="radio" id="mobileNum" name="Num" value="moboleNum" onclick="clickMob()" >
+               <label for="mobile-num">Mobile Number</label>
+               <input type="radio" id="membNum" name="Num" value="membNum" onclick="clickMemb()">
+               <label for="member-num" >Membership Number</label>
+               <br><br>
+               <div id="phoneN" style="display:block">
+                   <label for="phone">Phone number: </label>
+                   <input type="tel" id="phone" name="phone" placeholder="04-123-456-78" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{2}">
+               </div><br><br>
+               <div id="membershipN" style="display:none">
+                   <label for="memberNum">Membership number: </label>
+                   <input type="text" id="number" name="number">
+               </div><br>
+               <label for="birthday">Date of Birth: </label>
+               <input type="date" id="birthday" name="birthday"><br><br>
+               <button type="button" id="continue" onlick="showPayForm()">Continue</button><br><br>
+            </div>
+        </div>
+        <div id="payForm"> <!--style="display:none"-->
+            <form>
+                <label for="name">Name on Card: </label><br>
+                <input type="name" id="cardName" name="cardName"><br><br>
+                <label for="number">Card Number: </label><br>
+                <input type="text" id="cardNum" name="cardNum"><br><br>
+                <label for="number">Expire Date: </label><br>
+                <input type="text" id="expDate" placeholder="MM/YY" maxlength='7'><br><br>
+                <label for="number">CVV: </label><br>
+                <input type="text" placeholder="CVV"><br><br>
+                <input type="submit" id="subBtn" value="Submit">
+            </form>
+        </div>
+    </body>
+</html>

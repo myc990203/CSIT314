@@ -1,0 +1,85 @@
+body {
+    background-color: #ffffff;
+    text-align: center;
+    background: url(3.jpg);
+    background-size: 100%;
+}
+
+section {
+    width: 1200px;
+    border: 5px outset blue;
+    position: absolute;
+    height: 900px;
+    line-height: 50px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 250px;
+    margin-right: 350px;
+}
+
+#title {
+    position: absolute;
+    height: 50px;
+    text-align: center;
+    line-height: 50%;
+    width: 100%;
+}
+
+.cardin {
+    position: absolute;
+    text-align: left;
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+#selectbank {
+    text-align: left;
+    margin-top: 50px;
+}
+
+#valid {
+    position: absolute;
+    float: left;
+    line-height: 10px;
+    font-size: 15px;
+    text-align: left;
+}
+
+#account {
+    position: absolute;
+    line-height: 10px;
+    font-size: 15px;
+    text-align: left;
+    margin-top: 60px;
+}
+
+.sizea {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-top: 400px;
+    font-weight: bold;
+}
+
+.but {
+    width: 350px;
+    min-height: 80px;
+    display: block;
+    background-color: #4a77d4;
+    border: 1px solid #3762bc;
+    color: #fff;
+    padding: 9px 14px;
+    font-size: 50px;
+    line-height: normal;
+    border-radius: 5px;
+    margin-top: 600px;
+    margin-left: 420px;
+}
+
+infor {
+    border: 2px outset black;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    line-height: 50px;
+}

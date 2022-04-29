@@ -1,0 +1,43 @@
+.titleinfo{
+    color:black;
+    width:400px;
+    padding: 25px;
+    margin:50px;
+}
+h2{
+    text-align: center;
+}
+hr{
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+.benefit {
+    text-align: center;
+    width:490px;
+    margin: 10px auto;
+    padding-left:30px;
+}
+#joinbtn, #renewbtn{
+    background-color:orange;
+    border-radius:30px;
+}
+.benefit li{
+    text-align: left;
+    width:350px;
+    margin: 5px auto;
+    padding-left:50px;
+}
+.services li{
+    text-align: left;
+    width:350px;
+    margin: 5px auto;
+    padding-left:50px;
+}
+.final{
+    text-align: center;
+}

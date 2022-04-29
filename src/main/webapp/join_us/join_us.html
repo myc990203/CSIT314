@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Become a Membership</title>
+        <link rel ="stylesheet" type="text/css" href="../join_us/join_us.css"/>
+        <script src="../join_us/join_us.js"></script>
+    </head>
+    <body>
+    <div class="began">
+        <h1>Welcome to Join Us: </h1>
+        <h4>Please fill in your personal information below.</h4>
+    </div>
+        <form class="join">
+            <table class="formInfo">
+                <tr>
+                    <td class="textR"><label for="fname">First Name: </label></td>
+                    <td><input type="text" id="fname" name="fname"></td>
+                </tr>
+                <tr>
+                    <td class="textR"><label for="lname">Last Name: </label></td>
+                    <td><input type="text" id="lname" name="lname"></td>
+                </tr>
+                <tr>
+                    <td class="textR"><label for="birthday">Date of Birth: </label></td>
+                    <td><input type="date" id="birthday" name="birthday"></td>
+                </tr>
+                <tr>
+                    <td class="textR"><label for="gender">Select your Gender: </label></td>
+                    <td>
+                    <select>
+                        <option value="none" selected>Gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="textR"><label for="emails">Email: </label></td>
+                    <td><input type="email" id="emails" name="emails"></td>
+                </tr>
+                <tr>
+                    <td class="textR"><label for="phone">Phone number: </label></td>
+                    <td><input type="tel" id="phone" name="phone" placeholder="04-123-456-78" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{2}" required></td><br>
+                    <td><small>Format:04-123-456-78</small></td>
+                </tr>
+            </table>
+            <input type="submit" id="submit">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- link rel="stylesheet" href="css/orgchart/style.css" -->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Determine Payment information</title>
+
+    <link rel="stylesheet" type="text/css" href="payment.css" />
+    <script type="text/javascript" src="payment.js" ></script>
+</head>
+
+
+<body>
+    <button onclick="back()">Back</button>
+    <div>
+        <form method="post">
+
+            <section>
+
+                <div id="title">
+                    <h1>Determine Payment information</h1>
+                    <img id="state" src="https://mywebspace.net.au/UOWC128/assignment_4/images/initial_state.png" alt="Alternate Text" />
+                    <h2></h2>
+                    <h1 class="cardin">Choose your payment method</h1>
+                    <!-- 选择银行卡 -->
+                    <div id="selectbank">
+
+                        <select>
+
+                <option value="Visa">Visa</option>
+                <option value="master card">master card</option> 
+                <form method="post">
+                    <input type="banknumber" required="required" placeholder="Bank number" name="u"></input>
+
+                </form> 
+            </select>
+    </div>
+
+    <!-- 银行卡信息 -->
+    <div id="valid">
+        <!-- 日期 -->
+
+        <h1>Valid period</h1>
+    <select>
+        <option value="month">1</option>
+        <option value="month">2</option>
+        <option value="month">3</option>
+        <option value="month">4</option>
+        <option value="month">5</option>
+        <option value="month">6</option>
+        <option value="month">7</option>
+        <option value="month">8</option>
+        <option value="month">9</option>
+        <option value="month">10</option>
+        <option value="month">11</option>
+        <option value="month">12</option>
+    </select>
+<!-- 年 -->
+    <select>
+        <option value="year">2022</option>
+        <option value="year">2023</option>
+        <option value="year">2024</option>
+        <option value="year">2025</option>
+        <option value="year">2026</option>
+        <option value="year">2027</option>
+        <option value="year">2028</option>
+        <option value="year">2029</option>
+        <option value="year">2030</option>
+        <option value="year">2031</option>
+        <option value="year">2032</option>
+        <option value="year">2033</option>
+        <option value="year">2034</option>
+        <option value="year">2035</option>
+        <option value="year">2036</option>
+        <option value="year">2037</option>
+        <option value="year">2038</option>
+        <option value="year">2039</option>
+        <option value="year">2040</option>
+        <option value="year">2041</option>
+        <option value="year">2042</option>
+        <option value="year">2043</option>
+        <option value="year">2044</option>
+        <option value="year">2045</option>
+        <option value="year">2046</option>
+        <option value="year">2047</option>
+    </select>
+                        <!-- 安全码-->
+            <input type="securitycode" required="required" placeholder="Security code " name="u"></input>
+        </div>
+
+        <div id="account">
+            <!-- 账单信息-->
+            <h1>Account information</h1>
+            <input type="name" required="required" placeholder="Last Name " name="u"></input>
+            <input type="name" required="required" placeholder="Fist Name " name="u"></input>
+            <input type="city" required="required" placeholder="City " name="u"></input>
+            <input type="Zipcode" required="required" placeholder="Zip code " name="u"></input>
+            <input type="Billingaddress" required="required" placeholder="Billing address " name="u"></input>
+            <input type="Billingaddress2" required="required" placeholder="Billing address2 " name="u"></input>
+
+            <p class="sizea">You need payment: </p>
+
+        </div>
+
+        <button class="but" type="submit" onclick="comment()">continue</button>
+    </div>
+</section>
+
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+.began{
+    text-align: center;
+}
+.formInfo{
+    border:0;
+    border-collapse: collapse;
+}
+th, td{
+    padding:10px;
+}
+.textR{
+    text-align: right;
+}
+h4{
+    color:gray;
+}
+.join{
+    width:500px;
+    padding: 25px;
+    margin:30px;
+    border: 1px solid #ccc;
+    border-radius:30px;
+    box-shadow: 5px 5px gray;
+    background-color: #f2f2f2;
+}
+#submit{
+    background-color: #337ab7;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+}
