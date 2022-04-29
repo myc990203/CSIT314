@@ -38,7 +38,7 @@ public class Register extends HttpServlet {
             String gender = req.getParameter("gender");
             String location = req.getParameter("location");
             try {
-                JdbcUtil.sqlProInsert(userType,username,password,DOB,email,phoneNum,gender,location);
+                JdbcUtil.sqlProInsert(username,password,DOB,email,phoneNum,gender,location);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
@@ -47,7 +47,7 @@ public class Register extends HttpServlet {
         }
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter pw = resp.getWriter();
-        resp.sendRedirect("login.html");
+        resp.sendRedirect("index.jsp");
     }
 
 }

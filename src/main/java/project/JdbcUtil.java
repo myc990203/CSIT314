@@ -96,42 +96,36 @@ public class JdbcUtil {
     //sql insert customer
     public static void sqlCusInsert(String username, String password, String DOB, String email, String phoneNum, String gender) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
-        System.out.println("11");
         String sql = "";
         sql="insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender) values (?,?,?,?,?,?,?,?);";
         PreparedStatement psmt = con.prepareStatement(sql);
-
         psmt.setString(1, password);
         psmt.setString(2, username);
         //java.sql.Date dob= toSqlData(DOB);
         psmt.setString(3, DOB);
         psmt.setString(4, phoneNum);
-        System.out.println("2");
         psmt.setString(5, "2022-01-01");
         psmt.setString(6, "2022-01-01");
         psmt.setString(7, email);
         psmt.setString(8, gender);
-        System.out.println("!!!");
         psmt.execute();
         con.close();
     }
     //sql insert professional
-    public static boolean sqlProInsert(String userType, String username, String password, String DOB, String email, String phoneNum, String gender,String location) throws SQLException, ClassNotFoundException {
+    public static void sqlProInsert(String username, String password, String DOB, String email, String phoneNum, String gender,String location) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
-        String sql="insert into PROFESSIONAL (userName,gender,DOB,phoneNum,password,email,plevel,balance,location) values (?,?,?,?,?,?,?,?,?);";
+        String sql="insert into PROFESSIONAL (proPw,proName,proDOB,phoneNum,pLevel,balance,location,email,gender) values (?,?,?,?,?,?,?,?,?);";
         PreparedStatement psmt = con.prepareStatement(sql);
-        int columnOfSql=1;
-        psmt.setString(columnOfSql, username);
-        psmt.setString(columnOfSql++, gender);
-        java.sql.Date dob= toSqlData(DOB);
-        psmt.setDate(columnOfSql++, dob);
-        psmt.setString(columnOfSql++, phoneNum);
-        psmt.setString(columnOfSql++, password);
-        psmt.setString(columnOfSql++, email);
-        psmt.setFloat(columnOfSql++,5);
-        psmt.setFloat(columnOfSql++,0);
-        psmt.setString(columnOfSql++,location);
-        return psmt.execute();
+        psmt.setString(1, password);
+        psmt.setString(2, username);
+        psmt.setString(3, DOB);
+        psmt.setString(4, phoneNum);
+        psmt.setFloat(5, 5);
+        psmt.setFloat(6, 0);
+        psmt.setString(7,location);
+        psmt.setString(8,email);
+        psmt.setString(9,gender);
+        psmt.execute();
     }
     //sql insert vehicle
     public static boolean sqlVehInsert(JSONObject ob) throws SQLException, ClassNotFoundException {

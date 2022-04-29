@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+<meta http-equiv="Content-Type" content="register/html; charset=gb2312">
+    <title>Register</title>
+    <link rel="stylesheet" type="text/css" href="register.css">  
+    <script src="register.js"></script>
+    
+</head>
+ 
+    <body>
+        <div class="wt">
+
+        </div>
+        <div class="background">
+        </div>
+        <div class="content">
+        <div id="loginDiv">
+            <form action="../Register" method="post">
+                <h1>Register</h1>
+                <p>Username:<input id="userName" name="username" type="text" autofocus required><label id="name_trip"></label></p>
+    
+                <p>Password:<input id="password" name="password" type="password" required><label id="password_trip"></label></p>
+    
+                <p>Check Password:<input id="confirm" type="password" onkeyup="checkPassword()" required><label id="surePassword_trip"></label></p>
+                <p id="test" style="color: red;"></p>
+                <p>
+                    Customer Type:
+                    <select name="user_type" id="userType">
+                        <option value="0">Please select</option>
+                        <option value="1">Customer</option>
+                        <option value="2">Professional</option>
+                    </select>
+                    <label id="type_trip"></label>
+                </p>
+                <p>
+                    Date of birth:
+                    <input id="birthday" name="dob" type="date">
+                    <label id="birthday_trip"></label>
+                </p>
+                <p>
+                    Email address:
+                    <input id="email" name="email" type="email" required>
+                    <label id="emil_trip"></label>
+                </p>
+                <p>
+                    Phone number:
+                    <input id="phoneNum" name="phoneNum" type="text" required>
+                    <label id="phoneNum_trip"></label>
+                </p>
+                <p>
+                    Gender:
+                    <input id="gender" name="gender" type="text" required>
+                    <label id="gender_trip"></label>
+                </p>
+                <p style="text-align: center;">
+                    <input type="submit" class="button" value="submit">
+                    <br />
+                    <br />
+                    <input type="reset" class="button" onclick="reset()" value="reset">
+                </p>
+            </form>
+        </div>
+        </div>
+        <div class="wt">       
+        </div>
+    </body>
+    
+</html>

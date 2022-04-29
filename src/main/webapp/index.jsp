@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="../css/login.css"/>
-    <script src="../js/login.js"></script>
+    <link rel="stylesheet" type="text/css" href="login.css"/>
+    <script src="login.js"></script>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 <div class="content">
     <div id="login">
         <h1>Login</h1>
-        <form action ="login" method = "post">
+        <form action ="Login" method = "post">
             <input class="inp" type="text" required="required" placeholder="Username" name="u"></input>
             <input class="inp" type="password" required="required" placeholder="Password" name="p"></input>
 
@@ -29,12 +29,16 @@
                 <input class="radio" type="radio" id="pro" name="drone" value="professional">Login As Professional</label>
 
             <br><br>
-            <br><br>
+
             <input type="submit" class="but" onclick=login() value="login">
+            <span class="signin">
+                        <a href="./register/register.html" methods="post">New to us? Sign in!</a>
+                    </span>
         </form>
-        <a href="register.html" methods="post">New to us? Sign in!</a>
+
     </div>
 </div>
+
 <div class="wt">
 
 </div>
