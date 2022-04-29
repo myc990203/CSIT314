@@ -41,13 +41,12 @@ public class Main {
         //final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
         //final String DB_URL      = "jdbc:mysql://localhost:3306/RUNOOB";
 
-        // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-        final String DB_URL = "jdbc:mysql://3.106.59.100:3306/csit314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+        final String DB_URL = "jdbc:mysql://localhost/CSIT314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 
 
         // 数据库的用户名与密码，需要根据自己的设置
-        final String USER = "william";
+        final String USER = "root";
         final String PASS = "123456";
 
         Connection conn = null;

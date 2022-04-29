@@ -13,9 +13,9 @@ public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获取用户请求额的数据
-
+        System.out.println(req.getParameter("user_type"));
         String userType = req.getParameter("user_type");
-        if (userType == "customer"){
+        if (userType.equals("1")){
             String username = req.getParameter("username");
             String password = req.getParameter("password");
             String DOB = req.getParameter("dob");
@@ -23,7 +23,7 @@ public class Register extends HttpServlet {
             String phoneNum = req.getParameter("phoneNum");
             String gender = req.getParameter("gender");
             try {
-                JdbcUtil.sqlCusInsert(userType,username,password,DOB,email,phoneNum,gender);
+                JdbcUtil.sqlCusInsert(username,password,DOB,email,phoneNum,gender);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {

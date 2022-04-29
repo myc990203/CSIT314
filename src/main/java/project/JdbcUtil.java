@@ -18,11 +18,11 @@ public class JdbcUtil {
 
         // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-        final String DB_URL = "jdbc:mysql://3.106.59.100:3306/csit314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+        final String DB_URL = "jdbc:mysql://localhost/CSIT314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 
 
         // 数据库的用户名与密码，需要根据自己的设置
-        final String USER = "william";
+        final String USER = "root";
         final String PASS = "123456";
 
         Connection conn = null;
@@ -94,24 +94,26 @@ public class JdbcUtil {
 
 
     //sql insert customer
-    public static boolean sqlCusInsert(String userType, String username, String password, String DOB, String email, String phoneNum, String gender) throws SQLException, ClassNotFoundException {
+    public static void sqlCusInsert(String username, String password, String DOB, String email, String phoneNum, String gender) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
+        System.out.println("11");
         String sql = "";
-            sql="insert into CUSTOMER (userName,gender,DOB,phoneNum,password,email,vipStart,vipEnd) values (?,?,?,?,?,?,?,?,?);";
-            PreparedStatement psmt = con.prepareStatement(sql);
-            int columnOfSql=1;
-            psmt.setString(columnOfSql, username);
-            psmt.setString(columnOfSql++, gender);
-            java.sql.Date dob= toSqlData(DOB);
-            psmt.setDate(columnOfSql++, dob);
-            psmt.setString(columnOfSql++, phoneNum);
-            psmt.setString(columnOfSql++, password);
-            psmt.setString(columnOfSql++, email);
-            java.sql.Date vipS= toSqlData("2022-01-01");
-            psmt.setDate(columnOfSql++, vipS);
-            java.sql.Date vipE= toSqlData("2022-01-01");
-            psmt.setDate(columnOfSql++,vipE);
-        return psmt.execute();
+        sql="insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender) values (?,?,?,?,?,?,?,?);";
+        PreparedStatement psmt = con.prepareStatement(sql);
+
+        psmt.setString(1, password);
+        psmt.setString(2, username);
+        //java.sql.Date dob= toSqlData(DOB);
+        psmt.setString(3, DOB);
+        psmt.setString(4, phoneNum);
+        System.out.println("2");
+        psmt.setString(5, "2022-01-01");
+        psmt.setString(6, "2022-01-01");
+        psmt.setString(7, email);
+        psmt.setString(8, gender);
+        System.out.println("!!!");
+        psmt.execute();
+        con.close();
     }
     //sql insert professional
     public static boolean sqlProInsert(String userType, String username, String password, String DOB, String email, String phoneNum, String gender,String location) throws SQLException, ClassNotFoundException {
