@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/login")
-public class login extends HttpServlet {
+@WebServlet("/Login")
+public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获取用户请求额的数据
@@ -22,7 +22,7 @@ public class login extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter pw = resp.getWriter();
 
-        resp.sendRedirect("register.html");
+        resp.sendRedirect("login.html");
     }
 
 }

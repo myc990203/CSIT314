@@ -29,14 +29,10 @@
                 <input class="radio" type="radio" id="pro" name="drone" value="professional">Login As Professional</label>
 
             <br><br>
-            <span class="signin">
-                        <a href="register.html">New to us? Sign in!</a>
-                    </span>
-
             <br><br>
             <input type="submit" class="but" onclick=login() value="login">
-
         </form>
+        <a href="register.html" methods="post">New to us? Sign in!</a>
     </div>
 </div>
 <div class="wt">
