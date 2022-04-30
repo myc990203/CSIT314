@@ -1,4 +1,5 @@
 package project;
+
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ public class JdbcUtil {
 
         // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-        final String DB_URL = "jdbc:mysql://localhost/CSIT314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+        final String DB_URL      = "jdbc:mysql://localhost/CSIT314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 
 
         // 数据库的用户名与密码，需要根据自己的设置
@@ -38,55 +39,72 @@ public class JdbcUtil {
 
 
     //sql select
-    public static Customer sqlCusSelect(JSONObject ob) throws SQLException, ClassNotFoundException {
-        Connection conn = connectSql();
-        int cusID = ob.getInt("cusID");
-        String sql = "select * from CUSTOMER where cusID = ?";
+    //TODO 判断密码，如果密码错误，解决报错并发送前端
+
+    public static Customer sqlCusSelect(String userName, String pw) throws SQLException, ClassNotFoundException {
+        Connection        conn = connectSql();
+        String            sql  = "select * from Customer where cusName = ? and cusPw = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
-        psmt.setInt(1,cusID);
-        ResultSet rs = psmt.executeQuery();
-        ArrayList<Vehicle> vehicleList = sqlVehicleSelect(ob);
-        Pre_Order curOrder = new Pre_Order();
-        Customer cus = new Customer(rs.getInt("cusId"),rs.getString("userName"),rs.getString("gender"),rs.getString("DOB"), rs.getNString("phoneNum"),rs.getString("password"),
-                                    rs.getString("email"),rs.getString("vipStart"),rs.getString("vipEnd"),vehicleList,curOrder);
+        psmt.setString(1, userName);
+        psmt.setString(2, pw);
+        ResultSet rs     = psmt.executeQuery();
+        int       cusNum = 1;
+        Customer  cus    = new Customer();
+        while (rs.next()) {
+            cusNum = rs.getInt("cusNum");
+            System.out.println(cusNum);
+            ArrayList<Vehicle> vehicleList = sqlVehicleSelect(cusNum);
+            Pre_Order          curOrder    = new Pre_Order();
+            cus = new Customer(rs.getInt("cusNum"), rs.getString("cusName"), rs.getString("gender"), rs.getString("cusDOB"), rs.getNString("phoneNum"), rs.getString("cusPw"),
+                               rs.getString("email"), rs.getString("vipStart"), rs.getString("vipEnd"), vehicleList, curOrder);
+
+        }
         return cus;
     }
 
-    public static Professional sqlProSelect(JSONObject ob) throws SQLException, ClassNotFoundException {
+    public static Professional sqlProSelect(String userName, String pw) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
-        int proID = ob.getInt("proID");
-        String sql = "select * from PROFESSION where proID = ?";
+
+        String            sql  = "select * from Professional where proName = ? and proPw = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
-        psmt.setInt(1,proID);
-        ResultSet rs = psmt.executeQuery();
-        Professional pro = new Professional(rs.getInt("proId"),rs.getString("userName"),rs.getString("gender"),rs.getString("DOB"), rs.getNString("phoneNum"),rs.getString("password"),
-                                            rs.getString("email"),rs.getFloat("plevel"),rs.getDouble("balance"),rs.getString("location"));
+        psmt.setString(1, userName);
+        psmt.setString(2, pw);
+        ResultSet    rs     = psmt.executeQuery();
+        int          proNum = 1;
+        Professional pro    = new Professional();
+        while (rs.next()) {
+            proNum = rs.getInt("proNum");
+            System.out.println(proNum);
+            pro = new Professional(rs.getInt("proNum"), rs.getString("proName"), rs.getString("gender"), rs.getString("proDOB"), rs.getNString("phoneNum"), rs.getString("proPw"),
+                                   rs.getString("email"), rs.getFloat("pLevel"), rs.getDouble("balance"), rs.getString("location"));
+        }
         return pro;
     }
-    public static ArrayList sqlVehicleSelect(JSONObject ob) throws SQLException, ClassNotFoundException {
-        Connection conn = connectSql();
-        int cusID = ob.getInt("cusID");
-        String sql = "select * from VEHICLE where cusID = ?";
+
+    public static ArrayList sqlVehicleSelect(int cusNum) throws SQLException, ClassNotFoundException {
+        Connection        conn = connectSql();
+        String            sql  = "select * from VEHICLE where cusNum = ?";
         PreparedStatement psmt = conn.prepareStatement(sql);
-        psmt.setInt(1,cusID);
-        ResultSet rs = psmt.executeQuery();
+        psmt.setInt(1, cusNum);
+        ResultSet rs          = psmt.executeQuery();
         ArrayList vehicleList = new ArrayList<Vehicle>();
-        while (rs.next()){
-            Vehicle vehicle = new Vehicle(rs.getString("plateNum"),rs.getString("model"));
+        while (rs.next()) {
+            Vehicle vehicle = new Vehicle(rs.getString("plateNum"), rs.getString("model"));
+            System.out.println(vehicle.getPlateNum());
             vehicleList.add(vehicle);
         }
         return vehicleList;
     }
 
     public static JSONObject sqlOrderSelect(JSONObject ob) throws SQLException, ClassNotFoundException {
-        Connection conn = connectSql();
-        int userID = ob.getInt("userID");
-        String sql = "select * from ORDER where userID = ?";
-        PreparedStatement psmt = conn.prepareStatement(sql);
-        psmt.setInt(1,userID);
-        ResultSet rs = psmt.executeQuery();
+        Connection        conn   = connectSql();
+        int               userID = ob.getInt("userID");
+        String            sql    = "select * from ORDER where userID = ?";
+        PreparedStatement psmt   = conn.prepareStatement(sql);
+        psmt.setInt(1, userID);
+        ResultSet  rs     = psmt.executeQuery();
         JSONObject result = new JSONObject();
-        while (rs.next()){
+        while (rs.next()) {
             //返回一个Json
         }
         return result;
@@ -96,8 +114,8 @@ public class JdbcUtil {
     //sql insert customer
     public static void sqlCusInsert(String username, String password, String DOB, String email, String phoneNum, String gender) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
-        String sql = "";
-        sql="insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender) values (?,?,?,?,?,?,?,?);";
+        String     sql = "";
+        sql = "insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender) values (?,?,?,?,?,?,?,?);";
         PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setString(1, password);
         psmt.setString(2, username);
@@ -111,10 +129,11 @@ public class JdbcUtil {
         psmt.execute();
         con.close();
     }
+
     //sql insert professional
-    public static void sqlProInsert(String username, String password, String DOB, String email, String phoneNum, String gender,String location) throws SQLException, ClassNotFoundException {
-        Connection con = connectSql();
-        String sql="insert into PROFESSIONAL (proPw,proName,proDOB,phoneNum,pLevel,balance,location,email,gender) values (?,?,?,?,?,?,?,?,?);";
+    public static void sqlProInsert(String username, String password, String DOB, String email, String phoneNum, String gender, String location) throws SQLException, ClassNotFoundException {
+        Connection        con  = connectSql();
+        String            sql  = "insert into PROFESSIONAL (proPw,proName,proDOB,phoneNum,pLevel,balance,location,email,gender) values (?,?,?,?,?,?,?,?,?);";
         PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setString(1, password);
         psmt.setString(2, username);
@@ -122,48 +141,50 @@ public class JdbcUtil {
         psmt.setString(4, phoneNum);
         psmt.setFloat(5, 5);
         psmt.setFloat(6, 0);
-        psmt.setString(7,location);
-        psmt.setString(8,email);
-        psmt.setString(9,gender);
+        psmt.setString(7, location);
+        psmt.setString(8, email);
+        psmt.setString(9, gender);
         psmt.execute();
     }
+
     //sql insert vehicle
     public static boolean sqlVehInsert(JSONObject ob) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
 
-        int userID =0;
-        String plateNum="";
-        String model="";
+        int    userID   = 0;
+        String plateNum = "";
+        String model    = "";
 
 
-        String sql="insert into CUSTOMER (userID,plateNum,model) values (?,?,?)";
-        PreparedStatement psmt = con.prepareStatement(sql);
-        int columnOfSql=1;
+        String            sql         = "insert into CUSTOMER (userID,plateNum,model) values (?,?,?)";
+        PreparedStatement psmt        = con.prepareStatement(sql);
+        int               columnOfSql = 1;
         psmt.setInt(columnOfSql, userID);
         psmt.setString(columnOfSql++, plateNum);
         psmt.setString(columnOfSql++, model);
         return psmt.execute();
     }
+
     //sql insert order
     public static boolean sqlOrdInsert(JSONObject ob) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
 
-        String orderID="";
-        String orderStartDate="";
-        Customer customerID = new Customer();
-        double price=1;
-        Vehicle vehiclePlate = new Vehicle();
-        String location="";
-        String issue="";
-        Professional professional= new Professional();
-        String orderEndDate="";
-        String review="";
-        float rating=1;
-        String payCardNum="";
-        PayType payType=PayType.valueOf("VISA");
-        String sql="insert into CUSTOMER (orderID,orderStartDate,customerID,price,vehiclePlate,location,issue,professional,orderEndDate,review,rating,payCardNum,payType) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        PreparedStatement psmt = con.prepareStatement(sql);
-        int columnOfSql=1;
+        String            orderID        = "";
+        String            orderStartDate = "";
+        Customer          customerID     = new Customer();
+        double            price          = 1;
+        Vehicle           vehiclePlate   = new Vehicle();
+        String            location       = "";
+        String            issue          = "";
+        Professional      professional   = new Professional();
+        String            orderEndDate   = "";
+        String            review         = "";
+        float             rating         = 1;
+        String            payCardNum     = "";
+        PayType           payType        = PayType.valueOf("VISA");
+        String            sql            = "insert into CUSTOMER (orderID,orderStartDate,customerID,price,vehiclePlate,location,issue,professional,orderEndDate,review,rating,payCardNum,payType) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement psmt           = con.prepareStatement(sql);
+        int               columnOfSql    = 1;
         psmt.setString(columnOfSql, orderID);
         psmt.setString(columnOfSql++, orderStartDate);
         psmt.setInt(columnOfSql++, customerID.getUserID());
@@ -186,23 +207,23 @@ public class JdbcUtil {
         Connection con = connectSql();
 
 
-        int userID =0;
-        String userName="";
-        String gender="";
-        String DOB="";
-        String phoneNum="";
-        String password="";
-        String email="";
-        String vipStart="";
-        String vipEnd="";
+        int    userID   = 0;
+        String userName = "";
+        String gender   = "";
+        String DOB      = "";
+        String phoneNum = "";
+        String password = "";
+        String email    = "";
+        String vipStart = "";
+        String vipEnd   = "";
 
         String sql = "" +
                      "update CUSTOMER " +
                      "set userName=?,gender=?,DOB=?,phoneNum=?,password=?,email=?,vipStart=?,vipEnd=?," +
                      "where userID=?";
         //预编译sql语句
-        PreparedStatement psmt = con.prepareStatement(sql);
-        int columnOfSql=1;
+        PreparedStatement psmt        = con.prepareStatement(sql);
+        int               columnOfSql = 1;
         //先对应SQL语句，给SQL语句传递参数
         psmt.setInt(columnOfSql, userID);
         psmt.setString(columnOfSql++, userName);
@@ -216,19 +237,20 @@ public class JdbcUtil {
         //执行SQL语句
         return psmt.execute();
     }
+
     //sql update Professional
     public static boolean updateProfessional(JSONObject ob) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
 
-        int userID =0;
-        String userName="";
-        String gender="";
-        String DOB="";
-        String phoneNum="";
-        String password="";
-        String email="";
-        float plevel = 1;
-        double balance = 1.0;
+        int    userID   = 0;
+        String userName = "";
+        String gender   = "";
+        String DOB      = "";
+        String phoneNum = "";
+        String password = "";
+        String email    = "";
+        float  plevel   = 1;
+        double balance  = 1.0;
         String location = "";
 
         String sql = "" +
@@ -236,8 +258,8 @@ public class JdbcUtil {
                      "set userName=?,gender=?,DOB=?,phoneNum=?,password=?,email=?,plevel=?,balance=?,location=?" +
                      "where userID=?";
         //预编译sql语句
-        PreparedStatement psmt = con.prepareStatement(sql);
-        int columnOfSql=1;
+        PreparedStatement psmt        = con.prepareStatement(sql);
+        int               columnOfSql = 1;
         //先对应SQL语句，给SQL语句传递参数
         psmt.setInt(columnOfSql, userID);
         psmt.setString(columnOfSql++, userName);
@@ -255,13 +277,13 @@ public class JdbcUtil {
 
     //sql delete
     public boolean sqlDeleteVehicle(JSONObject ob) throws SQLException, ClassNotFoundException {
-        Connection conn = connectSql();
-        int cusID = ob.getInt("cusID");
-        String plantNum = ob.getString("plantNum");
-        String sql = "delete * from VEHICLE where cusID = ? and plantNum = ?";
-        PreparedStatement psmt = conn.prepareStatement(sql);
-        psmt.setInt(1,cusID);
-        psmt.setString(2,plantNum);
+        Connection        conn     = connectSql();
+        int               cusID    = ob.getInt("cusID");
+        String            plantNum = ob.getString("plantNum");
+        String            sql      = "delete * from VEHICLE where cusID = ? and plantNum = ?";
+        PreparedStatement psmt     = conn.prepareStatement(sql);
+        psmt.setInt(1, cusID);
+        psmt.setString(2, plantNum);
         return psmt.execute();
     }
 
@@ -269,17 +291,18 @@ public class JdbcUtil {
     //TODO
     //sql语句查询最后一个已存在的用户ID
     public int getNewID() throws SQLException, ClassNotFoundException {
-        Connection conn = connectSql();
-        String sql = "select MAX(cusID) from CUSTOMER;";
-        PreparedStatement psmt = conn.prepareStatement(sql);
-        ResultSet rs = psmt.executeQuery();
-        int newID = rs.getInt("cusID");
+        Connection        conn  = connectSql();
+        String            sql   = "select MAX(cusID) from CUSTOMER;";
+        PreparedStatement psmt  = conn.prepareStatement(sql);
+        ResultSet         rs    = psmt.executeQuery();
+        int               newID = rs.getInt("cusID");
         newID++;
         return newID;
     }
-    public static java.sql.Date toSqlData(String data){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        java.sql.Date sdate = null; //初始化
+
+    public static java.sql.Date toSqlData(String data) {
+        SimpleDateFormat sdf   = new SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date    sdate = null; //初始化
         try {
             java.util.Date udate = sdf.parse(data);
             sdate = new java.sql.Date(udate.getTime()); //2013-01-14
