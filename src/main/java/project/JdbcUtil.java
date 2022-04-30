@@ -10,7 +10,7 @@ import org.json.JSONArray;
 //import org.json.JSONObject;
 
 import javax.xml.crypto.Data;
-
+//test
 public class JdbcUtil {
     //初始化连接sql
     public static Connection connectSql() throws ClassNotFoundException, SQLException {
