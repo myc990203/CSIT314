@@ -5,41 +5,36 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import org.json.JSONArray;
+//import org.json.JSONArray;
 
 //import org.json.JSONObject;
 
 import javax.xml.crypto.Data;
 //test
 public class JdbcUtil {
-    //初始化连接sql
     public static Connection connectSql() throws ClassNotFoundException, SQLException {
-        //final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-        //final String DB_URL      = "jdbc:mysql://localhost:3306/RUNOOB";
 
-        // MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
+        // MySQL 8.0
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
         final String DB_URL      = "jdbc:mysql://localhost/CSIT314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 
-
-        // 数据库的用户名与密码，需要根据自己的设置
         final String USER = "root";
         final String PASS = "123456";
 
         Connection conn = null;
         Statement  stmt = null;
-        // 注册 JDBC 驱动
+
         Class.forName(JDBC_DRIVER);
 
-        // 打开链接
-        System.out.println("连接数据库...");
+
+        System.out.println("connecting...");
         conn = DriverManager.getConnection(DB_URL, USER, PASS);
         return conn;
     }
 
 
     //sql select
-    //TODO 判断密码，如果密码错误，解决报错并发送前端
+    //TODO check the password!!! dont forget
 
     public static Customer sqlCusSelect(String userName, String pw) throws SQLException, ClassNotFoundException {
         Connection        conn = connectSql();

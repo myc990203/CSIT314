@@ -19,8 +19,8 @@
     <div id="login">
         <h1>Login</h1>
         <form action ="Login" method = "post">
-            <input class="inp" type="text" required="required" placeholder="Username" name="u"></input>
-            <input class="inp" type="password" required="required" placeholder="Password" name="p"></input>
+            <input class="inp" type="text" required="required" placeholder="Username" name="username"></input>
+            <input class="inp" type="password" required="required" placeholder="Password" name="password"></input>
 
             <label for="dsa"><input class="radio" type="radio" id="cus" name="drone" value="customer" checked>Login As Customer</label>
 

@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+
 import project.*;
 @WebServlet("/Register")
 public class Register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //获取用户请求额的数据
         System.out.println(req.getParameter("user_type"));
         String userType = req.getParameter("user_type");
         if (userType.equals("1")){
@@ -45,9 +45,8 @@ public class Register extends HttpServlet {
                 throw new RuntimeException(e);
             }
         }
+        resp.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=UTF-8");
-        PrintWriter pw = resp.getWriter();
         resp.sendRedirect("index.jsp");
     }
-
 }
