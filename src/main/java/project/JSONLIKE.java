@@ -1,5 +1,7 @@
 package project;
 
+import org.json.simple.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +19,15 @@ public class JSONLIKE {
             map.put(pail[0],pail[1]);
         }
         return map;
+    }
+    public static String myMap2JSON(Map<String,String> map){
+        String res = "";
+        for (Map.Entry<String,String> entey : map.entrySet()){
+            res = res + "\""+entey.getKey()+"\":"+"\""+entey.getValue()+"\""+",";
+        }
+        res = res.substring(0,res.length()-1);
+        res= "{"+res+"}";
+        return res;
     }
 
 }

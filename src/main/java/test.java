@@ -22,20 +22,24 @@ public class test extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         BufferedReader bufferedReader = req.getReader();
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
+        StringBuilder  stringBuilder  = new StringBuilder();
+        String         line;
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line);
         }
         String str = stringBuilder.toString();
         System.out.println(str);
+
         Map<String,String> map = JSONLIKE.myJson(str);
         //JSONObject jsonObject = new JSONObject();
         //jsonObject.put("gender","male");
+        //System.out.println(jsonObject);
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         PrintWriter pw = resp.getWriter();
-        pw.print("{\"uid\":\"william\"}");
+        String json = JSONLIKE.myMap2JSON(map);
+        System.out.println(json);
+        pw.print(json);
         pw.flush();
         //resp.getOutputStream().print(jsonObject);
 
