@@ -19,14 +19,14 @@
     <div id="login">
         <h1>Login</h1>
         <form action ="Login" method = "post">
-            <input class="inp" type="text" required="required" placeholder="Username" name="username"></input>
-            <input class="inp" type="password" required="required" placeholder="Password" name="password"></input>
+            <input id="username" class="inp" type="text" required="required" placeholder="Username" onblur="setCookie_username()" name="u">
+            <input id="password" class="inp" type="password" required="required" placeholder="Password" name="p">
 
-            <label for="dsa"><input class="radio" type="radio" id="cus" name="drone" value="customer" checked>Login As Customer</label>
+            <label><input class="radio" type="radio" id="cus" name="drone" value="cus" onclick="setType1()">Login As Customer</label>
 
-            <label for="adas">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input class="radio" type="radio" id="pro" name="drone" value="professional">Login As Professional</label>
+                <input class="radio" type="radio" id="pro" name="drone" value="pro" onclick="setType2()">Login As Professional</label>
 
             <br><br>
 

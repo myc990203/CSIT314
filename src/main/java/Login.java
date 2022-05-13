@@ -17,7 +17,8 @@ public class Login extends HttpServlet {
         System.out.println("提交的数据："+username+"\t"+password);
         resp.setCharacterEncoding("utf-8");
         resp.setContentType("text/html;charset=UTF-8");
-        resp.sendRedirect("test.html");
+        //resp.sendRedirect("./customer/customer.html");
+        resp.sendRedirect("./user_info/user_info.html");
         resp.setContentType("text/html;charset=UTF-8");
 
         PrintWriter pw = resp.getWriter();

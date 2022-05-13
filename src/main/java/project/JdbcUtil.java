@@ -4,12 +4,17 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 //import org.json.JSONArray;
 
 //import org.json.JSONObject;
 
 import javax.xml.crypto.Data;
+
+
+
 //test
 public class JdbcUtil {
     public static Connection connectSql() throws ClassNotFoundException, SQLException {
@@ -36,44 +41,49 @@ public class JdbcUtil {
     //sql select
     //TODO check the password!!! dont forget
 
-    public static Customer sqlCusSelect(String userName, String pw) throws SQLException, ClassNotFoundException {
+    public static Map sqlCusSelect(int userID) throws SQLException, ClassNotFoundException {
         Connection        conn = connectSql();
-        String            sql  = "select * from Customer where cusName = ? and cusPw = ?;";
+        String            sql  = "select * from Customer where cusNum = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
-        psmt.setString(1, userName);
-        psmt.setString(2, pw);
+        psmt.setInt(1, userID);
         ResultSet rs     = psmt.executeQuery();
-        int       cusNum = 1;
-        Customer  cus    = new Customer();
-        while (rs.next()) {
-            cusNum = rs.getInt("cusNum");
-            System.out.println(cusNum);
-            ArrayList<Vehicle> vehicleList = sqlVehicleSelect(cusNum);
-            Pre_Order          curOrder    = new Pre_Order();
-            cus = new Customer(rs.getInt("cusNum"), rs.getString("cusName"), rs.getString("gender"), rs.getString("cusDOB"), rs.getNString("phoneNum"), rs.getString("cusPw"),
-                               rs.getString("email"), rs.getString("vipStart"), rs.getString("vipEnd"), vehicleList, curOrder);
+        Map<String,String> res = new HashMap<String, String>();
 
+        while (rs.next()) {
+            res.put("cusNum", String.valueOf(rs.getInt("cusNum")));
+            res.put("cusName",rs.getString("cusName"));
+            res.put("gender",rs.getString("gender"));
+            res.put("cusDOB",rs.getString("cusDOB"));
+            res.put("phoneNum",rs.getString("phoneNum"));
+            res.put("cusPw",rs.getString("cusPw"));
+            res.put("email",rs.getString("email"));
+            res.put("vipStart",rs.getString("vipStart"));
+            res.put("vipEnd",rs.getString("vipEnd"));
         }
-        return cus;
+        return res;
     }
 
-    public static Professional sqlProSelect(String userName, String pw) throws SQLException, ClassNotFoundException {
+    public static Map sqlProSelect(String userID) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
 
-        String            sql  = "select * from Professional where proName = ? and proPw = ?;";
+        String            sql  = "select * from Professional where proNum = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
-        psmt.setString(1, userName);
-        psmt.setString(2, pw);
+        psmt.setString(1, userID);
         ResultSet    rs     = psmt.executeQuery();
-        int          proNum = 1;
-        Professional pro    = new Professional();
+        Map<String,String> res = new HashMap<String, String>();
         while (rs.next()) {
-            proNum = rs.getInt("proNum");
-            System.out.println(proNum);
-            pro = new Professional(rs.getInt("proNum"), rs.getString("proName"), rs.getString("gender"), rs.getString("proDOB"), rs.getNString("phoneNum"), rs.getString("proPw"),
-                                   rs.getString("email"), rs.getFloat("pLevel"), rs.getDouble("balance"), rs.getString("location"));
+            res.put("proNum", String.valueOf(rs.getInt("proNum")));
+            res.put("proName", rs.getString("proName"));
+            res.put("gender", rs.getString("gender"));
+            res.put("proDOB", rs.getString("cusDOB"));
+            res.put("phoneNum", rs.getString("phoneNum"));
+            res.put("proPw", rs.getString("cusPw"));
+            res.put("email", rs.getString("email"));
+            res.put("pLevel", String.valueOf(rs.getFloat("pLevel")));
+            res.put("balance", String.valueOf(rs.getDouble("balance")));
+            res.put("location", rs.getString("location"));
         }
-        return pro;
+        return res;
     }
 
     public static ArrayList sqlVehicleSelect(int cusNum) throws SQLException, ClassNotFoundException {

@@ -1,74 +1,136 @@
 ﻿<!DOCTYPE html>
 <html>
-	<head>
-	  <meta charset="UTF-8">
-	  <title>User information</title>
-	  <link rel="stylesheet" href="user_info.css" type="text/css">
-	  <script type="text/javascript" src="user_info.js" ></script>
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<title>User information</title>
+	<link rel="stylesheet" href="user_info.css" type="text/css">
+	<script>
+		function getCookie(cname)
+		{
+			var name = cname + "=";
+			var ca = document.cookie.split(';');
+			for(var i=0; i<ca.length; i++)
+			{
+				var c = ca[i].trim();
+				if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+			}
+			return "";
+		}
+		window.onload = function() {
+			var id = getCookie("username");
+			var usertype = getCookie("type");
+			const req = new XMLHttpRequest();
+			req.open("POST", "user_info", true);
+			req.setRequestHeader('Content-Type', 'application/json');
+			var jsonObj = new Object();
+			jsonObj.uid = id;
+			jsonObj.type = usertype;
+			// req.send(JSON.stringify(
+			// 	jsonObj
+			// ));
+			console.log(usertype);
+			req.send(JSON.stringify(jsonObj));
+			req.onreadystatechange = function() {
+				if (req.readyState === 4) {
+					console.log(req.response);
+					const json = JSON.parse(req.response);
+					document.getElementById("username").innerHTML=json.cusName;
+					document.getElementById("gender").innerHTML=json.gender;
+					document.getElementById("dob").innerHTML=json.cusDOB;
+					document.getElementById("email").innerHTML=json.email;
+					document.getElementById("phone").innerHTML=json.phoneNum;
+					document.getElementById("address").innerHTML=json.address;
+					document.getElementById("VIPstart").innerHTML=json.vipStart;
+					document.getElementById("VIPend").innerHTML=json.vipEnd;
+					//document.getElementById("vehicleList").innerHTML=json.vehicleList;
+				}
+			}
+		}
+	</script>
+	<script  type="text/javascript" src="user_info.js" >
+	</script>
+</head>
 <body>
-	<div class="top">
-		<!--<h3>Welcome to user information center!</h3>-->
-		<h1>User information</h1>
-		<span onclick="openNav()">&#9776; Menu </span>
-	</div>
+<div class="top">
+	<!--<h3>Welcome to user information center!</h3>-->
+	<h1>User information</h1>
+	<span onclick="openNav()">&#9776; Menu </span>
+</div>
 <div class="wrapper">
 	<div id="nav" class="sideNav">
 		<h2>Menu</h2>
 		<ul>
 			<a href="../customer/customer.html"><i class="main main-home"></i>Home</a> <!--release page-->
 			<!-- user info -->
-			<a href="../user_info/user_info.html"><i class="main main-account"></i>My Account</a> 
+			<a href="../user_info/user_info.html"><i class="main main-account"></i>My Account</a>
 			<a href="../membership/membership.html"><i class="main main-membership"></i>Membership</a> <!--membership-->
 		</ul>
 	</div>
-<div class="info-form">
-<div class="container">
-	<div class="user_photo">
-		<!--add user photo if possible-->
-		<img src="../image/account_images_example.png" alt="User photo" style="width:150px">
-	</div>
-
-	<div class="user_info">
-		<form >
-			<div class="one-row">
-				<div class="form-group">
-					<label for="name">Name: </label>
-					<input type="text" id="name" name="name">
-				</div>&nbsp;&nbsp;
-				<div class="form-group">
-					<label for="gender">Gender: </label>
-					<input type="text" id="gender" name="gender">
+	<div class="info-form">
+		<div class="container">
+			<div class="user_info">
+				<div class="one-row">
+					<div class="form-group">
+						<label for="name">Customer Name: </label>
+						<br>
+						<span id="username">Scott M</span>
+					</div>&nbsp;&nbsp;
+					<div class="form-group">
+						<label for="gender">Gender: </label>
+						<br>
+						<span id="gender">Male</span>
+					</div>
+				</div>
+				<div class="one-row">
+					<div class="form-group">
+						<label for="age">Date of Birth: </label>
+						<br>
+						<span id="dob">01-01-1990</span>
+					</div>&nbsp;&nbsp;
+					<div class="form-group">
+						<label for="Email">Email: </label>
+						<br>
+						<span id="email">123123123@gmail.com</span>
+					</div>
+				</div>
+				<div class="one-row">
+					<div class="form-group">
+						<label for="phone">Phone number: </label>
+						<br>
+						<span id="phone">04-121-1233-12</span>
+					</div>&nbsp;&nbsp;
+					<div class="form-group">
+						<label for="address">Address: </label>
+						<br>
+						<span id="address">124a Gipps st, Gwynnevill, Wollongong, NSW</span>
+					</div>
+				</div>
+				<div class="one-row">
+					<div class="form-group">
+						<label for="VIPstart">VIP start date:</label>
+						<br>
+						<span id="VIPstart">03-03-2022</span>
+					</div>&nbsp;&nbsp;
+					<div class="form-group">
+						<label for="VIPend">VIP end date: </label>
+						<br>
+						<span id="VIPend">03-03-2023</span>
+					</div>
+				</div>
+				<div class="one-row">
+					<div class="form-group">
+						<label for="vehicleList">vehicleList</label>
+						<br>
+						<span id="vehicleList">QAQ-orz</span>
+					</div>
+				</div>
+				<div class="button-center">
+					<button onclick="modify()">Modify Information</button>&nbsp;&nbsp;
+					<button onclick="back()">Back</button>
 				</div>
 			</div>
-			<div class="one-row">
-				<div class="form-group">
-					<label for="age">Age: </label>
-					<input type="text" id="age" name="age">
-				</div>&nbsp;&nbsp;
-				<div class="form-group">
-					<label for="Email">Email: </label>
-					<input type="email" id="email" name="email">
-				</div>
-			</div>
-			<div class="one-row">
-				<div class="form-group">
-					<label for="phone">Phone number: </label>
-					<input type="tel" id="phone" name="phone">
-				</div>&nbsp;&nbsp;
-				<div class="form-group">
-					<label for="address">Address: </label>
-					<input type="text" id="address" name="address">
-				</div>
-			</div>	
-		</form>
-		<div class="button-center">
-			<button onclick="modify()">Modify Information</button>&nbsp;&nbsp;
-			<button onclick="back()">Back</button>
 		</div>
 	</div>
-  </div>
-</div>
 </div>
 </body>
 </html>

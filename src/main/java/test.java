@@ -29,11 +29,7 @@ public class test extends HttpServlet {
         }
         String str = stringBuilder.toString();
         System.out.println(str);
-
         Map<String,String> map = JSONLIKE.myJson(str);
-        //JSONObject jsonObject = new JSONObject();
-        //jsonObject.put("gender","male");
-        //System.out.println(jsonObject);
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         PrintWriter pw = resp.getWriter();

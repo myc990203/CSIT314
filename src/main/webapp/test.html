@@ -7,6 +7,11 @@
 <script>
     window.onload = function() {
         const req = new XMLHttpRequest();
+        req.open("POST", "test", true);
+        req.setRequestHeader('Content-Type', 'application/json');
+        req.send(JSON.stringify({
+            uid: "william"
+        }));
         req.onreadystatechange = function() {
             if (req.readyState === 4) {
                 console.log(req.response);
@@ -14,12 +19,6 @@
                 document.getElementById("userName").innerHTML=json.uid;
             }
         }
-        req.open("POST", "test", true);
-        req.setRequestHeader('Content-Type', 'application/json');
-        req.send(JSON.stringify({
-            uid: "william"
-        }));
-
     };
 
 </script>

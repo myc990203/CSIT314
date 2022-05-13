@@ -11,3 +11,18 @@ function login(){
         window.open("../professional/professional.html",target="_self");
     }
 }
+
+function setCookie_username(){
+    var username = document.getElementById("username").value;
+    document.cookie = "username="+username;
+}
+
+function setType1(){
+    var type = document.getElementById("cus").value;
+    document.cookie = "type="+type;
+}
+
+function setType2(){
+    var type = document.getElementById("pro").value;
+    document.cookie = "type="+type;
+}
