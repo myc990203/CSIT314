@@ -231,73 +231,65 @@ public class JdbcUtil {
         String vehicleModel = map.get("vehicleModel");
         String sql = "" +
                      "update CUSTOMER " +
-                     "set userName=?,gender=?,DOB=?,phoneNum=?,password=?,email=?,plateNum=?,vehicleModel=?," +
+                     "set cusName=?,gender=?,cusDOB=?,phoneNum=?,password=?,email=?,plateNum=?,vehicleModel=?," +
                      "where userID=?";
         //预编译sql语句
         PreparedStatement psmt        = con.prepareStatement(sql);
-        int               columnOfSql = 1;
         //先对应SQL语句，给SQL语句传递参数
-        psmt.setInt(columnOfSql, userID);
-        psmt.setString(columnOfSql++, userName);
-        psmt.setString(columnOfSql++, gender);
-        psmt.setString(columnOfSql++, DOB);
-        psmt.setString(columnOfSql++, phoneNum);
-        psmt.setString(columnOfSql++, password);
-        psmt.setString(columnOfSql++, email);
-        psmt.setString(columnOfSql++, plateNum);
-        psmt.setString(columnOfSql++, vehicleModel);
+        psmt.setInt(9, userID);
+        psmt.setString(1, userName);
+        psmt.setString(2, gender);
+        psmt.setString(3, DOB);
+        psmt.setString(4, phoneNum);
+        psmt.setString(5, password);
+        psmt.setString(6, email);
+        psmt.setString(7, plateNum);
+        psmt.setString(8, vehicleModel);
         //执行SQL语句
         return psmt.execute();
     }
 
     //sql update Professional
-    public static boolean updateProfessional(JSONObject ob) throws SQLException, ClassNotFoundException {
+    public static boolean updateProfessional(Map<String,String> map) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
-
-        int    userID   = 0;
-        String userName = "";
-        String gender   = "";
-        String DOB      = "";
-        String phoneNum = "";
-        String password = "";
-        String email    = "";
-        float  plevel   = 1;
-        double balance  = 1.0;
-        String location = "";
-
+        int    userID   = Integer.parseInt(map.get("uid"));
+        String userName = map.get("userName");
+        String gender   = map.get("gender");
+        String DOB      = map.get("DOB");
+        String phoneNum = map.get("phoneNum");
+        String password = map.get("password");
+        String email    = map.get("email");
+        String location = map.get("location");
         String sql = "" +
                      "update CUSTOMER " +
-                     "set userName=?,gender=?,DOB=?,phoneNum=?,password=?,email=?,plevel=?,balance=?,location=?" +
-                     "where userID=?";
+                     "set proName=?,gender=?,proDOB=?,phoneNum=?,proPw=?,email=?,location=?" +
+                     "where proNum=?";
         //预编译sql语句
         PreparedStatement psmt        = con.prepareStatement(sql);
-        int               columnOfSql = 1;
         //先对应SQL语句，给SQL语句传递参数
-        psmt.setInt(columnOfSql, userID);
-        psmt.setString(columnOfSql++, userName);
-        psmt.setString(columnOfSql++, gender);
-        psmt.setString(columnOfSql++, DOB);
-        psmt.setString(columnOfSql++, phoneNum);
-        psmt.setString(columnOfSql++, password);
-        psmt.setString(columnOfSql++, email);
-        psmt.setFloat(columnOfSql++, plevel);
-        psmt.setDouble(columnOfSql++, balance);
-        psmt.setString(columnOfSql++, location);
+        psmt.setInt(8, userID);
+        psmt.setString(1, userName);
+        psmt.setString(2, gender);
+        psmt.setString(3, DOB);
+        psmt.setString(4, phoneNum);
+        psmt.setString(5, password);
+        psmt.setString(6, email);
+        psmt.setString(7, location);
         //执行SQL语句
         return psmt.execute();
     }
 
     //sql delete
-    public boolean sqlDeleteVehicle(JSONObject ob) throws SQLException, ClassNotFoundException {
-        Connection        conn     = connectSql();
-        int               cusID    = ob.getInt("cusID");
-        String            plantNum = ob.getString("plantNum");
-        String            sql      = "delete * from VEHICLE where cusID = ? and plantNum = ?";
-        PreparedStatement psmt     = conn.prepareStatement(sql);
-        psmt.setInt(1, cusID);
-        psmt.setString(2, plantNum);
-        return psmt.execute();
-    }
+//    public boolean sqlDeleteVehicle(JSONObject ob) throws SQLException, ClassNotFoundException {
+//        Connection        conn     = connectSql();
+//        int               cusID    = ob.getInt("cusID");
+//        String            plantNum = ob.getString("plantNum");
+//        String            sql      = "delete * from VEHICLE where cusID = ? and plantNum = ?";
+//        PreparedStatement psmt     = conn.prepareStatement(sql);
+//        psmt.setInt(1, cusID);
+//        psmt.setString(2, plantNum);
+//        return psmt.execute();
+//    }
 
 
     //TODO
