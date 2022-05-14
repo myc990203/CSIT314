@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/user_info/user_info")
+@WebServlet("/modify_user_info/modify_user_info")
 public class modifyloding extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
