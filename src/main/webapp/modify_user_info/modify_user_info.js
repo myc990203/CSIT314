@@ -1,9 +1,10 @@
 function modify(){
-    window.open("../modify_user_info/modify_user_info.html",target="_self");
+    document.modify_page.submit();
+    window.open("../user_info/info.html",target="_self");
 }
 
 function back(){
-    window.open("../customer/customer.html",target="_self");
+    window.open("../user_info/user_info.html",target="_self");
 }
 
 function openNav(){

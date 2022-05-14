@@ -42,7 +42,7 @@
      document.getElementById("address").value=json.address;
      document.getElementById("VIPstart").value=json.vipStart;
      document.getElementById("VIPend").value=json.vipEnd;
-     //document.getElementById("vehicleList").innerHTML=json.vehicleList;
+     document.getElementById("vehicleList").value=json.vehicleModel;
     }
    }
   }
@@ -67,7 +67,7 @@
   </ul>
  </div>
  <div class="info-form">
-  <form action="">
+  <form action="" name="modify_page">
    <div class="container">
     <div class="user_info">
      <div class="one-row">
@@ -127,7 +127,7 @@
      </div>
      <div class="button-center">
       <button onclick="modify()">Modify Information</button>&nbsp;&nbsp;
-      <input id="submit" type="button" value="Submit">
+      <input id="submit" type="button" value="Submit" onclick="modify()">
 
       <button onclick="back()">Back</button>
      </div>

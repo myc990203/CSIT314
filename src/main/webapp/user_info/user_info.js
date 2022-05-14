@@ -4,6 +4,7 @@ function modify(){
 
 function back(){
     window.open("../customer/customer.html",target="_self");
+    history.back(-1);
 }
 
 function openNav(){
