@@ -21,9 +21,9 @@ public class JdbcUtil {
 
         // MySQL 8.0
         final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-        final String DB_URL      = "jdbc:mysql://localhost/CSIT314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+        final String DB_URL      = "jdbc:mysql://192.168.0.13/CSIT314?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
 
-        final String USER = "root";
+        final String USER = "william";
         final String PASS = "123456";
 
         Connection conn = null;
