@@ -3,7 +3,7 @@ function modify(){
 }
 
 function back(){
-    window.open("../html/customer/customer.html",target="_self");
+    window.open("../customer/customer.html",target="_self");
 }
 
 function openNav(){

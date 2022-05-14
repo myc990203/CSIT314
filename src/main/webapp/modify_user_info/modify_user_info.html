@@ -20,7 +20,7 @@
    var id = getCookie("username");
    var usertype = getCookie("type");
    const req = new XMLHttpRequest();
-   req.open("POST", "user_info", true);
+   req.open("POST", "modify_user_info", true);
    req.setRequestHeader('Content-Type', 'application/json');
    var jsonObj = new Object();
    jsonObj.uid = id;
@@ -34,14 +34,14 @@
     if (req.readyState === 4) {
      console.log(req.response);
      const json = JSON.parse(req.response);
-     document.getElementById("username").innerHTML=json.cusName;
-     document.getElementById("gender").innerHTML=json.gender;
-     document.getElementById("dob").innerHTML=json.cusDOB;
-     document.getElementById("email").innerHTML=json.email;
-     document.getElementById("phone").innerHTML=json.phoneNum;
-     document.getElementById("address").innerHTML=json.address;
-     document.getElementById("VIPstart").innerHTML=json.vipStart;
-     document.getElementById("VIPend").innerHTML=json.vipEnd;
+     document.getElementById("username").value=json.cusName;
+     document.getElementById("gender").value=json.gender;
+     document.getElementById("dob").value=json.cusDOB;
+     document.getElementById("email").value=json.email;
+     document.getElementById("phone").value=json.phoneNum;
+     document.getElementById("address").value=json.address;
+     document.getElementById("VIPstart").value=json.vipStart;
+     document.getElementById("VIPend").value=json.vipEnd;
      //document.getElementById("vehicleList").innerHTML=json.vehicleList;
     }
    }
@@ -71,61 +71,71 @@
    <div class="user_info">
     <div class="one-row">
      <div class="form-group">
-      <label for="name">Customer Name: </label>
+      <label>Customer Name: </label>
       <br>
-      <span id="username">Scott M</span>
+<!--      <span id="username">Scott M</span>-->
+      <input type="text" name="username" id="username">
      </div>&nbsp;&nbsp;
      <div class="form-group">
       <label for="gender">Gender: </label>
       <br>
-      <span id="gender">Male</span>
+<!--      <span id="gender">Male</span>-->
+      <input type="text" name="gender" id="gender">
      </div>
     </div>
     <div class="one-row">
      <div class="form-group">
-      <label for="age">Date of Birth: </label>
+      <label>Date of Birth: </label>
       <br>
-      <span id="dob">01-01-1990</span>
+<!--      <span id="dob">01-01-1990</span>-->
+      <input type="text" name="dob" id="dob">
      </div>&nbsp;&nbsp;
      <div class="form-group">
       <label for="Email">Email: </label>
       <br>
-      <span id="email">123123123@gmail.com</span>
+<!--      <span id="email">123123123@gmail.com</span>-->
+      <input type="text" name="email" id="email">
      </div>
     </div>
     <div class="one-row">
      <div class="form-group">
       <label for="phone">Phone number: </label>
       <br>
-      <span id="phone">04-121-1233-12</span>
+<!--      <span id="phone">04-121-1233-12</span>-->
+      <input type="text" name="phone" id="phone">
      </div>&nbsp;&nbsp;
      <div class="form-group">
       <label for="address">Address: </label>
       <br>
-      <span id="address">124a Gipps st, Gwynnevill, Wollongong, NSW</span>
+<!--      <span id="address">124a Gipps st, Gwynnevill, Wollongong, NSW</span>-->
+      <input type="text" name="address" id="address">
      </div>
     </div>
     <div class="one-row">
      <div class="form-group">
       <label for="VIPstart">VIP start date:</label>
       <br>
-      <span id="VIPstart">03-03-2022</span>
+<!--      <span id="VIPstart">03-03-2022</span>-->
+      <input type="text" name="VIPstart" id="VIPstart">
      </div>&nbsp;&nbsp;
      <div class="form-group">
       <label for="VIPend">VIP end date: </label>
       <br>
-      <span id="VIPend">03-03-2023</span>
+<!--      <span id="VIPend">03-03-2023</span>-->
+      <input type="text" name="VIPend" id="VIPend">
      </div>
     </div>
     <div class="one-row">
      <div class="form-group">
       <label for="vehicleList">vehicleList</label>
       <br>
-      <span id="vehicleList">QAQ-orz</span>
+<!--      <span id="vehicleList">QAQ-orz</span>-->
+      <input type="text" name="vehicleList" id="vehicleList">
      </div>
     </div>
     <div class="button-center">
      <button onclick="modify()">Modify Information</button>&nbsp;&nbsp;
+
      <button onclick="back()">Back</button>
     </div>
    </div>

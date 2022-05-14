@@ -1,9 +1,9 @@
 function modify(){
-    window.open("../html/modify_user_info.html",target="_self");
+    window.open("../modify_user_info/modify_user_info.html",target="_self");
 }
 
 function back(){
-    window.open("../html/customer/customer.html",target="_self");
+    window.open("../customer/customer.html",target="_self");
 }
 
 function openNav(){
