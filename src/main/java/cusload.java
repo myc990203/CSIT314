@@ -7,8 +7,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import project.*;
@@ -28,11 +30,28 @@ public class cusload extends HttpServlet {
         }
         String str = stringBuilder.toString();
         System.out.println(str);
-        Map<String, String> map = JSONLIKE.myJson(str);
+        Map<String, String> map    = JSONLIKE.myJson(str);
+        String              cusNum = map.get("username");
+        Map<String, String> cus    = new HashMap<>();
+        try {
+            cus = JdbcUtil.sqlCusLoginSelect(cusNum);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Map<String, String> cus2;
+        try {
+            cus2 = JdbcUtil.sqlCusSelect(Integer.parseInt(cus.get("cusNum")));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         PrintWriter pw   = resp.getWriter();
-        String      json = JSONLIKE.myMap2JSON(map);
+        String      json = JSONLIKE.myMap2JSON(cus2);
         System.out.println(json);
         pw.print(json);
         pw.flush();
