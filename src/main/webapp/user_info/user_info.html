@@ -42,6 +42,8 @@
 					document.getElementById("address").innerHTML=json.address;
 					document.getElementById("VIPstart").innerHTML=json.vipStart;
 					document.getElementById("VIPend").innerHTML=json.vipEnd;
+					document.getElementById("plateNum").innerHTML=json.plateNum;
+					document.getElementById("vehicleModel").innerHTML=json.vehicleModel;
 					//document.getElementById("vehicleList").innerHTML=json.vehicleList;
 				}
 			}
@@ -119,9 +121,14 @@
 				</div>
 				<div class="one-row">
 					<div class="form-group">
-						<label for="vehicleList">vehicleList</label>
+						<label for="plateNum">plateNum</label>
 						<br>
-						<span id="vehicleList">QAQ-orz</span>
+						<span id="plateNum">QAQ-orz</span>
+					</div>
+					<div class="form-group">
+						<label for="vehicleModel">Vehicle model: </label>
+						<br>
+						<span id="vehicleModel">BMW</span>
 					</div>
 				</div>
 				<div class="button-center">
