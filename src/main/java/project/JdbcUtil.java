@@ -89,7 +89,7 @@ public class JdbcUtil {
     }
     public static Map sqlCusLoginSelect(String username) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
-
+        System.out.println("name = "+username);
         String            sql  = "select cusPw,cusNum from Customer where cusName = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, username);
@@ -98,6 +98,7 @@ public class JdbcUtil {
         while (rs.next()) {
             res.put("cusPw",rs.getString("cusPw"));
             res.put("cusNum",rs.getString("cusNum"));
+
         }
         return res;
     }

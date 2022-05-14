@@ -24,9 +24,9 @@
 <div class="content">
     <div id="login">
         <h1>Login</h1>
-        <form action="Login" method="post">
+
             <input id="username" class="inp" type="text" required="required" placeholder="Username" onblur="setCookie_username()" name="u">
-            <input id="password" class="inp" type="password" required="required" placeholder="Password" onblur="setCookie_pwd()" name="p">
+            <input id="password" class="inp" type="password" required="required" placeholder="Password" name="p">
 
             <label><input class="radio" type="radio" id="cus" name="drone" value="cus" onclick="setType1()">Login As Customer</label>
 
@@ -35,11 +35,11 @@
                 <input class="radio" type="radio" id="pro" name="drone" value="pro" onclick="setType2()">Login As Professional</label>
 
             <br><br>
-            <input type="submit" class="but" value="login">
+<%--            <input type="submit" class="but" value="login">--%>
             <span class="signin">
                         <a href="./register/register.html" methods="post">New to us? Sign in!</a>
             </span>
-        </form>
+            <button onclick="login1()">Login</button>
     </div>
 </div>
 

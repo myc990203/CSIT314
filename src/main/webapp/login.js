@@ -42,7 +42,6 @@ function setType2() {
 }
 
 function login1() {
-    alert("hello");
     var cus = document.getElementById("cus");
     var pro = document.getElementById("pro");
     const req    = new XMLHttpRequest();
@@ -53,26 +52,27 @@ function login1() {
     } else if (pro.checked) {
         var usertype = pro.value;
     }
-    var jsonObj      = new Object();
-    jsonObj.userName = userName;
-    sonObj.password  = password;
-    jsonObj.type     = usertype;
+    var jsonObj      = {
+        userName : userName,
+        password: password,
+        type:usertype
+    };
+    // jsonObj.userName = userName;
+    // jsonObj.password  = password;
+    // jsonObj.type     = usertype;
     console.log(jsonObj);
-    alert(jsonObj);
-    req.open("POST", "login", true);
+    req.open("POST", "Login", true);
     req.setRequestHeader('Content-Type', 'application/json');
-    req.send(JSON.stringify({
+    req.send(JSON.stringify(
         jsonObj
-    }));
+    ));
     req.onreadystatechange = function () {
         if (req.readyState === 4) {
             console.log(req.response);
             const json      = JSON.parse(req.response);
             document.cookie = "uid=" + json.uid;
-            document.cookie = "type=" + json.type;
             if (cus.checked) {
                 window.location.href = "./customer/customer.html";
-
             } else if (pro.checked) {
                 window.open("./professional/professional.html", target = "_self");
             }

@@ -31,27 +31,20 @@ public class cusload extends HttpServlet {
         String str = stringBuilder.toString();
         System.out.println(str);
         Map<String, String> map    = JSONLIKE.myJson(str);
-        String              cusNum = map.get("username");
+        String              cusNum = map.get("uid");
         Map<String, String> cus    = new HashMap<>();
         try {
-            cus = JdbcUtil.sqlCusLoginSelect(cusNum);
+            cus = JdbcUtil.sqlCusSelect(Integer.parseInt(cusNum));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        Map<String, String> cus2;
-        try {
-            cus2 = JdbcUtil.sqlCusSelect(Integer.parseInt(cus.get("cusNum")));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         PrintWriter pw   = resp.getWriter();
-        String      json = JSONLIKE.myMap2JSON(cus2);
+        String      json = JSONLIKE.myMap2JSON(cus);
         System.out.println(json);
         pw.print(json);
         pw.flush();

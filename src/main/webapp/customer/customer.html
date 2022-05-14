@@ -18,23 +18,17 @@
         }
 
         window.onload = function () {
-
-            var username = getCookie("username");
-            var pwd      = getCookie("pwd");
-            var usertype = getCookie("type");
+            var uid = getCookie("uid");
             const req    = new XMLHttpRequest();
             req.open("POST", "customer", true);
             req.setRequestHeader('Content-Type', 'application/json');
             var jsonObj      = new Object();
-            jsonObj.username = username;
-            jsonObj.pwd      = pwd;
-            jsonObj.type     = usertype;
+            jsonObj.uid = uid;
             req.send(JSON.stringify(jsonObj));
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     console.log(req.response);
                     const json                                 = JSON.parse(req.response);
-                    document.cookie                            = "uid=" + json.uid;
                     document.getElementById("name").innerHTML  = json.cusName;
                     document.getElementById("phone").innerHTML = json.phoneNum;
                     document.getElementById("car").innerHTML   = json.plateNum;
