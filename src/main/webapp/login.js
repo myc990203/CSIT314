@@ -30,6 +30,7 @@ function setCookie_pwd() {
     document.cookie = "pwd=" + pwd;
 }
 
+
 function setType1() {
     var type        = document.getElementById("cus").value;
     document.cookie = "type=" + type;

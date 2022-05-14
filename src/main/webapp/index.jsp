@@ -6,6 +6,12 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="login.css"/>
     <script src="login.js"></script>
+    <script>
+        function setCookie_pwd() {
+            var pwd    = document.getElementById("password").value;
+            document.cookie = "pwd=" + pwd;
+        }
+    </script>
 </head>
 
 <body>
