@@ -90,13 +90,14 @@ public class JdbcUtil {
     public static Map sqlCusLoginSelect(String username) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
 
-        String            sql  = "select cusPw from Customer where cusName = ?;";
+        String            sql  = "select cusPw,cusNum from Customer where cusName = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, username);
         ResultSet    rs     = psmt.executeQuery();
         Map<String,String> res = new HashMap<String, String>();
         while (rs.next()) {
             res.put("cusPw",rs.getString("cusPw"));
+            res.put("cusNum",rs.getString("cusNum"));
         }
         return res;
     }
@@ -104,13 +105,14 @@ public class JdbcUtil {
     public static Map sqlProLoginSelect(String username) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
 
-        String            sql  = "select proPw from Professional where proName = ?;";
+        String            sql  = "select proPw,proNum from Professional where proName = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, username);
         ResultSet    rs     = psmt.executeQuery();
         Map<String,String> res = new HashMap<String, String>();
         while (rs.next()) {
             res.put("proPw", rs.getString("proPw"));
+            res.put("proNum",rs.getString("proNum"));
 
         }
         return res;

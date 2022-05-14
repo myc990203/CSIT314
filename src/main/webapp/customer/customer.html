@@ -6,7 +6,39 @@
     <title>Release Information</title>
     <link rel="stylesheet" type="text/css" href="customer.css"/>
     <script src="customer.js"></script>
-
+    <script>
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca   = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+        window.onload = function() {
+        var username = getCookie("username");
+        var pwd = getCookie("pwd");
+        var usertype = getCookie("type");
+        const req = new XMLHttpRequest();
+        req.open("POST", "customer", true);
+        req.setRequestHeader('Content-Type', 'application/json');
+        var jsonObj = new Object();
+        jsonObj.username = username;
+        jsonObj.pwd = pwd;
+        jsonObj.type = usertype;
+        req.send(JSON.stringify(jsonObj));
+        req.onreadystatechange = function() {
+            if (req.readyState === 4) {
+                console.log(req.response);
+                const json = JSON.parse(req.response);
+                document.cookie = "uid=" + json.uid;
+                document.getElementById("name").innerHTML=json.cusName;
+                document.getElementById("phone").innerHTML=json.phoneNum;
+                document.getElementById("car").innerHTML=json.plateNum;
+            }
+        }
+    }</script>
 </head>
 
 <body onload="saveId()">
@@ -26,22 +58,20 @@
     <a href="../current_order/current_order.html"><i class="main main-payment"></i>Current Order</a>
     <a href="../order_history/order_history.html"><i class="main main-order"></i>Order History</a>
 </div>
-
 <div class="row">
     <div class="left-part">
         <form class="card" method="post">
             <h2>Please fill in the information below in detail to get help.</h2>
             <label for="name">Your Name: </label>&nbsp;&nbsp;
-            <input type="text" id="name" name="name" required/><br><br>
+            <span id="name" name="name"></span><br><br>
             <label for="phone">Phone number: </label>&nbsp;&nbsp;
-            <input type="tel" id="phone" name="phone" placeholder="04-123-456-78" pattern="[0-9]{10}" required>
-            <br><br>
+            <span id="phone"  name="phone"></span><br><br>
             <label for="address">Address: </label>&nbsp;&nbsp;
             <input type="text" id="address" name="address" required/><br><button class="getLocation" onclick="getLocation()">Use current location</button><br><br>
             <div id="map" style="display: none;">
             </div>
-            <label for="choose">Which of your vehicles needs assistance<br>(Please fill in the license plate number.)</label>&nbsp;&nbsp;
-            <input for="text" id="car" name="car required" required><br><br>
+            <label for="car">Which of your vehicles needs assistance<br>(Please fill in the license plate number.)</label>&nbsp;&nbsp;
+            <span id="car" name="choose"></span><br><br>
             <label>Issue Type: </label>
             <select name="issue" required>
                 <option value="batteries">Flat Batteries</option>
@@ -55,7 +85,6 @@
             <textarea style="width: 300px;resize: none;" rows="4"></textarea><br><br>
             <!-- <label>Price: $<s> ***</s></label><br><br> -->
             <input type="submit" id="submit" onsubmit="submit()">
-
         </form>
         <button onclick="submit()">应该去</button>
     </div>
@@ -63,7 +92,7 @@
     <div class="right-part">
         <div class="cd">
             <h2 id="test">About Me</h2>
-            <p id="hello">(Some introduction!!)</p>
+            <p id="hello">(Some introduction!!)</p >
         </div>
     </div>
 </div>

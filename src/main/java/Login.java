@@ -20,6 +20,7 @@ public class Login extends HttpServlet {
         String              password = req.getParameter("p");
         String              role     = req.getParameter("drone");
         Map<String, String> res      = new HashMap<String, String>();
+        Map<String,String> map = new HashMap<String, String>();
         if (role.equals("cus")) {
             try {
                 res = JdbcUtil.sqlCusLoginSelect(username);
