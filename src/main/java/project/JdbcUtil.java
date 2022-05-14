@@ -85,6 +85,34 @@ public class JdbcUtil {
         }
         return res;
     }
+    public static Map sqlCusLoginSelect(String username) throws SQLException, ClassNotFoundException {
+        Connection conn = connectSql();
+
+        String            sql  = "select cusPw from Customer where cusName = ?;";
+        PreparedStatement psmt = conn.prepareStatement(sql);
+        psmt.setString(1, username);
+        ResultSet    rs     = psmt.executeQuery();
+        Map<String,String> res = new HashMap<String, String>();
+        while (rs.next()) {
+            res.put("cusPw",rs.getString("cusPw"));
+        }
+        return res;
+    }
+
+    public static Map sqlProLoginSelect(String username) throws SQLException, ClassNotFoundException {
+        Connection conn = connectSql();
+
+        String            sql  = "select proPw from Professional where proName = ?;";
+        PreparedStatement psmt = conn.prepareStatement(sql);
+        psmt.setString(1, username);
+        ResultSet    rs     = psmt.executeQuery();
+        Map<String,String> res = new HashMap<String, String>();
+        while (rs.next()) {
+            res.put("proPw", rs.getString("proPw"));
+
+        }
+        return res;
+    }
 
     public static ArrayList sqlVehicleSelect(int cusNum) throws SQLException, ClassNotFoundException {
         Connection        conn = connectSql();
