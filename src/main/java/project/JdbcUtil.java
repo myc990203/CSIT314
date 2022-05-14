@@ -118,20 +118,20 @@ public class JdbcUtil {
         return res;
     }
 
-    public static ArrayList sqlVehicleSelect(int cusNum) throws SQLException, ClassNotFoundException {
-        Connection        conn = connectSql();
-        String            sql  = "select * from VEHICLE where cusNum = ?";
-        PreparedStatement psmt = conn.prepareStatement(sql);
-        psmt.setInt(1, cusNum);
-        ResultSet rs          = psmt.executeQuery();
-        ArrayList vehicleList = new ArrayList<Vehicle>();
-        while (rs.next()) {
-            Vehicle vehicle = new Vehicle(rs.getString("plateNum"), rs.getString("model"));
-            System.out.println(vehicle.getPlateNum());
-            vehicleList.add(vehicle);
-        }
-        return vehicleList;
-    }
+//    public static ArrayList sqlVehicleSelect(int cusNum) throws SQLException, ClassNotFoundException {
+//        Connection        conn = connectSql();
+//        String            sql  = "select * from VEHICLE where cusNum = ?";
+//        PreparedStatement psmt = conn.prepareStatement(sql);
+//        psmt.setInt(1, cusNum);
+//        ResultSet rs          = psmt.executeQuery();
+//        ArrayList vehicleList = new ArrayList<Vehicle>();
+//        while (rs.next()) {
+//            Vehicle vehicle = new Vehicle(rs.getString("plateNum"), rs.getString("model"));
+//            System.out.println(vehicle.getPlateNum());
+//            vehicleList.add(vehicle);
+//        }
+//        return vehicleList;
+//    }
 
     public static String sqlOrderSelect(String userNum) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
