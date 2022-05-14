@@ -8,11 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/modify_user_info/modify_user_info")
-public class modifyloding extends HttpServlet {
+public class Modifyloding extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("post");
