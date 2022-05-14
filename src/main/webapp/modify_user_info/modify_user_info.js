@@ -1,6 +1,7 @@
 function modify(){
     document.modify_page.submit();
-    window.open("../user_info/info.html",target="_self");
+    alert("修改成功");
+    window.open("../user_info/user_info.html",target="_self");
 }
 
 function back(){

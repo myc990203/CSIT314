@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="UTF-8">
+ <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
  <title>Modify User information</title>
  <link rel="stylesheet" href="modify_user_info.css" type="text/css">
  <script>
@@ -53,8 +53,8 @@
 <body>
 <div class="top">
  <!--<h3>Welcome to user information center!</h3>-->
- <h1>User information</h1>
- <span onclick="openNav()">&#9776; Menu </span>
+ <h1>Modify User information</h1>
+ <div onclick="openNav()">&#9776; Menu </div>
 </div>
 <div class="wrapper">
  <div id="nav" class="sideNav">
@@ -67,7 +67,7 @@
   </ul>
  </div>
  <div class="info-form">
-  <form action="" name="modify_page">
+  <form action="modifyloding" name="modify_page" method="post">
    <div class="container">
     <div class="user_info">
      <div class="one-row">
@@ -126,8 +126,8 @@
       </div>
      </div>
      <div class="button-center">
-      <button onclick="modify()">Modify Information</button>&nbsp;&nbsp;
-      <input id="submit" type="button" value="Submit" onclick="modify()">
+      <button onclick="modify()">Submit</button>&nbsp;&nbsp;
+      <input id="submit" type="submit" value="Submit">
 
       <button onclick="back()">Back</button>
      </div>
