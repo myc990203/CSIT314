@@ -1,6 +1,7 @@
 import project.JdbcUtil;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +10,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpdataCus extends HttpServlet {
+@WebServlet("/modify_user_info/UpdateCus")
+public class UpdateCus extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("hello");
