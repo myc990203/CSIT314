@@ -4,76 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Release Information</title>
-    <link rel="stylesheet" type="text/css" href="customer.css"/>  
+    <link rel="stylesheet" type="text/css" href="customer.css"/>
     <script src="customer.js"></script>
 
 </head>
 
-<body>
+<body onload="saveId()">
 
 <div class="header">
     <div class="header-img" data-stellar-background-ratio="0.4" style="background-image:url(../image/release-bg.jpg); background-position: 80% -102px;">
         <h1>Release Information</h1>
         <div style="text-align:right">
-           <button onclick="logOut()">Log out</button>
+            <button onclick="logOut()">Log out</button>
         </div>
     </div>
 </div>
 
-    <div class="navbar">
-        <a href="../user_info/user_info.html"><i class="main main-account"></i>My Account</a> <!--user info-->
-        <a href="../membership/membership.html"><i class="main main-membership"></i>Membership</a> <!--membership-->
-        <a href="../payment/payment.html"><i class="main main-payment"></i>Payment暂时放在这里</a>
-        <a href="../order_history/order_history.html"><i class="main main-order"></i>Order</a>
-    </div>
-
-    <div class="row">
-        <div class="left-part">
-            <div class="card">
-                <h2>Please fill in the information below in detail.</h2>
-                <label for="name">Name: </label>&nbsp;&nbsp;
-                <input type="text" id="name" name="name"/><br><br>
-                <label for="phone">Phone number: </label>&nbsp;&nbsp;
-                <input type="tel" id="phone" name="phone" placeholder="04-123-456-78" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{2}" required>
-                <br><br>
-
-
-                <button class="getLocation" onclick="getLocation()">Use current location</button>
-                <div id="demo"></div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3291.4098132838963!2d150.88693971594518!3d-34.41634408050848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b13190a31ac4cc7%3A0x6ea2dd608ece8f71!2s124%20Gipps%20St%2C%20Gwynneville%20NSW%202500!5e0!3m2!1sen-US!2sau!4v1651234961139!5m2!1sen-US!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-
-                <label for="address">Address: </label>&nbsp;&nbsp;
-                <input type="text" id="address" name="address"/><br><br>
-                <label for="choose">Which of your vehicles needs assistance?(Please fill in the license plate number.)</label>&nbsp;&nbsp;
-                <input for="text" id="car" name="car"><br><br>
-                <label>Issue Type: </label>
-                <select>
-                    <option value="batteries">Flat Batteries</option>
-                    <option value="tyres">Flat Tyres</option>
-                    <option value="towing">Towing</option>
-                    <option value="locked">Locked Out</option>
-                    <option value="fuel">Emergency fuel delivery</option>
-                </select><br><br>
-                <div>If the above incident types do not cover your current situation, please note your situation below.</div><br>
-                <textarea style="width: 300px" rows="4"></textarea><br><br>
-                <label>Price: $<s> ***</s></label><br><br>
-                <button>Submit</button>
-            </div>
-        </div>
-
-        <div class="right-part">
-            <div class="cd">
-               <h2>About Me</h2>
-               <p>(Some introduction!!)</p>
-            </div>
-        </div>
-    </div>
-<div>
-    <button onclick="showCookie()">showCookie</button>
+<div class="navbar">
+    <a href="../user_info/user_info.html"><i class="main main-account"></i>My Account</a> <!--user info-->
+    <a href="../membership/membership.html"><i class="main main-membership"></i>Membership</a> <!--membership-->
+    <a href="../current_order/current_order.html"><i class="main main-payment"></i>Current Order</a>
+    <a href="../order_history/order_history.html"><i class="main main-order"></i>Order History</a>
 </div>
+
+<div class="row">
+    <div class="left-part">
+        <form class="card" method="post">
+            <h2>Please fill in the information below in detail to get help.</h2>
+            <label for="name">Your Name: </label>&nbsp;&nbsp;
+            <input type="text" id="name" name="name" required/><br><br>
+            <label for="phone">Phone number: </label>&nbsp;&nbsp;
+            <input type="tel" id="phone" name="phone" placeholder="04-123-456-78" pattern="[0-9]{10}" required>
+            <br><br>
+            <label for="address">Address: </label>&nbsp;&nbsp;
+            <input type="text" id="address" name="address" required/><br><button class="getLocation" onclick="getLocation()">Use current location</button><br><br>
+            <div id="map" style="display: none;">
+            </div>
+            <label for="choose">Which of your vehicles needs assistance<br>(Please fill in the license plate number.)</label>&nbsp;&nbsp;
+            <input for="text" id="car" name="car required" required><br><br>
+            <label>Issue Type: </label>
+            <select name="issue" required>
+                <option value="batteries">Flat Batteries</option>
+                <option value="tyres">Flat Tyres</option>
+                <option value="towing">Towing</option>
+                <option value="locked">Locked Out</option>
+                <option value="fuel">Emergency fuel delivery</option>
+                <option value="other">Others</option>
+            </select><br><br>
+            <div>If the above incident types do not cover your current situation<br> please note your situation below.</div><br>
+            <textarea style="width: 300px;resize: none;" rows="4"></textarea><br><br>
+            <!-- <label>Price: $<s> ***</s></label><br><br> -->
+            <input type="submit" id="submit" onsubmit="submit()">
+
+        </form>
+        <button onclick="submit()">应该去</button>
+    </div>
+
+    <div class="right-part">
+        <div class="cd">
+            <h2 id="test">About Me</h2>
+            <p id="hello">(Some introduction!!)</p>
+        </div>
+    </div>
+</div>
+
 <div class="footer">
-    (Company name)
+    (CSIT314)
 </div>
+
 </body>
 </html>

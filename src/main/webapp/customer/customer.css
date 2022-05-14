@@ -1,92 +1,98 @@
 .header {
     /* background-color: #848484; 
     padding: 30px;*/
-     color: rgb(68, 67, 67);
-     
- }
- .head h1{
-     font-size:50px;
-     padding:15px;
- }
- .header-img{
-     width:100%;
-     height:260px;
-     background:url(../image/release-bg.jpg) no-repeat center center;
-     background-size: cover;
-     background-position: 50% -102px;
- }
- .header-img h1{
-     text-align: center;
-     padding:80px;
- }
- .navbar h2{
-     text-align: center;
- }
- .navbar{
-     overflow:hidden;
-     background-color:orange;
- }
- .navbar a{
-     float:left;
-     display:block;
-     color:white;
-     text-align: center;
-     padding:14px 16px;
-     text-decoration: none;
- }
- .navbar a:hover{
-     background-color:#ddd;
-     color:black;
- }
- .left-part{
-     float:left;
-     width:68%;
- }
- .right-part{
-     float:left;
-     width:28%;
-     background-color:#ddd;
-     padding-left:30px;
- }
- .card{
-     background-color: white;
-     padding:20px;
-     margin-top: 20px;
- }
- .cd{
-     background-color: #ddd;
-     padding:20px;
-     margin-top: 20px;
- }
- .row:after {
-     content:"";
-     display:table;
-     clear:both;
- }
- .footer{
-     padding:20px;
-     text-align: center;
-     background:#ddd;
-     margin-top: 20px;
- }
- @media screen and (max-width: 800px){
-     .left-part .right-part{
-         width:100%;
-         padding:0;
-     }
- }
- @media screen and (max-width:400px){
-     .navbar a{
-         float:none;
-         width:100%;
-     }
- }
- button{
-     background-color:orange;
-     border-radius:10px;
-     color:white;
-     box-shadow:4px 3px 3px orange;
-     border:1px solid gainsboro;
-     padding:8px;
- }
- 
+    color: rgb(68, 67, 67);
+
+}
+.head h1{
+    font-size:50px;
+    padding:15px;
+}
+.header-img{
+    width:100%;
+    height:260px;
+    background:url(../image/release-bg.jpg) no-repeat center center;
+    background-size: cover;
+    background-position: 50% -102px;
+}
+.header-img h1{
+    text-align: center;
+    padding:80px;
+}
+.navbar h2{
+    text-align: center;
+}
+.navbar{
+    overflow:hidden;
+    background-color:orange;
+}
+.navbar a{
+    float:left;
+    display:block;
+    color:white;
+    text-align: center;
+    padding:14px 16px;
+    text-decoration: none;
+}
+.navbar a:hover{
+    background-color:#ddd;
+    color:black;
+}
+.left-part{
+    float:left;
+    width:68%;
+}
+.right-part{
+    float:left;
+    width:28%;
+    background-color:#ddd;
+    padding-left:30px;
+}
+.card{
+    background-color: white;
+    padding:20px;
+    margin-top: 20px;
+}
+.cd{
+    background-color: #ddd;
+    padding:20px;
+    margin-top: 20px;
+}
+.row:after {
+    content:"";
+    display:table;
+    clear:both;
+}
+.footer{
+    padding:20px;
+    text-align: center;
+    background:#ddd;
+    margin-top: 20px;
+}
+@media screen and (max-width: 800px){
+    .left-part .right-part{
+        width:100%;
+        padding:0;
+    }
+}
+@media screen and (max-width:400px){
+    .navbar a{
+        float:none;
+        width:100%;
+    }
+}
+button{
+    background-color:orange;
+    border-radius:10px;
+    color:white;
+    box-shadow:4px 3px 3px orange;
+    border:1px solid gainsboro;
+    padding:8px;
+}
+#submit{
+    background-color:orange;
+    border-radius:10px;
+    color:white;
+    height: 40px;
+    width: 80px;
+}
