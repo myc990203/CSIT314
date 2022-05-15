@@ -30,13 +30,13 @@ function checkPassword(){
 function changeType(){
     var userType = document.getElementById("userType").value;
     if(userType == "cus"){
-        document.getElementById("cus_plate").style.display = "inline";
+        document.getElementById("cus_plate").style.display = "block";
         document.getElementById("cus_vm").style.display = "block";
         document.getElementById("pro_address").style.display = "none";
     }else if (userType == "pro"){
         document.getElementById("cus_plate").style.display = "none";
         document.getElementById("cus_vm").style.display = "none";
-        document.getElementById("pro_address").style.display = "inline";
+        document.getElementById("pro_address").style.display = "block";
     } else{
         document.getElementById("cus_plate").style.display = "none";
         document.getElementById("cus_vm").style.display = "none";
