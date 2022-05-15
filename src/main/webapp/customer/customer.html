@@ -15,7 +15,6 @@
         });
     </script>
     <script>
-
         function getCookie(cname) {
             var name = cname + "=";
             var ca   = document.cookie.split(';');
@@ -25,8 +24,16 @@
             }
             return "";
         }
+        function getTime(){
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth()+1;
+            var day = date.getDate();
 
+            document.getElementById("time").innerHTML = year+"-"+month+"-"+day;
+        }
         window.onload = function () {
+            getTime();
             var uid = getCookie("uid");
             const req    = new XMLHttpRequest();
             req.open("POST", "customer", true);
@@ -43,10 +50,45 @@
                     document.getElementById("car").innerHTML   = json.plateNum;
                 }
             }
-        }</script>
+        }
+        function cus1() {
+            var name = document.getElementById("name").innerHTML;
+            var phone = document.getElementById("phone").innerHTML;
+            var time = document.getElementById("time").innerHTML;
+            var address = document.getElementById("address").value;
+            var select = document.getElementById("issue");
+            var index = select.selectedIndex;
+            var value = select.options[index].value;
+            var other = document.getElementById("other").value;
+            var plate = document.getElementById("car").innerHTML;
+            var uid = getCookie("uid");
+            const req    = new XMLHttpRequest();
+            var jsonObj      = {
+                uid: uid,
+                Name : name,
+                Phone: phone,
+                Time:time,
+                Address:address,
+                Value:value,
+                Plate:plate,
+                Review:other
+            };
+            console.log(jsonObj);
+            req.open("POST", "Customer", true);
+            req.setRequestHeader('Content-Type', 'application/json');
+            req.send(JSON.stringify(
+                jsonObj
+            ));
+            req.onreadystatechange = function () {
+                if (req.readyState === 4) {
+                    window.open("../current_order/current_order.html" , "_self");
+                }
+            }
+        }
+    </script>
 
 </head>
-
+<body>
 <div class="header">
     <div class="header-img" data-stellar-background-ratio="0.4"
          style="background-image:url(../image/release-bg.jpg); background-position: 80% -102px;">
@@ -65,38 +107,37 @@
 </div>
 <div class="row">
     <div class="left-part">
-        <form class="card" method="post" action="Customer">
-            <h2>Please fill in the information below in detail to get help.</h2>
-            <label for="name">Your Name: </label>&nbsp;&nbsp;
-            <span id="name" name="name"></span><br><br>
-            <label for="phone">Phone number: </label>&nbsp;&nbsp;
-            <span id="phone" name="phone"></span><br><br>
-            <label for="address">Address: </label>&nbsp;&nbsp;
-            <input type="text" id="address" name="address" required/><br>
-            <button class="getLocation" onclick="getLocation()">Use current location</button>
-            <br><br>
-            <div id="map" style="display: none;">
-            </div>
-            <label for="car">Which of your vehicles needs assistance<br>(Please fill in the license plate
-                number.)</label>&nbsp;&nbsp;
-            <span id="car" name="choose"></span><br><br>
-            <label>Issue Type: </label>
-            <select name="issue" required>
-                <option value="Flat Batteries">Flat Batteries</option>
-                <option value="Flat Tyres">Flat Tyres</option>
-                <option value="Towing">Towing</option>
-                <option value="Locked Out">Locked Out</option>
-                <option value="Emergency fuel delivery">Emergency fuel delivery</option>
-                <option value="other">Others</option>
-            </select><br><br>
-            <div>If the above incident types do not cover your current situation<br> please note your situation below.
-            </div>
-            <br>
-            <textarea style="width: 300px;resize: none;" rows="4" name="ifOther"></textarea><br><br>
-            <!-- <label>Price: $<s> ***</s></label><br><br> -->
-            <input type="submit" id="submit" onsubmit="submit()">
-        </form>
-        <button onclick="submit()">应该去</button>
+        <h2>Please fill in the information below in detail to get help.</h2>
+        <label for="name">Your Name: </label>&nbsp;&nbsp;
+        <span id="name" name="name"></span><br><br>
+        <label for="phone">Phone number: </label>&nbsp;&nbsp;
+        <span id="phone" name="phone"></span><br><br>
+        <label for="time">Current time: </label>&nbsp;&nbsp;
+        <span id="time" name="time"></span><br><br>
+        <label for="address">Address: </label>&nbsp;&nbsp;
+        <input type="text" id="address" name="address" required/><br>
+        <button class="getLocation" onclick="getLocation()">Use current location</button>
+        <br><br>
+        <div id="map" style="display: none;">
+        </div>
+        <label for="car">Which of your vehicles needs assistance<br>(Please fill in the license plate
+            number.)</label>&nbsp;&nbsp;
+        <span id="car" name="choose"></span><br><br>
+        <label>Issue Type: </label>
+        <select id="issue" name="issue" required>
+            <option value="Flat Batteries">Flat Batteries</option>
+            <option value="Flat Tyres">Flat Tyres</option>
+            <option value="Towing">Towing</option>
+            <option value="Locked Out">Locked Out</option>
+            <option value="Emergency fuel delivery">Emergency fuel delivery</option>
+            <option value="other">Others</option>
+        </select><br><br>
+        <div>If the above incident types do not cover your current situation<br> please note your situation below.
+        </div>
+        <br>
+        <textarea style="width: 300px;resize: none;" rows="4" name="ifOther" id="other"></textarea><br><br>
+        <!-- <label>Price: $<s> ***</s></label><br><br> -->
+        <button onclick="cus1()">Submit</button>
     </div>
 
     <div class="right-part">
