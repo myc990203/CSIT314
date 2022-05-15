@@ -39,17 +39,35 @@ public class Register extends HttpServlet {
         if (userT.equals("cus")) {
             try {
                 JdbcUtil.sqlCusInsert(name, pw, date, email, phone, gender, plateN, vhn);
+                resp.setCharacterEncoding("utf-8");
+                resp.setContentType("text/html;charset=UTF-8");
+                resp.sendRedirect("../index.jsp");
             } catch (SQLException e) {
+                resp.setCharacterEncoding("utf-8");
+                resp.setContentType("text/html;charset=UTF-8");
+                resp.sendRedirect("register.html");
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
+                resp.setCharacterEncoding("utf-8");
+                resp.setContentType("text/html;charset=UTF-8");
+                resp.sendRedirect("register.html");
                 throw new RuntimeException(e);
             }
         } else if (userT.equals("pro")) {
             try {
                 JdbcUtil.sqlProInsert(name, pw, date, email, phone,gender, location);
+                resp.setCharacterEncoding("utf-8");
+                resp.setContentType("text/html;charset=UTF-8");
+                resp.sendRedirect("../index.jsp");
             } catch (SQLException e) {
+                resp.setCharacterEncoding("utf-8");
+                resp.setContentType("text/html;charset=UTF-8");
+                resp.sendRedirect("register.html");
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
+                resp.setCharacterEncoding("utf-8");
+                resp.setContentType("text/html;charset=UTF-8");
+                resp.sendRedirect("register.html");
                 throw new RuntimeException(e);
             }
         }
