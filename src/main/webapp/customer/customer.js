@@ -1,19 +1,6 @@
 function logOut(){
-    window.open("../login/login.html",target="_self");
+    window.open("../index.jsp",target="_self");
 }
-function userInfo(){
-    window.open("../user_info/user_info.html",target="_self");
-}
-function membership(){
-    window.open("../membership/membership.html",target="_self");
-}
-function currentOrder(){
-    window.open("../current_order/current_order.html",target="_self");
-}
-function payment(){
-    window.open("../payment/payment.html",target="_self");
-}
-
 
 // current location
 var latitude;
