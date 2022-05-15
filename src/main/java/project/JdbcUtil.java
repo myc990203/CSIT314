@@ -65,12 +65,12 @@ public class JdbcUtil {
         return res;
     }
 
-    public static Map sqlProSelect(String userID) throws SQLException, ClassNotFoundException {
+    public static Map sqlProSelect(int userID) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
 
         String            sql  = "select * from Professional where proNum = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
-        psmt.setString(1, userID);
+        psmt.setInt(1, userID);
         ResultSet    rs     = psmt.executeQuery();
         Map<String,String> res = new HashMap<String, String>();
         while (rs.next()) {

@@ -37,14 +37,14 @@ public class ShowUserInfo extends HttpServlet {
         System.out.println(userType);
         if (userType.equals("cus")){
             try {
-                res = JdbcUtil.sqlCusSelect(1);
+                res = JdbcUtil.sqlCusSelect(Integer.parseInt(userID));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 
         }else {
             try {
-                res = JdbcUtil.sqlProSelect(userID);
+                res = JdbcUtil.sqlProSelect(Integer.parseInt(userID));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

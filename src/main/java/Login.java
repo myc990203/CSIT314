@@ -17,7 +17,6 @@ import project.*;
 public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("@WebServlet(\"/Login\")");
         BufferedReader bufferedReader = req.getReader();
         StringBuilder  stringBuilder  = new StringBuilder();
         String         line;
