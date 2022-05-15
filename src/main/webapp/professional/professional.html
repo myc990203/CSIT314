@@ -3,9 +3,37 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Order Page</title>
+    <title>Professional Page</title>
     <link rel="stylesheet" type="text/css" href="professional.css" />
     <script src="professional.js"></script>
+    <script>
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca   = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+
+        window.onload = function () {
+            var uid = getCookie("uid");
+            const req    = new XMLHttpRequest();
+            req.open("POST", "proload", true);
+            req.setRequestHeader('Content-Type', 'application/json');
+            var jsonObj = new Object();
+            jsonObj.uid = uid;
+            req.send(JSON.stringify(jsonObj));
+            req.onreadystatechange = function () {
+                if (req.readyState === 4) {
+                    console.log(req.response);
+                    const json = JSON.parse(req.response);
+                    document.getElementById("name").innerHTML  = json.proName;
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -32,48 +60,11 @@
         </div>
     </div>
     <div class="title">
+        <label>Your Name: </label>&nbsp;&nbsp;
+        <span id="name" ></span><br><br>
         <h3>Order information 1</h3>
         <h3>currently you dont have any serving request</h3>
     </div>
-    <!-- <div class="form">
-        <div class="forminner">
-            <div class="formone">
-                <div class="forminput">
-                    <input type="text" placeholder="Address">
-                </div>
-                <div class="forminput">
-                    <input type="text" placeholder="Problem">
-                </div>
-            </div>
-            <div class="formtwo">
-                <textarea>text</textarea>
-            </div>
-        </div>
-        <div class="formselect">
-            <p><input type="checkbox">select</p>
-        </div>
-    </div> -->
-    <!-- <div class="title">
-        <h3>Order information 2</h3>
-    </div>
-    <div class="form">
-        <div class="forminner">
-            <div class="formone">
-                <div class="forminput">
-                    <input type="text" placeholder="Address">
-                </div>
-                <div class="forminput">
-                    <input type="text" placeholder="Problem">
-                </div>
-            </div>
-            <div class="formtwo">
-                <textarea>text</textarea>
-            </div>
-        </div>
-        <div class="formselect">
-            <p><input type="checkbox">select</p>
-        </div>
-    </div> -->
 </div>
 
 

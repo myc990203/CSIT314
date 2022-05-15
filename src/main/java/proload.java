@@ -18,8 +18,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 
-@WebServlet("/customer/customer")
-public class cusload extends HttpServlet {
+@WebServlet("/professional/proload")
+public class proload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BufferedReader bufferedReader = req.getReader();
@@ -32,10 +32,10 @@ public class cusload extends HttpServlet {
         System.out.println(str);
         Map<String, String> map    = JSONLIKE.myJson(str);
         String              cusNum = map.get("uid");
-        System.out.println(cusNum);
+        System.out.println("cusID= "+cusNum);
         Map<String, String> cus    = new HashMap<>();
         try {
-            cus = JdbcUtil.sqlCusSelect(Integer.parseInt(cusNum));
+            cus = JdbcUtil.sqlProSelect(Integer.parseInt(cusNum));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -49,6 +49,6 @@ public class cusload extends HttpServlet {
         System.out.println(json);
         pw.print(json);
         pw.flush();
-        System.out.println("cusload");
+        System.out.println("professional/professional");
     }
 }

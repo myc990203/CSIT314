@@ -62,12 +62,12 @@ public class JdbcUtil {
             res.put("plateNum",rs.getString("plateNum"));
             res.put("vehicleModel",rs.getString("vehicleModel"));
         }
+        System.out.println(res);
         return res;
     }
 
     public static Map sqlProSelect(int userID) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
-
         String            sql  = "select * from Professional where proNum = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setInt(1, userID);
@@ -77,14 +77,15 @@ public class JdbcUtil {
             res.put("proNum", String.valueOf(rs.getInt("proNum")));
             res.put("proName", rs.getString("proName"));
             res.put("gender", rs.getString("gender"));
-            res.put("proDOB", rs.getString("cusDOB"));
+            res.put("proDOB", rs.getString("proDOB"));
             res.put("phoneNum", rs.getString("phoneNum"));
-            res.put("proPw", rs.getString("cusPw"));
+            res.put("proPw", rs.getString("proPw"));
             res.put("email", rs.getString("email"));
             res.put("pLevel", String.valueOf(rs.getFloat("pLevel")));
-            res.put("balance", String.valueOf(rs.getDouble("balance")));
+            res.put("balance", String.valueOf(rs.getFloat("balance")));
             res.put("location", rs.getString("location"));
         }
+        System.out.println(res);
         return res;
     }
     public static Map sqlCusLoginSelect(String username) throws SQLException, ClassNotFoundException {
