@@ -1,8 +1,3 @@
-function logOut(){
-    document.cookie = "uid=" + null;
-    window.open("../index.jsp",target="_self");
-
-}
 
 // current location
 var latitude;
@@ -46,8 +41,4 @@ function submit(){
     window.open("../current_order/current_order.html",target="_self");
 }
 
-function saveId(){
-    // 需要取到返回的json
-    var id = document.getElementById("id").value;
-    document.cookie = "id="+id;
-}
+

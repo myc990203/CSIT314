@@ -16,7 +16,6 @@ public class JSONLIKE {
         String[] str = temp2.split(",");
         for (int i =0; i< str.length;i = i+1){
             String[] pail = str[i].split(":");
-            System.out.println(pail[0]+pail[1]);
             map.put(pail[0],pail[1]);
         }
         return map;

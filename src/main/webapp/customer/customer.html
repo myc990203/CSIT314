@@ -6,15 +6,11 @@
     <title>Release Information</title>
     <link rel="stylesheet" type="text/css" href="customer.css"/>
     <script src="customer.js"></script>
-<!--    防止回退-->
-    <script language="javascript">
-        //防止页面后退
-        history.pushState(null, null, document.URL);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, document.URL);
-        });
-    </script>
+
     <script>
+        function setCookie(cName, cValue) {
+            document.cookie = String(cName) + "=" + String(cValue);
+        }
         function getCookie(cname) {
             var name = cname + "=";
             var ca   = document.cookie.split(';');
@@ -24,21 +20,23 @@
             }
             return "";
         }
-        function getTime(){
-            var date = new Date();
-            var year = date.getFullYear();
-            var month = date.getMonth()+1;
-            var day = date.getDate();
 
-            document.getElementById("time").innerHTML = year+"-"+month+"-"+day;
+        function getTime() {
+            var date  = new Date();
+            var year  = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day   = date.getDate();
+
+            document.getElementById("time").innerHTML = year + "-" + month + "-" + day;
         }
+
         window.onload = function () {
             getTime();
-            var uid = getCookie("uid");
-            const req    = new XMLHttpRequest();
+            var uid   = getCookie("uid");
+            const req = new XMLHttpRequest();
             req.open("POST", "customer", true);
             req.setRequestHeader('Content-Type', 'application/json');
-            var jsonObj      = new Object();
+            var jsonObj = new Object();
             jsonObj.uid = uid;
             req.send(JSON.stringify(jsonObj));
             req.onreadystatechange = function () {
@@ -51,26 +49,26 @@
                 }
             }
         }
-        function cus1() {
 
-            var name = document.getElementById("name").innerHTML;
-            var phone = document.getElementById("phone").innerHTML;
-            var time = document.getElementById("time").innerHTML;
+        function cus1() {
+            var name    = document.getElementById("name").innerHTML;
+            var phone   = document.getElementById("phone").innerHTML;
+            var time    = document.getElementById("time").innerHTML;
             var address = document.getElementById("address").value;
-            var select = document.getElementById("issue");
-            var index = select.selectedIndex;
-            var value = select.options[index].value;
-            var plate = document.getElementById("car").innerHTML;
-            var uid = getCookie("uid");
-            const req    = new XMLHttpRequest();
-            var jsonObj      = {
+            var select  = document.getElementById("issue");
+            var index   = select.selectedIndex;
+            var value   = select.options[index].value;
+            var plate   = document.getElementById("car").innerHTML;
+            var uid     = getCookie("uid");
+            const req   = new XMLHttpRequest();
+            var jsonObj = {
                 uid: uid,
-                Name : name,
+                Name: name,
                 Phone: phone,
-                Time:time,
-                Address:address,
-                Value:value,
-                Plate:plate,
+                Time: time,
+                Address: address,
+                Value: value,
+                Plate: plate,
             };
             console.log(jsonObj);
             req.open("POST", "Customer", true);
@@ -81,8 +79,13 @@
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     const json = JSON.parse(req.response);
-                    document.cookie = "oid="+json.oid;
-                    window.open("../current_order/current_order.html" , "_self");
+                    alert(json.oid);
+                    console.log("oid=" + json);
+                    //document.cookie = "oid=" + json.oid ;path=/";
+                    document.cookie="oid="+json.oid+"; path=/CSIT314_war_exploded";
+                    //setCookie("oid1",json.oid);
+                    window.location.href = "../current_order/current_order.html";
+                    // window.open("../current_order/current_order.html",target = "_self");
                 }
             }
         }
@@ -95,7 +98,7 @@
          style="background-image:url(../image/release-bg.jpg); background-position: 80% -102px;">
         <h1>Release Information</h1>
         <div style="text-align:right">
-            <button onclick="logOut()">Log out</button>
+            <button>Log out</button>
         </div>
     </div>
 </div>

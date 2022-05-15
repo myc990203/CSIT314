@@ -129,7 +129,7 @@ public class JdbcUtil {
         ResultSet    rs     = psmt.executeQuery();
         Map<String,String> res = new HashMap<String, String>();
         while (rs.next()) {
-            res.put("cur_orderid", rs.getString("cur_orderid"));
+            res.put("oid", rs.getString("cur_orderid"));
         }
         return res;
     }

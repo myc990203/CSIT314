@@ -63,7 +63,6 @@ public class Customer extends HttpServlet{
         //no vip
         if(compare<0){
             try {
-
                 JdbcUtil.sqlCurrOrderInsert(date,Plate,price,address,issue, String.valueOf(uid));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -79,10 +78,19 @@ public class Customer extends HttpServlet{
                 throw new RuntimeException(e);
             }
         }
+        Map<String, String> oidmap      = new HashMap<String, String>();
+        try {
+            oidmap = JdbcUtil.sqlcurOrderIdSelect(uid);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         PrintWriter pw   = resp.getWriter();
-        String      json = JSONLIKE.myMap2JSON(res);
+        String      json = JSONLIKE.myMap2JSON(oidmap);
+        System.out.println(json);
         System.out.println(json);
         pw.print(json);
         pw.flush();
