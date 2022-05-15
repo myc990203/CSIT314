@@ -13,6 +13,8 @@ function currentOrder(){
 function payment(){
     window.open("../payment/payment.html",target="_self");
 }
+
+
 // current location
 var latitude;
 var longitude;
@@ -36,7 +38,7 @@ function getLocation()
         console.log(site)
         // document.getElementById("demo").innerHTML = site;
         showMap();
-        document.getElementById("address").value = latitude+","+longitude;
+        document.getElementById("address").value = latitude+"#"+longitude;
     }
 
 }

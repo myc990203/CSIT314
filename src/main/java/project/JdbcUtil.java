@@ -90,7 +90,7 @@ public class JdbcUtil {
     public static Map sqlCusLoginSelect(String username) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
         System.out.println("name = "+username);
-        String            sql  = "select cusPw,cusNum from Customer where cusName = ?;";
+        String            sql  = "select cusPw,cusNum,vipEnd from Customer where cusName = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, username);
         ResultSet    rs     = psmt.executeQuery();
@@ -98,6 +98,7 @@ public class JdbcUtil {
         while (rs.next()) {
             res.put("cusPw",rs.getString("cusPw"));
             res.put("cusNum",rs.getString("cusNum"));
+            res.put("vipEnd",rs.getString("vipEnd"));
 
         }
         return res;
@@ -202,6 +203,21 @@ public class JdbcUtil {
         psmt.setString(7, location);
         psmt.setString(8, email);
         psmt.setString(9, gender);
+        psmt.execute();
+        con.close();
+    }
+    public static void sqlCurrOrderInsert(String orderStartDate, String vehiclePlate, float price, String c_location, String issue, String O_cusNum) throws SQLException, ClassNotFoundException {
+        Connection        con  = connectSql();
+        String state = "waiting";
+        String            sql  = "insert into cur_orders (orderStartDate,vehiclePlate,price,c_location,issue,O_cusNum,sstate) values (?,?,?,?,?,?,?);";
+        PreparedStatement psmt = con.prepareStatement(sql);
+        psmt.setString(1, orderStartDate);
+        psmt.setString(2, vehiclePlate);
+        psmt.setFloat(3, price);
+        psmt.setString(4, c_location);
+        psmt.setString(5, issue);
+        psmt.setString(6, O_cusNum);
+        psmt.setString(7, state);
         psmt.execute();
         con.close();
     }
