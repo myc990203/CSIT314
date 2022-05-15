@@ -65,9 +65,14 @@ public class Login extends HttpServlet {
                 throw new RuntimeException(e);
             }
             if (password.equals(res.get("proPw"))) {
-                resp.setCharacterEncoding("utf-8");
-                resp.setContentType("text/html;charset=UTF-8");
-                resp.sendRedirect("./professional/professional.html");
+                resp.setCharacterEncoding("UTF-8");
+                resp.setContentType("application/json");
+                PrintWriter pw = resp.getWriter();
+                map.put("uid",res.get("proNum"));
+                String json = JSONLIKE.myMap2JSON(map);
+                System.out.println(json);
+                pw.print(json);
+                pw.flush();
             } else {
                 resp.setCharacterEncoding("utf-8");
                 resp.setContentType("text/html;charset=UTF-8");
