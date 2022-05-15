@@ -14,48 +14,24 @@
             Request an Assistant
         </h1>
     </div>
-    <table style="width: 100%;">
-        <table style="width: 25%;">
-            <tbody>
-                <tr>
-                    <h2>
-                        服务状态: 服务ing<br>
-                        <input type="button" onclick="display_alert()" value="取消服务（后期alert取消服务需要支付部分付款）" />
-                    </h2>
-                </tr>
-                <tr>
-                    <td style="width: 25%;" id="维护人员信息">
-                        <table>
-                            <tr>
-                                <td style="width: 30%;">
-                                    <img src="" alt="维护人员照片">
-                                </td>
-                                <td>
-                                    姓名:<br>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td style="width: 50%;" id="事件类型">
-                        事件类型取决于维护人员服务界面的选择
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        服务开始时间: 取决于维护人员服务界面的选择<br>
-                    <div>
-                        显示服务时间（在顾客没有VIP时，公司按照小时收费）<br>
-                        <input type="text" id="timeValue" value="0秒" readonly><br>
-                        <button type="button" onclick="startTimer()">开始</button> <button type="button" onclick="stopTimer()">暂停</button> <button type="button" onclick="resetTimer()">重置</button>
-                    </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div>
+        <div>Customer name: </div>
+        <span id = "cusName"></span>
 
+    </div>
+    <div>
+        <div>Vehicle: </div>
+        <span id = "vehicle"></span>
+    </div>
+    <div>
+        <div>Issue: </div>
+        <span id = "issue"></span>
+    </div>
+    <div>
+        <div>Service state</div>
+        <span id = "sstate"></span>
+    </div>
+    <table style="width: 100%;">
         <table style="width: 50%;">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3291.0801341075103!2d150.89169511616595!3d-34.42471958050633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b1319a5c5b704fb%3A0x3f038f4f50910d82!2sWollongong%20Central!5e0!3m2!1szh-CN!2sau!4v1648952144074!5m2!1szh-CN!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </table>

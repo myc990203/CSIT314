@@ -35,7 +35,6 @@ class JdbcUtilTest {
 
     @Test
     void sqlCusInsert() throws SQLException, ClassNotFoundException {
-        JdbcUtil.sqlCusInsert("name", "pw", "2022-01-10", "2131231@gmail.com", "12345678", "male");
 
     }
 

@@ -156,7 +156,6 @@ public class JdbcUtil {
         PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setString(1, password);
         psmt.setString(2, username);
-        //java.sql.Date dob= toSqlData(DOB);
         psmt.setString(3, DOB);
         psmt.setString(4, phoneNum);
         psmt.setString(5, "2022-01-01");
@@ -223,7 +222,7 @@ public class JdbcUtil {
 //    }
 
     //sql update customer
-    public static boolean updateCustomer(Map<String, String> map) throws SQLException, ClassNotFoundException {
+    public static void updateCustomer(Map<String, String> map) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
         int    userID   = Integer.parseInt(map.get("uid"));
         String userName = map.get("cusName");
@@ -251,11 +250,11 @@ public class JdbcUtil {
         psmt.setString(7, plateNum);
         psmt.setString(8, vehicleModel);
         //执行SQL语句
-        return psmt.execute();
+        psmt.execute();
     }
 
     //sql update Professional
-    public static boolean updateProfessional(Map<String,String> map) throws SQLException, ClassNotFoundException {
+    public static void updateProfessional(Map<String,String> map) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
         int    userID   = Integer.parseInt(map.get("uid"));
         String userName = map.get("userName");
@@ -269,9 +268,9 @@ public class JdbcUtil {
                      "update CUSTOMER " +
                      "set proName=?,gender=?,proDOB=?,phoneNum=?,proPw=?,email=?,location=?" +
                      "where proNum=?";
-        //预编译sql语句
+
         PreparedStatement psmt        = con.prepareStatement(sql);
-        //先对应SQL语句，给SQL语句传递参数
+
         psmt.setInt(8, userID);
         psmt.setString(1, userName);
         psmt.setString(2, gender);
@@ -280,8 +279,8 @@ public class JdbcUtil {
         psmt.setString(5, password);
         psmt.setString(6, email);
         psmt.setString(7, location);
-        //执行SQL语句
-        return psmt.execute();
+
+        psmt.execute();
     }
 
     //sql delete
