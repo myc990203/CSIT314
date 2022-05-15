@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 import project.*;
 
-@WebServlet ("/Register")
+@WebServlet ("/register/Register")
 
 public class Register extends HttpServlet {
     //处理post 请求
