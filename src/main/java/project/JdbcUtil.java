@@ -149,10 +149,10 @@ public class JdbcUtil {
 
 
     //sql insert customer
-    public static void sqlCusInsert(String username, String password, String DOB, String email, String phoneNum, String gender) throws SQLException, ClassNotFoundException {
+    public static void sqlCusInsert(String username, String password, String DOB, String email, String phoneNum, String gender,String plateNum,String model) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
         String     sql = "";
-        sql = "insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender) values (?,?,?,?,?,?,?,?);";
+        sql = "insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender,plateNum,vhicleModel) values (?,?,?,?,?,?,?,?,?,?);";
         PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setString(1, password);
         psmt.setString(2, username);
@@ -163,6 +163,8 @@ public class JdbcUtil {
         psmt.setString(6, "2022-01-01");
         psmt.setString(7, email);
         psmt.setString(8, gender);
+        psmt.setString(9, plateNum);
+        psmt.setString(10, model);
         psmt.execute();
         con.close();
     }

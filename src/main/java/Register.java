@@ -37,7 +37,7 @@ public class Register extends HttpServlet {
 
         if (userT.equals("cus")) {
             try {
-                jdbcUtil.sqlCusInsert(name, pw, userT, date, email, phone, gender, plateN, vhn);
+                JdbcUtil.sqlCusInsert(name, pw, date, email, phone, gender, plateN, vhn);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
@@ -45,7 +45,9 @@ public class Register extends HttpServlet {
             }
         } else if (userT.equals("pro")) {
             try {
-                jdbcUtil.sqlProInsert(name, pw, userT, date, email, phone, ）
+                JdbcUtil.sqlProInsert(name, pw, date, email, phone, gender);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
     }
