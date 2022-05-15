@@ -34,6 +34,7 @@ public class Register extends HttpServlet {
         System.out.print(plateN + "\t");
         String vhn = req.getParameter("vm");
         System.out.print(vhn);
+        String location = req.getParameter("location");
 
         if (userT.equals("cus")) {
             try {
@@ -45,8 +46,10 @@ public class Register extends HttpServlet {
             }
         } else if (userT.equals("pro")) {
             try {
-                JdbcUtil.sqlProInsert(name, pw, date, email, phone, gender);
-            } catch (Exception e) {
+                JdbcUtil.sqlProInsert(name, pw, date, email, phone, location);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
         }
