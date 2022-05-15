@@ -10,7 +10,8 @@ import java.sql.SQLException;
 
 import project.*;
 
-@WebServlet ("/register/Register")
+@WebServlet ("/Register")
+
 public class Register extends HttpServlet {
     //处理post 请求
     @Override
@@ -33,7 +34,7 @@ public class Register extends HttpServlet {
         System.out.print(plateN + "\t");
         String vhn = req.getParameter("vm");
         System.out.print(vhn);
-        String location = req.getParameter("address");
+        String location = req.getParameter("location");
 
         if (userT.equals("cus")) {
             try {
