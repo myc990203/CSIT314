@@ -3,7 +3,6 @@ function back(){
 }
 function refreshBtn() {
     var curorder_id = getCookie("oid");
-    alert("refreshBtn");
     const req = new XMLHttpRequest();
     req.open("POST", "current_order", true);
     req.setRequestHeader('Content-Type', 'application/json');
@@ -22,6 +21,12 @@ function refreshBtn() {
             document.getElementById("sstate").innerHTML         = json.sstate;
             document.getElementById("orderStartDate").innerHTML = json.orderStartDate;
             document.getElementById("price").innerHTML          = json.price;
+            if (json.sstate=="Finished"){
+                document.getElementById("pay").style.display = "block";
+            }
         }
     }
+}
+function payBtn(){
+    window.open("../payment/payment.html")
 }
