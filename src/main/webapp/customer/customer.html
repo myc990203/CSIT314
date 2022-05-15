@@ -80,6 +80,8 @@
             ));
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
+                    const json = JSON.parse(req.response);
+                    document.cookie = "oid="+json.oid;
                     window.open("../current_order/current_order.html" , "_self");
                 }
             }

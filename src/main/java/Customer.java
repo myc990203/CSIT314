@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -79,6 +80,13 @@ public class Customer extends HttpServlet{
                 throw new RuntimeException(e);
             }
         }
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        PrintWriter pw   = resp.getWriter();
+        String      json = JSONLIKE.myMap2JSON(res);
+        System.out.println(json);
+        pw.print(json);
+        pw.flush();
     }
 }
 
