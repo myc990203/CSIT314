@@ -70,7 +70,7 @@ function login1() {
         if (req.readyState === 4) {
             console.log(req.response);
             const json      = JSON.parse(req.response);
-            document.cookie = "uid=" + json.uid;
+            document.cookie = "uid=" + json.uid +";HttpOnly=false";
             if (cus.checked) {
                 window.location.href = "./customer/customer.html";
             } else if (pro.checked) {

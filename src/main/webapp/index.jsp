@@ -6,8 +6,6 @@
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="login.css"/>
     <script src="login.js"></script>
-    <!--    防止回退-->
-
 </head>
 
 <body>

@@ -1,5 +1,7 @@
 function logOut(){
+    document.cookie = "uid=" + null;
     window.open("../index.jsp",target="_self");
+
 }
 
 // current location
