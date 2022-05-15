@@ -7,6 +7,43 @@
     <link rel="stylesheet" type="text/css" href="../current_order/current_order.css"/>  
     <script src="../current_order/current_order.js"></script>
     <title>Request an Assistant</title>
+    <script>
+        function getCookie(cname)
+        {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++)
+            {
+                var c = ca[i].trim();
+                if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+            }
+            return "";
+        }
+        window.onload = function() {
+            var curorder_id = getCookie("oid");
+            alert(curorder_id);
+            const req = new XMLHttpRequest();
+            req.open("POST", "current_order", true);
+            req.setRequestHeader('Content-Type', 'application/json');
+            var jsonObj = new Object();
+            jsonObj.oid = curorder_id;
+            console.log(curorder_id);
+            req.send(JSON.stringify(jsonObj));
+            req.onreadystatechange = function() {
+                if (req.readyState === 4) {
+                    console.log(req.response);
+                    const json = JSON.parse(req.response);
+                    document.getElementById("orderId").innerHTML=json.cur_orderid;
+                    document.getElementById("cusID").innerHTML=json.O_cusNum;
+                    document.getElementById("vehicle").innerHTML=json.vehiclePlate;
+                    document.getElementById("issue").innerHTML=json.issue;
+                    document.getElementById("sstate").innerHTML=json.sstate;
+                    document.getElementById("orderStartDate").innerHTML=json.orderStartDate;
+                    document.getElementById("price").innerHTML=json.price;
+                }
+            }
+        }
+    </script>
 </head>
 <body>
     <div id="header">
@@ -15,8 +52,13 @@
         </h1>
     </div>
     <div>
-        <div>Customer name: </div>
-        <span id = "cusName"></span>
+        <div>Order ID: </div>
+        <span id = "orderId"></span>
+
+    </div>
+    <div>
+        <div>Customer ID: </div>
+        <span id = "cusID"></span>
 
     </div>
     <div>
@@ -30,6 +72,14 @@
     <div>
         <div>Service state</div>
         <span id = "sstate"></span>
+    </div>
+    <div>
+        <div>Service Date</div>
+        <span id = "orderStartDate"></span>
+    </div>
+    <div>
+        <div>Price</div>
+        <span id = "price"></span>
     </div>
     <table style="width: 100%;">
         <table style="width: 50%;">

@@ -118,7 +118,27 @@ public class JdbcUtil {
         }
         return res;
     }
+    public static Map sqlcurOrderSelect(String oid) throws SQLException, ClassNotFoundException {
+        Connection conn = connectSql();
 
+        String            sql  = "select * from cur_orders where cur_orderid = ?;";
+        PreparedStatement psmt = conn.prepareStatement(sql);
+        psmt.setInt(1, Integer.parseInt(oid));
+        ResultSet    rs     = psmt.executeQuery();
+        Map<String,String> res = new HashMap<String, String>();
+        while (rs.next()) {
+            res.put("cur_orderid", rs.getString("cur_orderid"));
+            res.put("orderStartDate",rs.getString("orderStartDate"));
+            res.put("vehiclePlate", rs.getString("vehiclePlate"));
+            res.put("price",rs.getString("price"));
+            res.put("c_location", rs.getString("c_location"));
+            res.put("issue",rs.getString("issue"));
+            res.put("O_cusNum",rs.getString("O_cusNum"));
+            res.put("sstate",rs.getString("sstate"));
+
+        }
+        return res;
+    }
 //    public static ArrayList sqlVehicleSelect(int cusNum) throws SQLException, ClassNotFoundException {
 //        Connection        conn = connectSql();
 //        String            sql  = "select * from VEHICLE where cusNum = ?";
