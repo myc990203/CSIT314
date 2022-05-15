@@ -6,6 +6,14 @@
     <title>Release Information</title>
     <link rel="stylesheet" type="text/css" href="customer.css"/>
     <script src="customer.js"></script>
+<!--    防止回退-->
+    <script language="javascript">
+        //防止页面后退
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
     <script>
 
         function getCookie(cname) {
@@ -36,6 +44,7 @@
                 }
             }
         }</script>
+
 </head>
 
 <div class="header">
