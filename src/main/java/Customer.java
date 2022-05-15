@@ -24,7 +24,6 @@ public class Customer extends HttpServlet{
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line);
         }
-        System.out.println("sdd");
         String str = stringBuilder.toString();
         System.out.println(str);
 
