@@ -219,6 +219,7 @@ public class JdbcUtil {
         psmt.setString(5, issue);
         psmt.setString(6, O_cusNum);
         psmt.setString(7, state);
+
         psmt.execute();
         con.close();
     }

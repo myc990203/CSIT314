@@ -23,11 +23,12 @@ public class Customer extends HttpServlet{
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line);
         }
+        System.out.println("sdd");
         String str = stringBuilder.toString();
         System.out.println(str);
-        System.out.println("come in222");
+
         Map<String,String> map = JSONLIKE.myJson(str);
-        System.out.println("come in here");
+
         int uid = Integer.parseInt(map.get("uid"));
         String              username = map.get("name");
         String              phone = map.get("Phone");
@@ -40,6 +41,7 @@ public class Customer extends HttpServlet{
         float vipPrice = 0;
         Map<String, String> res      = new HashMap<String, String>();
         try {
+
             res=JdbcUtil.sqlCusSelect(uid);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -61,6 +63,7 @@ public class Customer extends HttpServlet{
         //no vip
         if(compare<0){
             try {
+
                 JdbcUtil.sqlCurrOrderInsert(date,Plate,price,address,issue, String.valueOf(uid));
             } catch (SQLException e) {
                 throw new RuntimeException(e);

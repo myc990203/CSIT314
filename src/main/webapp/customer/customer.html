@@ -52,6 +52,7 @@
             }
         }
         function cus1() {
+
             var name = document.getElementById("name").innerHTML;
             var phone = document.getElementById("phone").innerHTML;
             var time = document.getElementById("time").innerHTML;
@@ -59,7 +60,6 @@
             var select = document.getElementById("issue");
             var index = select.selectedIndex;
             var value = select.options[index].value;
-            var other = document.getElementById("other").value;
             var plate = document.getElementById("car").innerHTML;
             var uid = getCookie("uid");
             const req    = new XMLHttpRequest();
@@ -71,7 +71,6 @@
                 Address:address,
                 Value:value,
                 Plate:plate,
-                Review:other
             };
             console.log(jsonObj);
             req.open("POST", "Customer", true);
@@ -132,11 +131,6 @@
             <option value="Emergency fuel delivery">Emergency fuel delivery</option>
             <option value="other">Others</option>
         </select><br><br>
-        <div>If the above incident types do not cover your current situation<br> please note your situation below.
-        </div>
-        <br>
-        <textarea style="width: 300px;resize: none;" rows="4" name="ifOther" id="other"></textarea><br><br>
-        <!-- <label>Price: $<s> ***</s></label><br><br> -->
         <button onclick="cus1()">Submit</button>
     </div>
 
