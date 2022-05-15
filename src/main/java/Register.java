@@ -9,44 +9,45 @@ import java.sql.SQLException;
 
 
 import project.*;
-@WebServlet("/Register")
+
+@WebServlet ("/Register")
+
 public class Register extends HttpServlet {
+    //处理post 请求
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getParameter("user_type"));
-        String userType = req.getParameter("user_type");
-        if (userType.equals("1")){
-            String username = req.getParameter("username");
-            String password = req.getParameter("password");
-            String DOB = req.getParameter("dob");
-            String email = req.getParameter("email");
-            String phoneNum = req.getParameter("phoneNum");
-            String gender = req.getParameter("gender");
+        String name = req.getParameter("username");
+        System.out.print(name + "\t");
+        String pw = req.getParameter("password");
+        System.out.print(pw + "\t");
+        String userT = req.getParameter("user_type");
+        System.out.print(userT + "\t");
+        String date = req.getParameter("dob");
+        System.out.print(date + "\t");
+        String email = req.getParameter("email");
+        System.out.print(email + "\t");
+        String phone = req.getParameter("phoneNum");
+        System.out.print(phone + "\t");
+        String gender = req.getParameter("gender");
+        System.out.print(gender + "\t");
+        String plateN = req.getParameter("plateN");
+        System.out.print(plateN + "\t");
+        String vhn = req.getParameter("vm");
+        System.out.print(vhn);
+
+        if (userT.equals("cus")) {
             try {
-                JdbcUtil.sqlCusInsert(username,password,DOB,email,phoneNum,gender);
+                jdbcUtil.sqlCusInsert(name, pw, userT, date, email, phone, gender, plateN, vhn);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-        }else {
-            String username = req.getParameter("username");
-            String password = req.getParameter("password");
-            String DOB = req.getParameter("dob");
-            String email = req.getParameter("email");
-            String phoneNum = req.getParameter("phoneNum");
-            String gender = req.getParameter("gender");
-            String location = req.getParameter("location");
+        } else if (userT.equals("pro")) {
             try {
-                JdbcUtil.sqlProInsert(username,password,DOB,email,phoneNum,gender,location);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+                jdbcUtil.sqlProInsert(name, pw, userT, date, email, phone, ）
             }
         }
-        resp.setCharacterEncoding("utf-8");
-        resp.setContentType("text/html;charset=UTF-8");
-        resp.sendRedirect("index.jsp");
     }
+
 }
