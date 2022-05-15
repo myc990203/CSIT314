@@ -16,7 +16,7 @@
         }
 
         window.onload = function () {
-            var id       = getCookie("username");
+            var id       = getCookie("uid");
             var usertype = getCookie("type");
             const req    = new XMLHttpRequest();
             req.open("POST", "modify_user_info", true);
@@ -32,7 +32,7 @@
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     console.log(req.response);
-                    const json                                   = JSON.parse(req.response);
+                    const json = JSON.parse(req.response);
                     document.getElementById("username").value    = json.cusName;
                     document.getElementById("gender").value      = json.gender;
                     document.getElementById("dob").value         = json.cusDOB;
