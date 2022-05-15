@@ -3,6 +3,7 @@ package project;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,7 +55,19 @@ class JdbcUtilTest {
     }
 
     @Test
-    void updateCustomer() {
+    void updateCustomer() throws SQLException, ClassNotFoundException {
+        Map<String,String > map = new HashMap<>();
+        map.put("uid", String.valueOf(8));
+        map.put("cusPw", String.valueOf(123455));
+        map.put("gender","male");
+        map.put("cusName","william2");
+        map.put("phone","420275558");
+        map.put("dob","2022-05-19");
+        map.put("model","undefined");
+        map.put("plateNum","jmnh");
+        map.put("email","ym554@uowmail.edu.au");
+
+        JdbcUtil.updateCustomer(map);
     }
 
     @Test

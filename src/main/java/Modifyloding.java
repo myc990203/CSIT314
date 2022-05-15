@@ -16,7 +16,7 @@ import java.util.Map;
 public class Modifyloding extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("post12212");
+        System.out.println("Modifyloading,java");
         BufferedReader bufferedReader = req.getReader();
         StringBuilder  stringBuilder  = new StringBuilder();
         String         line;
@@ -24,6 +24,7 @@ public class Modifyloding extends HttpServlet {
             stringBuilder.append(line);
         }
         String str = stringBuilder.toString();
+        System.out.println("Modifyloading,java");
         System.out.println(str);
         Map<String,String>  res = new HashMap<String, String>();
         Map<String, String> map = JSONLIKE.myJson(str);

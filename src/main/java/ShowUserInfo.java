@@ -29,12 +29,10 @@ public class ShowUserInfo extends HttpServlet {
             stringBuilder.append(line);
         }
         String str = stringBuilder.toString();
-        System.out.println(str);
         Map<String,String> res = new HashMap<String, String>();
         Map<String, String> map = JSONLIKE.myJson(str);
         String userID = map.get("uid");
         String userType = map.get("type");
-        System.out.println(userType);
         if (userType.equals("cus")){
             try {
                 res = JdbcUtil.sqlCusSelect(Integer.parseInt(userID));
@@ -53,7 +51,6 @@ public class ShowUserInfo extends HttpServlet {
         resp.setContentType("application/json");
         PrintWriter pw   = resp.getWriter();
         String      json = JSONLIKE.myMap2JSON(res);
-        System.out.println(json);
         pw.print(json);
         pw.flush();
     }

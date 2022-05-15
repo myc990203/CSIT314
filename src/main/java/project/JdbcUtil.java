@@ -247,16 +247,17 @@ public class JdbcUtil {
         int    userID   = Integer.parseInt(map.get("uid"));
         String userName = map.get("cusName");
         String gender   = map.get("gender");
-        String DOB      = map.get("DOB");
-        String phoneNum = map.get("phoneNum");
-        String password = map.get("password");
+        String DOB      = map.get("dob");
+        String phoneNum = map.get("phone");
+        String password = map.get("cusPw");
         String email    = map.get("email");
         String plateNum = map.get("plateNum");
-        String vehicleModel = map.get("vehicleModel");
+        String vehicleModel = map.get("model");
+        System.out.println("New_userName = "+userName);
         String sql = "" +
-                     "update CUSTOMER " +
-                     "set cusName=?,gender=?,cusDOB=?,phoneNum=?,password=?,email=?,plateNum=?,vehicleModel=?," +
-                     "where userID=?";
+                     "update customer " +
+                     "set cusName=?,gender=?,cusDOB=?,phoneNum=?,cusPw=?,email=?,plateNum=?,vehicleModel=?" +
+                     "where cusNum=?";
         //预编译sql语句
         PreparedStatement psmt        = con.prepareStatement(sql);
         //先对应SQL语句，给SQL语句传递参数

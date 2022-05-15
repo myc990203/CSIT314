@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import project.*;
+
 //1231
 @WebServlet("/Login")
 public class Login extends HttpServlet {
@@ -25,12 +26,12 @@ public class Login extends HttpServlet {
         }
         String str = stringBuilder.toString();
         System.out.println(str);
-        Map<String,String> reqmap = JSONLIKE.myJson(str);
+        Map<String, String> reqmap   = JSONLIKE.myJson(str);
         String              username = reqmap.get("userName");
         String              password = reqmap.get("password");
         String              role     = reqmap.get("type");
         Map<String, String> res      = new HashMap<String, String>();
-        Map<String,String> map = new HashMap<String, String>();
+        Map<String, String> map      = new HashMap<String, String>();
 
         if (role.equals("cus")) {
             try {
@@ -45,7 +46,7 @@ public class Login extends HttpServlet {
                 resp.setCharacterEncoding("UTF-8");
                 resp.setContentType("application/json");
                 PrintWriter pw = resp.getWriter();
-                map.put("uid",res.get("cusNum"));
+                map.put("uid", res.get("cusNum"));
                 String json = JSONLIKE.myMap2JSON(map);
                 System.out.println(json);
                 pw.print(json);
@@ -68,7 +69,7 @@ public class Login extends HttpServlet {
                 resp.setCharacterEncoding("UTF-8");
                 resp.setContentType("application/json");
                 PrintWriter pw = resp.getWriter();
-                map.put("uid",res.get("proNum"));
+                map.put("uid", res.get("proNum"));
                 String json = JSONLIKE.myMap2JSON(map);
                 System.out.println(json);
                 pw.print(json);

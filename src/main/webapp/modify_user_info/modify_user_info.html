@@ -38,10 +38,10 @@
                     document.getElementById("dob").value         = json.cusDOB;
                     document.getElementById("email").value       = json.email;
                     document.getElementById("phone").value       = json.phoneNum;
-                    document.getElementById("address").value     = json.address;
-                    document.getElementById("VIPstart").value    = json.vipStart;
-                    document.getElementById("VIPend").value      = json.vipEnd;
-                    document.getElementById("vehicleList").value = json.vehicleModel;
+                    document.getElementById("model").value = json.vehicleModel;
+                    document.getElementById("plateNum").value = json.plateNum;
+                    document.getElementById("old_pwd").value = json.cusPw;
+                    document.getElementById("new_pwd").value = json.cusPw;
                 }
             }
         }
@@ -66,7 +66,7 @@
         </ul>
     </div>
     <div class="info-form">
-        <form action="UpdateCus" method="post">
+<!--        <form action="UpdateCus" method="post">-->
             <div class="container">
                 <div class="user_info">
                     <div class="one-row">
@@ -99,29 +99,29 @@
                             <br>
                             <input type="text" name="phone" id="phone">
                         </div>&nbsp;&nbsp;
+                    </div>
+                    <div class="one-row">
                         <div class="form-group">
-                            <label>Address: </label>
+                            <label>Vehicle plate: </label>
                             <br>
-                            <input type="text" name="address" id="address">
+                            <input type="text" name="plateNum" id="plateNum">
+                        </div>
+                        <div class="form-group">
+                            <label>Vehicle model</label>
+                            <br>
+                            <input type="text" name="model" id="model">
                         </div>
                     </div>
                     <div class="one-row">
                         <div class="form-group">
-                            <label>VIP start date:</label>
+                            <label>Current password: </label>
                             <br>
-                            <input type="text" name="VIPstart" id="VIPstart">
-                        </div>&nbsp;&nbsp;
-                        <div class="form-group">
-                            <label>VIP end date: </label>
-                            <br>
-                            <input type="text" name="VIPend" id="VIPend">
+                            <input type="text" name="old_pwd" id="old_pwd">
                         </div>
-                    </div>
-                    <div class="one-row">
                         <div class="form-group">
-                            <label>vehicleList</label>
+                            <label>New password: </label>
                             <br>
-                            <input type="text" name="vehicleList" id="vehicleList">
+                            <input type="text" name="new_pwd" id="new_pwd">
                         </div>
                     </div>
                     <div class="button-center">
@@ -129,8 +129,9 @@
                     </div>
                 </div>
             </div>
-        </form>
+
         <div class="button-center">
+            <button onclick="modify()">Submit to change</button>
             <button onclick="back()">Back</button>
         </div>
 
