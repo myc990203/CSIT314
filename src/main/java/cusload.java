@@ -22,7 +22,6 @@ import org.json.simple.parser.JSONParser;
 public class cusload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("hello");
         BufferedReader bufferedReader = req.getReader();
         StringBuilder  stringBuilder  = new StringBuilder();
         String         line;

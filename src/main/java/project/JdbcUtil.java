@@ -152,7 +152,7 @@ public class JdbcUtil {
     public static void sqlCusInsert(String username, String password, String DOB, String email, String phoneNum, String gender,String plateNum,String model) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
         String     sql = "";
-        sql = "insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender,plateNum,vhicleModel) values (?,?,?,?,?,?,?,?,?,?);";
+        sql = "insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender,plateNum,vehicleModel) values (?,?,?,?,?,?,?,?,?,?);";
         PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setString(1, password);
         psmt.setString(2, username);
