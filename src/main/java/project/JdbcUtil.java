@@ -120,6 +120,19 @@ public class JdbcUtil {
         }
         return res;
     }
+    public static Map sqlcurOrderIdSelect(int  userId) throws SQLException, ClassNotFoundException {
+        Connection conn = connectSql();
+
+        String            sql  = "select * from cur_orders where O_cusNum = ?;";
+        PreparedStatement psmt = conn.prepareStatement(sql);
+        psmt.setInt(1, userId);
+        ResultSet    rs     = psmt.executeQuery();
+        Map<String,String> res = new HashMap<String, String>();
+        while (rs.next()) {
+            res.put("cur_orderid", rs.getString("cur_orderid"));
+        }
+        return res;
+    }
     public static Map sqlcurOrderSelect(String oid) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
 
