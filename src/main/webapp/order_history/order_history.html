@@ -4,7 +4,80 @@
         <meta charset="UTF-8">
         <title>Order History</title>
         <link rel="stylesheet" href="order_history.css">
-        <script>src="order_history.js"</script> 
+      <script>src="order_history.js"</script>
+        <script>
+            function order_history(){
+                var data = '{"address":"北京","problem":"problem","text":"内容","price":"价格"}'
+                var json_obj=JSON.parse(data);
+
+
+                //window.open("../comment/comment.html",target="_self");
+                const req    = new XMLHttpRequest();
+                req.open("POST", "get_order_history", true);
+                req.setRequestHeader('Content-Type', 'application/json');
+                var jsonObj      = {
+                    pageSize : 1,
+                    pageNumber: 100
+                };
+                req.send(JSON.stringify(
+                    jsonObj
+                ));
+                req.onreadystatechange = function () {
+                    var allOrder;
+                    var addressDiv;
+                    var p;
+                    var problem;
+                    var p2;
+                    var text;
+                    var p3;
+                    var price;
+                    var p4;
+                    if (req.readyState === 4) {
+                        console.log(req.response);
+                        const json_objs = JSON.parse(req.response);
+                        var allOrder;
+                        var addressDiv;
+                        var p;
+                        var problem;
+                        var p2;
+                        var text;
+                        var p3;
+                        var price;
+                        var p4;
+                        for (let json_obj_index in json_objs) {
+                            json_obj =json_objs[json_obj_index]
+                            allOrder = document.getElementById("allOrder");
+                            addressDiv = document.createElement("div");
+                            console.log(addressDiv)
+
+                            p = document.createElement("p");
+                            p.innerHTML=json_obj.address;
+                            addressDiv.appendChild(p);
+                            allOrder.appendChild(addressDiv);
+
+                            problem = document.createElement("div");
+                            p2 = document.createElement("p");
+                            p2.innerHTML=json_obj.problem;
+                            problem.appendChild(p2);
+                            allOrder.appendChild(problem);
+
+                            text = document.createElement("div");
+                            p3 = document.createElement("p");
+                            p3.innerHTML=json_obj.text;
+                            text.appendChild(p3);
+                            allOrder.appendChild(text);
+
+                            price = document.createElement("div");
+                            p4 = document.createElement("p");
+                            p4.innerHTML=json_obj.price;
+                            price.appendChild(p4);
+                            allOrder.appendChild(price)
+                        }
+
+                    }
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="top">
@@ -53,6 +126,7 @@
                     <p>The total price: $80</p>
                 </div>
             </div>
+            <button onclick="order_history()"></button>
         </div>
         <div class="bottom"></div>
     </body>
