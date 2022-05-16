@@ -4,10 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../current_order/current_order.css"/>  
-    <script src="./current_order.js"></script>
-    <title>Request an Assistant</title>
+    <link rel="stylesheet" type="text/css" href="current_order.css"/>
+    <script src="current_order.js"></script>
+    <title>Requesting an Assistant</title>
     <script>
+        // current location
+        var latitude;
+        var longitude;
+        function getLocation()
+        {
+            var x=document.getElementById("demo");
+            var lat;
+            var lng;
+            if (navigator.geolocation)
+            {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+            else{x.innerHTML="Geolocation is not supported by this browser.";}
+            function showPosition(position)
+            {
+                lng = position.coords.longitude;
+                lat = position.coords.latitude;
+                latitude = lat;
+                longitude = lng;
+                var site = lat.toFixed(6)+','+lng.toFixed(6);
+                console.log(site)
+                // document.getElementById("demo").innerHTML = site;
+                showMap();
+            }
+
+        }
+        function showMap(){
+            document.getElementById("map").style.display = "block";
+            document.getElementById("map").innerHTML = "<iframe width=600 height=450 style=border:0 loading=lazy allowfullscreen referrerpolicy=no-referrer-when-downgrade src=https://www.google.com/maps/embed/v1/place?key=AIzaSyCD3IzyW0QXpfbqQequxGGx2CPVpVZsV1c&q="+latitude+","+longitude+"> </iframe>";
+        }
         function getCookie(cname)
         {
             var name = cname + "=";
@@ -20,6 +50,7 @@
             return "";
         }
         window.onload = function() {
+            getLocation();
             var curorder_id = getCookie("oid");
             alert(curorder_id);
             const req = new XMLHttpRequest();
@@ -40,59 +71,61 @@
                     document.getElementById("sstate").innerHTML=json.sstate;
                     document.getElementById("orderStartDate").innerHTML=json.orderStartDate;
                     document.getElementById("price").innerHTML=json.price;
+
                 }
             }
         }
     </script>
-    <script src="current_order.js"></script>
 </head>
 <body>
-    <div id="header">
-        <h1>
-            Request an Assistant
-        </h1>
-    </div>
-    <div>
-        <div>Order ID: </div>
-        <span id = "orderId"></span>
 
-    </div>
-    <div>
-        <div>Customer ID: </div>
-        <span id = "cusID"></span>
+<div id="header">
+    <h1>
+        Requesting an Assistant
+    </h1>
+</div><hr>
 
+<div>
+    <div class="left-part">
+        <div class="form">
+            <h3>Order Details</h3>
+            <div>
+                <div>Order ID: </div>
+                <span id = "orderId"></span>
+            </div><br>
+            <div>
+                <div>Customer ID: </div>
+                <span id = "cusID"></span>
+            </div><br>
+            <div>
+                <div>Vehicle: </div>
+                <span id = "vehicle"></span>
+            </div><br>
+            <div>
+                <div>Issue: </div>
+                <span id = "issue"></span>
+            </div><br>
+            <div>
+                <div>Service state: </div>
+                <span id = "sstate"></span>
+            </div><br>
+            <div>
+                <div>Service Date: </div>
+                <span id = "orderStartDate"></span>
+            </div><br>
+            <div>
+                <div>Price: </div>
+                <span id = "price"></span>
+            </div><br>
+            <div class="btn">
+                <button onclick="refreshBtn()">Refresh</button>&nbsp;&nbsp;
+                <button onclick="payBtn()" id="pay"> Pay</button>&nbsp;&nbsp;
+                <button onclick="back()">Back</button>
+            </div>
+        </div>
     </div>
-    <div>
-        <div>Vehicle: </div>
-        <span id = "vehicle"></span>
-    </div>
-    <div>
-        <div>Issue: </div>
-        <span id = "issue"></span>
-    </div>
-    <div>
-        <div>Service state</div>
-        <span id = "sstate"></span>
-    </div>
-    <div>
-        <div>Service Date</div>
-        <span id = "orderStartDate"></span>
-    </div>
-    <div>
-        <div>Price</div>
-        <span id = "price"></span>
-    </div>
-    <div>
-        <button onclick="refreshBtn()">Refresh</button>
-    </div>
-    <table style="width: 100%;">
-        <table style="width: 50%;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3291.0801341075103!2d150.89169511616595!3d-34.42471958050633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b1319a5c5b704fb%3A0x3f038f4f50910d82!2sWollongong%20Central!5e0!3m2!1szh-CN!2sau!4v1648952144074!5m2!1szh-CN!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </table>
-        <button style="display: block" onclick="payBtn()" id="pay"> Pay!</button>
-        <button onclick="back()">Back</button>
 
-    </table>
-    
+    <div id="map"></div>
+</div>
 </body>
 </html>

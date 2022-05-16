@@ -18,6 +18,7 @@
         }
 
         window.onload = function () {
+            getLocation();
             var uid = getCookie("uid");
             const req    = new XMLHttpRequest();
             req.open("POST", "proload", true);
@@ -37,42 +38,70 @@
 </head>
 
 <body>
-<div class="top">
-    <h1>Order Page</h1>
-</div>
-<div class="logout">
-    <button id="logout" onclick="logOut()">Log out</button>
-</div>
-
-<div class="main">
-    <div class="button">
-        <div class="butper">
-            <button onclick="userInfo()">My account</button>
-        </div>
-        <div class="butper">
-            <button onclick="currentResuest()">Current requent</button>
-        </div>
-        <div class="butper">
-            <button onclick="serveHistory()">Serve History</button>
-        </div>
-        <div class="butper">
-            <button onclick="commission()">Commission</button>
+<div class="header">
+    <div class="header-img" data-stellar-background-ratio="0.4"
+         style="background-image:url(../image/release-bg.jpg); background-position: 80% -102px;">
+        <h1>Release Information</h1>
+        <div style="text-align:right">
+            <button>Log out</button>
         </div>
     </div>
-    <div class="title">
-        <label>Your Name: </label>&nbsp;&nbsp;
-        <span id="name" ></span><br><br>
-        <h3>Order information 1</h3>
-        <h3>currently you dont have any serving request</h3>
+</div>
+
+<div class="navbar">
+    <a href="../pro_user_info/pro_user_info.html"><i class="main main-account"></i>My Account</a> <!--user info-->
+    <a href="../current_request/current_request.html"><i class="main main-payment"></i>Current Request</a>
+    <a href="../request_history/request_history.html"><i class="main main-order"></i>Request History</a>
+</div>
+<div class="row">
+    <div class="left-part">
+        <div>
+            <table border="1" width="100%" height="100%">
+                <tr>
+                    <th>Request ID</th>
+                    <th>Customer Name</th>
+                    <th>Issue Type</th>
+                    <th>Confirmation</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>c1</td>
+                    <td>battery</td>
+                    <td>
+                        <button>Confirm</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>c2</td>
+                    <td>battery</td>
+                    <td>
+                        <button>Confirm</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>c3</td>
+                    <td>battery</td>
+                    <td>
+                        <button>Confirm</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="right-part">
+        <div id="map">
+
+        </div>
     </div>
 </div>
 
-
-
-<div id="footer">
-    <p>CSIT314</p>
+<div class="footer">
+    (CSIT314)
 </div>
-
 </body>
 
 </html>

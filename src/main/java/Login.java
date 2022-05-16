@@ -48,7 +48,7 @@ public class Login extends HttpServlet {
                 PrintWriter pw = resp.getWriter();
                 map.put("uid", res.get("cusNum"));
                 String json = JSONLIKE.myMap2JSON(map);
-                System.out.println(json);
+                System.out.println("uid"+json);
                 pw.print(json);
                 pw.flush();
             } else {

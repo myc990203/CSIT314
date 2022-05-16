@@ -18,8 +18,8 @@ class JdbcUtilTest {
 
     @Test
     void sqlCusSelect() throws SQLException, ClassNotFoundException {
-        Map<String,String> res = JdbcUtil.sqlCusSelect(1);
-        System.out.println(res.get("cusName"));
+        Map<String,String> res = JdbcUtil.sqlCusSelect(7);
+        System.out.println(res);
     }
 
     @Test

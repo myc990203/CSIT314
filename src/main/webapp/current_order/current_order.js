@@ -30,3 +30,5 @@ function refreshBtn() {
 function payBtn(){
     window.open("../payment/payment.html")
 }
+
+

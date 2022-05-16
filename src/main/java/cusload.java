@@ -32,7 +32,7 @@ public class cusload extends HttpServlet {
         System.out.println(str);
         Map<String, String> map    = JSONLIKE.myJson(str);
         String              cusNum = map.get("uid");
-        System.out.println(cusNum);
+        System.out.println("cusNum "+cusNum);
         Map<String, String> cus    = new HashMap<>();
         try {
             cus = JdbcUtil.sqlCusSelect(Integer.parseInt(cusNum));
