@@ -1,48 +1,101 @@
 <!DOCTYPE html>
+<script>
+    function getCookie(phone) {
+        if (document.cookie.length > 0) {
+            c_get = document.cookie.indexOf(phone + "=")
+            if (c_get != -1) {
+                c_get = c_get + phone.length + 1
+                c_end = document.cookie.indexOf(";", c_get)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_get, c_end))
+            }
+        }
+        return ""
+    }
+
+    window.onload = function() {
+        var userId = getCookie("phone");
+        var usertype = getCookie("type");
+        const req = new XMLHttpRequest();
+        req.open("POST", "renew", true);
+        req.setRequestHeader('Content-Type', 'application/json');
+        var jsonObj = new Object();
+        jsonObj.uid = userId;
+        jsonObj.type = usertype;
+
+
+
+        console.log(usertype);
+        req.send(JSON.stringify(jsonObj));
+        req.onreadystatechange = function() {
+            if (req.readyState === 4) {
+                console.log(req.response);
+                const json = JSON.parse(req.response);
+                document.getElementById("phone").innerHTML = json.phone;
+                document.getElementById("number").innerHTML = json.number;
+                document.getElementById("birthday").innerHTML = json.birthday;
+                document.getElementById("cardName").innerHTML = json.cardName;
+                document.getElementById("cardNum").innerHTML = json.cardNum;
+                document.getElementById("expDate").innerHTML = json.expDate;
+                document.getElementById("CVV").innerHTML = json.CVV;
+            }
+        }
+    }
+</script>
+
+
+
+
+
+
 <html>
-    <head>
-        <title>Renew Membership</title>
-        <link rel ="stylesheet" href="../renew/renew.css"/>
-        <script type="text/javascript" src="../renew/renew.js"></script>
-    </head>
-    <body>
-        <div class="renewInfo">
-        <h1>Renew My Membership</h1>
-        </div>
-        <div class="renewForm">
-            <h3>Fill out the form below to renew your membership.</h3>
-            <p>Renewal Types: </p>
-            <div>
-               <input type="radio" id="mobileNum" name="Num" value="moboleNum" onclick="clickMob()" >
-               <label for="mobile-num">Mobile Number</label>
-               <input type="radio" id="membNum" name="Num" value="membNum" onclick="clickMemb()">
-               <label for="member-num" >Membership Number</label>
-               <br><br>
-               <div id="phoneN" style="display:block">
-                   <label for="phone">Phone number: </label>
-                   <input type="tel" id="phone" name="phone" placeholder="04-123-456-78" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{2}">
-               </div><br><br>
-               <div id="membershipN" style="display:none">
-                   <label for="memberNum">Membership number: </label>
-                   <input type="text" id="number" name="number">
-               </div><br>
-               <label for="birthday">Date of Birth: </label>
-               <input type="date" id="birthday" name="birthday"><br><br>
-               <button type="button" id="continue" onlick="showPayForm()">Continue</button><br><br>
-            </div>
-        </div>
-        <div id="payForm"> <!--style="display:none"-->
-            <form>
-                <label for="name">Name on Card: </label><br>
-                <input type="name" id="cardName" name="cardName"><br><br>
-                <label for="number">Card Number: </label><br>
-                <input type="text" id="cardNum" name="cardNum"><br><br>
-                <label for="number">Expire Date: </label><br>
-                <input type="text" id="expDate" placeholder="MM/YY" maxlength='7'><br><br>
-                <label for="number">CVV: </label><br>
-                <input type="text" placeholder="CVV"><br><br>
-                <input type="submit" id="subBtn" value="Submit">
-            </form>
-        </div>
-    </body>
+
+<head>
+    <title>Renew Membership</title>
+    <link rel="stylesheet" href="../renew/renew.css" />
+    <script type="text/javascript" src="../renew/renew.js"></script>
+</head>
+
+<body>
+<div class="renewInfo">
+    <h1>Renew My Membership</h1>
+</div>
+<div class="renewForm">
+    <h3>Fill out the form below to renew your membership.</h3>
+    <p>Renewal Types: </p>
+    <div>
+        <input type="radio" id="mobileNum" name="Num" value="moboleNum" onclick="clickMob()">
+        <label for="mobile-num">Mobile Number</label>
+        <input type="radio" id="membNum" name="Num" value="membNum" onclick="clickMemb()">
+        <label for="member-num">Membership Number</label>
+        <br><br>
+        <div id="phoneN" style="display:block">
+            <label for="phone">Phone number: </label>
+            <input type="tel" id="phone" name="phone" placeholder="04-123-456-78" pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}-[0-9]{2}">
+        </div><br><br>
+        <div id="membershipN" style="display:none">
+            <label for="memberNum">Membership number: </label>
+            <input type="text" id="number" name="number">
+        </div><br>
+        <label for="birthday">Date of Birth: </label>
+        <input type="date" id="birthday" name="birthday"><br><br>
+        <button type="button" id="continue" onlick="showPayForm()">Continue</button><br><br>
+    </div>
+</div>
+<div id="payForm">
+    <!--style="display:none"-->
+    <form>
+        <label for="name">Name on Card: </label><br>
+        <input type="name" id="cardName" name="cardName"><br><br>
+        <label for="number">Card Number: </label><br>
+        <input type="text" id="cardNum" name="cardNum"><br><br>
+        <label for="number">Expire Date: </label><br>
+        <input type="text" id="expDate" placeholder="MM/YY" maxlength='7'><br><br>
+        <label for="number">CVV: </label><br>
+        <input type="text" placeholder="CVV"><br><br>
+        <input type="submit" id="subBtn" value="Submit">
+    </form>
+</div>
+</body>
+
 </html>
