@@ -60,6 +60,8 @@ public class JdbcUtil {
             res.put("email",rs.getString("email"));
             res.put("vipStart",rs.getString("vipStart"));
             res.put("vipEnd",rs.getString("vipEnd"));
+            res.put("vehicleModel",rs.getString("vehicleModel"));
+            res.put("plateNum",rs.getString("plateNum"));
         }
         System.out.println(res);
         return res;
@@ -167,37 +169,41 @@ public class JdbcUtil {
 //        }
 //        return vehicleList;
 //    }
-
-    public static String sqlCusOrderSelect(String O_cusNum) throws SQLException, ClassNotFoundException {
+    public static String sqlCurrOrderSelect() throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
-        String            sql    = "select * from orders where O_cusNum = ?";
+        String            sql    = "select * from cur_orders";
         PreparedStatement psmt   = conn.prepareStatement(sql);
-        psmt.setString(1, O_cusNum);
         ResultSet  rs     = psmt.executeQuery();
-        Map<String,String> res = new LinkedHashMap<String, String>();
-        String temp1 ="[";
-        while (rs.next()) {
-            res.put("orderid", String.valueOf(rs.getInt("orderid")));
+        Map<String, String> res = new LinkedHashMap<String,String>();
+        String temp = "[";
+        while (rs.next()){
+            res.put("sstate",rs.getString("sstate"));
+            res.put("curorder",rs.getString("cur_orderid"));
             res.put("orderStartDate",rs.getString("orderStartDate"));
             res.put("vehiclePlate",rs.getString("vehiclePlate"));
             res.put("price",rs.getString("price"));
-            res.put("location",rs.getString("location"));
+            res.put("c_location",rs.getString("c_location"));
             res.put("issue",rs.getString("issue"));
             res.put("O_cusNum",rs.getString("O_cusNum"));
-            res.put("O_proNum",rs.getString("O_proNum"));
-            res.put("OrderEndDate",rs.getString("OrderEndDate"));
-            res.put("review",rs.getString("review"));
-            res.put("rating",rs.getString("rating"));
-            res.put("payCardNum",rs.getString("payCardNum"));
-            res.put("payType",rs.getString("payType"));
-            String temp = JSONLIKE.myMap2JSON(res);
-            temp1 += temp+",";
+            String temp1 = JSONLIKE.myMap2JSON(res);
+            temp += temp1+",";
         }
-        temp1=temp1.substring(0,temp1.length()-1);
-        temp1+="]";
-        System.out.println("sqlCusOrderSelect");
-        System.out.println(temp1);
-        return temp1;
+        temp = temp.substring(0,temp.length()-1);
+        temp +="]";
+        System.out.println(temp);
+        return temp;
+    }
+    public static String sqlOrderSelect(String userNum) throws SQLException, ClassNotFoundException {
+        Connection        conn   = connectSql();
+        String            sql    = "select * from ORDER where userID = ?";
+        PreparedStatement psmt   = conn.prepareStatement(sql);
+        psmt.setString(1, userNum);
+        ResultSet  rs     = psmt.executeQuery();
+        String res = "";
+        while (rs.next()) {
+            res = rs.getString(1);
+        }
+        return res;
     }
 
 
