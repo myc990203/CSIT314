@@ -32,10 +32,13 @@ public class proload extends HttpServlet {
         System.out.println(str);
         Map<String, String> map    = JSONLIKE.myJson(str);
         String              cusNum = map.get("uid");
+        String coordinates = map.get("coordinates");
+        System.out.println(coordinates);
         System.out.println("cusID= "+cusNum);
-        Map<String, String> cus    = new HashMap<>();
+//        Map<String, String> cus    = new HashMap<>();
+        String currentOrders = new String();
         try {
-            cus = JdbcUtil.sqlProSelect(Integer.parseInt(cusNum));
+            currentOrders = JdbcUtil.sqlCurrOrderSelect(coordinates);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
@@ -45,9 +48,9 @@ public class proload extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
         PrintWriter pw   = resp.getWriter();
-        String      json = JSONLIKE.myMap2JSON(cus);
-        System.out.println(json);
-        pw.print(json);
+//        String      json = JSONLIKE.myMap2JSON(cus);
+        System.out.println("this is currentOrders： "+currentOrders);
+        pw.print(currentOrders);
         pw.flush();
         System.out.println("professional/professional");
     }

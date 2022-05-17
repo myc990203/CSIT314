@@ -171,7 +171,7 @@ public class JdbcUtil {
 //    }-34.4100062#150.8958423
     public static String sqlCurrOrderSelect(String address) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
-        String            sql    = "select * from cur_orders";
+        String            sql    = "select * from cur_orders where sstate = 'waiting'";
         PreparedStatement psmt   = conn.prepareStatement(sql);
         ResultSet  rs     = psmt.executeQuery();
         Map<String, String> res = new LinkedHashMap<String,String>();
@@ -187,13 +187,14 @@ public class JdbcUtil {
                 res.put("c_location",rs.getString("c_location"));
                 res.put("issue",rs.getString("issue"));
                 res.put("O_cusNum",rs.getString("O_cusNum"));
+                res.put("distance", String.valueOf(dis));
                 String temp1 = JSONLIKE.myMap2JSON(res);
                 temp += temp1+",";
             }
         }
         temp = temp.substring(0,temp.length()-1);
         temp +="]";
-        System.out.println(temp);
+        System.out.println("this is JDBC: "+temp);
         return temp;
     }
     private static double rad(double d){

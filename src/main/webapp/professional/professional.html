@@ -17,21 +17,48 @@
             return "";
         }
 
+
         window.onload = function () {
             getLocation();
             var uid = getCookie("uid");
+            var coordinates = getCoordinate();
+            console.log("coor"+coordinates);
             const req    = new XMLHttpRequest();
             req.open("POST", "proload", true);
             req.setRequestHeader('Content-Type', 'application/json');
             var jsonObj = new Object();
             jsonObj.uid = uid;
+            jsonObj.coordinates = coordinates;
             req.send(JSON.stringify(jsonObj));
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     console.log(req.response);
+                    // document.getElementById("tb").style.display = "block";
                     const json = JSON.parse(req.response);
-                    document.getElementById("name").innerHTML  = json.proName;
+                    console.log(json.sstate);
+                    var table = document.getElementById("tb");
+                    //for each line in table
+                    for(var temp1 in json){
+                        var tr = document.createElement('tr');
+                        table.appendChild(tr);
+                        // for(var temp2 in json[temp1]){
+                        //     var td = document.createElement('td');
+                        //     td.innerHTML = json[temp1][temp2];
+                        //     tr.appendChild(td);
+                        // }
+                        var td = document.createElement('td');
+                        td.innerHTML = json[temp1].curorder;
+                        tr.appendChild(td);
+                        var td = document.createElement('td');
+                        td.innerHTML = json[temp1].curorder;
+                        tr.appendChild(td);
+                        // here we can add a button to confirm the request
+                        var td = document.createElement('td');
+                        // obtain the id of the request and add it to the button
+                        td.innerHTML = "<button onclick='confirmRequest("+json[temp1]["id"]+")'>Confirm</button>";
+                    }
                 }
+                // document.getElementById("name").innerHTML  = json.proName;
             }
         }
     </script>
@@ -55,40 +82,15 @@
 </div>
 <div class="row">
     <div class="left-part">
-        <div>
-            <table border="1" width="100%" height="100%">
-                <tr>
-                    <th>Request ID</th>
-                    <th>Customer Name</th>
-                    <th>Issue Type</th>
-                    <th>Confirmation</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>c1</td>
-                    <td>battery</td>
-                    <td>
-                        <button>Confirm</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>c2</td>
-                    <td>battery</td>
-                    <td>
-                        <button>Confirm</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>c3</td>
-                    <td>battery</td>
-                    <td>
-                        <button>Confirm</button>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <table border="1" width="100%" height="100%" id="tb" >
+            <tr>
+                <th>Request ID</th>
+                <th>Customer Name</th>
+                <th>Issue Type</th>
+                <th>Distance</th>
+                <th>Confirmation</th>
+            </tr>
+        </table>
 
     </div>
 
