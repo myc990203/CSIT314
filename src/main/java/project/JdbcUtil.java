@@ -168,8 +168,8 @@ public class JdbcUtil {
 //            vehicleList.add(vehicle);
 //        }
 //        return vehicleList;
-//    }
-    public static String sqlCurrOrderSelect() throws SQLException, ClassNotFoundException {
+//    }-34.4100062#150.8958423
+    public static String sqlCurrOrderSelect(String address) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
         String            sql    = "select * from cur_orders";
         PreparedStatement psmt   = conn.prepareStatement(sql);
@@ -177,21 +177,43 @@ public class JdbcUtil {
         Map<String, String> res = new LinkedHashMap<String,String>();
         String temp = "[";
         while (rs.next()){
-            res.put("sstate",rs.getString("sstate"));
-            res.put("curorder",rs.getString("cur_orderid"));
-            res.put("orderStartDate",rs.getString("orderStartDate"));
-            res.put("vehiclePlate",rs.getString("vehiclePlate"));
-            res.put("price",rs.getString("price"));
-            res.put("c_location",rs.getString("c_location"));
-            res.put("issue",rs.getString("issue"));
-            res.put("O_cusNum",rs.getString("O_cusNum"));
-            String temp1 = JSONLIKE.myMap2JSON(res);
-            temp += temp1+",";
+            double dis = getDistance(address,rs.getString("c_location"));
+            if (dis <= 50){
+                res.put("sstate",rs.getString("sstate"));
+                res.put("curorder",rs.getString("cur_orderid"));
+                res.put("orderStartDate",rs.getString("orderStartDate"));
+                res.put("vehiclePlate",rs.getString("vehiclePlate"));
+                res.put("price",rs.getString("price"));
+                res.put("c_location",rs.getString("c_location"));
+                res.put("issue",rs.getString("issue"));
+                res.put("O_cusNum",rs.getString("O_cusNum"));
+                String temp1 = JSONLIKE.myMap2JSON(res);
+                temp += temp1+",";
+            }
         }
         temp = temp.substring(0,temp.length()-1);
         temp +="]";
         System.out.println(temp);
         return temp;
+    }
+    private static double rad(double d){
+        return d * Math.PI / 180.0;
+    }
+    public static  double getDistance(String ca, String pa){
+        final  double EARTH_RADIUS = 6378.137;
+        String[] caset = ca.split("#");
+        double clon = Double.parseDouble(caset[0]);
+        double clat = Double.parseDouble(caset[1]);
+        String[] paset = pa.split("#");
+        double plon = Double.parseDouble(paset[0]);
+        double plat = Double.parseDouble(paset[1]);
+        double radLat1 = rad(clat);
+        double radLat2 = rad(plat);
+        double a = radLat1 - radLat2;
+        double b = rad(clon) - rad(plon);
+        double s = 2 *Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2)+Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+        s = s * EARTH_RADIUS;
+        return s;
     }
     public static String sqlOrderSelect(String userNum) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
