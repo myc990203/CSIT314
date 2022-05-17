@@ -1,5 +1,6 @@
 package project;
 
+import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
@@ -86,9 +87,16 @@ class JdbcUtilTest {
     void toSqlData() {
     }
     @Test
-    void sqlCusOrderSelect() throws SQLException, ClassNotFoundException {
-        String temp = "";
-        temp = JdbcUtil.sqlCusOrderSelect("7");
-        System.out.println(temp);
+    void getDistance(){
+        String a = "-34.41631237896929#150.88914851692778";
+        String b = "-34.414328674061366#150.87101276065172";
+        double dis = JdbcUtil.getDistance(a,b);
+        System.out.println(dis);
     }
+    @Test
+    void sqlCurrOrderSelect() throws SQLException, ClassNotFoundException {
+        String te = "-34.39350965887256#150.88522712732396";
+        String res = JdbcUtil.sqlCurrOrderSelect(te);
+        System.out.println(res);
+        }
 }
