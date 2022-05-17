@@ -20,11 +20,12 @@
 
         window.onload = function () {
             getLocation();
-            var uid = getCookie("uid");
-            var coordinates = getCookie("coordinates");
+
             window.navigator.geolocation.getCurrentPosition(function (position){
                 document.cookie ="coordinates="+position.coords.latitude+"#"+position.coords.longitude;
             })
+            var uid = getCookie("uid");
+            var coordinates = getCookie("coordinates");
             const req    = new XMLHttpRequest();
             req.open("POST", "proload", true);
             req.setRequestHeader('Content-Type', 'application/json');
@@ -37,9 +38,7 @@
                     console.log(req.response);
                     const json = JSON.parse(req.response);
                     // check if json equals "]"
-                    if (json=="]"){
 
-                    }
                     console.log(json.sstate);
                     document.getElementById("tb").style.visibility = "visible";
                     var table = document.getElementById("tb");
@@ -69,7 +68,7 @@
                         // here we can add a button to confirm the request
                         var td = document.createElement('td');
                         // obtain the id of the request and add it to the button
-                        td.innerHTML = "<button onclick='confirmRequest(json[temp1].curorder)'>Confirm</button>";
+                        td.innerHTML = "<button onclick='confirmRequest("+json[temp1].curorder +")'>Confirm</button>";
                         tr.appendChild(td);
                     }
                 }
