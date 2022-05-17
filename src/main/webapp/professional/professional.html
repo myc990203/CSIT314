@@ -35,9 +35,13 @@
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     console.log(req.response);
-                    // document.getElementById("tb").style.display = "block";
                     const json = JSON.parse(req.response);
+                    // check if json equals "]"
+                    if (json=="]"){
+
+                    }
                     console.log(json.sstate);
+                    document.getElementById("tb").style.visibility = "visible";
                     var table = document.getElementById("tb");
                     //for each line in table
                     for(var temp1 in json){
@@ -51,13 +55,22 @@
                         var td = document.createElement('td');
                         td.innerHTML = json[temp1].curorder;
                         tr.appendChild(td);
+                        // name
                         var td = document.createElement('td');
-                        td.innerHTML = json[temp1].curorder;
+                        td.innerHTML = json[temp1].cusName;
+                        tr.appendChild(td);
+                        var td = document.createElement('td');
+                        td.innerHTML = json[temp1].issue;
+                        tr.appendChild(td);
+                        var td = document.createElement('td');
+                        var temp = json[temp1].distance;
+                        td.innerHTML = temp.toString().match(/^\d+(?:\.\d{0,2})?/)+"km";
                         tr.appendChild(td);
                         // here we can add a button to confirm the request
                         var td = document.createElement('td');
                         // obtain the id of the request and add it to the button
-                        td.innerHTML = "<button onclick='confirmRequest("+json[temp1]["id"]+")'>Confirm</button>";
+                        td.innerHTML = "<button onclick='confirmRequest(json[temp1].curorder)'>Confirm</button>";
+                        tr.appendChild(td);
                     }
                 }
                 // document.getElementById("name").innerHTML  = json.proName;
@@ -84,7 +97,7 @@
 </div>
 <div class="row">
     <div class="left-part">
-        <table border="1" width="100%" height="100%" id="tb" >
+        <table border="1" width="100%" height="100%" id="tb" style="visibility: hidden" >
             <tr>
                 <th>Request ID</th>
                 <th>Customer Name</th>

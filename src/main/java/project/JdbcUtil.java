@@ -171,7 +171,7 @@ public class JdbcUtil {
 //    }-34.4100062#150.8958423
     public static String sqlCurrOrderSelect(String address) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
-        String            sql    = "select * from cur_orders where sstate = 'waiting'";
+        String            sql    = "select * from cur_orders,customer where sstate = 'waiting' and cur_orders.O_cusNum = customer.cusNum;";
         PreparedStatement psmt   = conn.prepareStatement(sql);
         ResultSet  rs     = psmt.executeQuery();
         Map<String, String> res = new LinkedHashMap<String,String>();
@@ -179,14 +179,9 @@ public class JdbcUtil {
         while (rs.next()){
             double dis = getDistance(address,rs.getString("c_location"));
             if (dis <= 50){
-                res.put("sstate",rs.getString("sstate"));
                 res.put("curorder",rs.getString("cur_orderid"));
-                res.put("orderStartDate",rs.getString("orderStartDate"));
-                res.put("vehiclePlate",rs.getString("vehiclePlate"));
-                res.put("price",rs.getString("price"));
-                res.put("c_location",rs.getString("c_location"));
+                res.put("cusName",rs.getString("cusName"));
                 res.put("issue",rs.getString("issue"));
-                res.put("O_cusNum",rs.getString("O_cusNum"));
                 res.put("distance", String.valueOf(dis));
                 String temp1 = JSONLIKE.myMap2JSON(res);
                 temp += temp1+",";
