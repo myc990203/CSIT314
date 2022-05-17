@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 //import org.json.JSONArray;
@@ -168,7 +169,30 @@ public class JdbcUtil {
 //        }
 //        return vehicleList;
 //    }
-
+    public static String sqlCurrOrderSelect() throws SQLException, ClassNotFoundException {
+        Connection        conn   = connectSql();
+        String            sql    = "select * from cur_orders";
+        PreparedStatement psmt   = conn.prepareStatement(sql);
+        ResultSet  rs     = psmt.executeQuery();
+        Map<String, String> res = new LinkedHashMap<String,String>();
+        String temp = "[";
+        while (rs.next()){
+            res.put("sstate",rs.getString("sstate"));
+            res.put("curorder",rs.getString("cur_orderid"));
+            res.put("orderStartDate",rs.getString("orderStartDate"));
+            res.put("vehiclePlate",rs.getString("vehiclePlate"));
+            res.put("price",rs.getString("price"));
+            res.put("c_location",rs.getString("c_location"));
+            res.put("issue",rs.getString("issue"));
+            res.put("O_cusNum",rs.getString("O_cusNum"));
+            String temp1 = JSONLIKE.myMap2JSON(res);
+            temp += temp1+",";
+        }
+        temp = temp.substring(0,temp.length()-1);
+        temp +="]";
+        System.out.println(temp);
+        return temp;
+    }
     public static String sqlOrderSelect(String userNum) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
         String            sql    = "select * from ORDER where userID = ?";
