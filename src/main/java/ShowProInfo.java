@@ -18,11 +18,11 @@ import org.json.simple.parser.JSONParser;
 
 //返回用户的详细信息json
 
-@WebServlet({"/user_info/user_info"})
-public class ShowUserInfo extends HttpServlet {
+@WebServlet({"/pro_user_info/pro_user_info"})
+public class ShowProInfo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("ShowUserInfo");
+        System.out.println("ShowProInfo");
         BufferedReader bufferedReader = req.getReader();
         StringBuilder  stringBuilder  = new StringBuilder();
         String         line;

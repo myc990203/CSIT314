@@ -94,11 +94,11 @@ public class JdbcUtil {
         psmt.setString(1, username);
         ResultSet    rs     = psmt.executeQuery();
         Map<String,String> res = new HashMap<String, String>();
+        Map<String,String> orders= new HashMap<String, String>();
         while (rs.next()) {
             res.put("cusPw",rs.getString("cusPw"));
             res.put("cusNum",rs.getString("cusNum"));
             res.put("vipEnd",rs.getString("vipEnd"));
-
         }
         return res;
     }
