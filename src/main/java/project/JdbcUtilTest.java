@@ -85,4 +85,10 @@ class JdbcUtilTest {
     @Test
     void toSqlData() {
     }
+    @Test
+    void sqlCusOrderSelect() throws SQLException, ClassNotFoundException {
+        String temp = "";
+        temp = JdbcUtil.sqlCusOrderSelect("7");
+        System.out.println(temp);
+    }
 }

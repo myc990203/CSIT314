@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 //import org.json.JSONArray;
@@ -167,17 +168,37 @@ public class JdbcUtil {
 //        return vehicleList;
 //    }
 
-    public static String sqlOrderSelect(String userNum) throws SQLException, ClassNotFoundException {
+    public static String sqlCusOrderSelect(String O_cusNum) throws SQLException, ClassNotFoundException {
         Connection        conn   = connectSql();
-        String            sql    = "select * from ORDER where userID = ?";
+        String            sql    = "select * from orders where O_cusNum = ?";
         PreparedStatement psmt   = conn.prepareStatement(sql);
-        psmt.setString(1, userNum);
+        psmt.setString(1, O_cusNum);
         ResultSet  rs     = psmt.executeQuery();
-        String res = "";
+        Map<String,String> res = new LinkedHashMap<String, String>();
+        Map<String,String> set = new HashMap<String, String>();
+        String temp1 ="[";
         while (rs.next()) {
-            res = rs.getString(1);
+            res.put("orderid",rs.getString("orderid"));
+            res.put("orderStartDate",rs.getString("orderStartDate"));
+            res.put("vehiclePlate",rs.getString("vehiclePlate"));
+            res.put("price",rs.getString("price"));
+            res.put("location",rs.getString("location"));
+            res.put("issue",rs.getString("issue"));
+            res.put("O_cusNum",rs.getString("O_cusNum"));
+            res.put("O_proNum",rs.getString("O_proNum"));
+            res.put("OrderEndDate",rs.getString("OrderEndDate"));
+            res.put("review",rs.getString("review"));
+            res.put("rating",rs.getString("rating"));
+            res.put("payCardNum",rs.getString("payCardNum"));
+            res.put("payType",rs.getString("payType"));
+            String temp = JSONLIKE.myMap2JSON(res);
+            temp1 += temp+",";
         }
-        return res;
+        temp1=temp1.substring(0,temp1.length()-1);
+        temp1+="]";
+        System.out.println("sqlCusOrderSelect");
+        System.out.println(temp1);
+        return temp1;
     }
 
 

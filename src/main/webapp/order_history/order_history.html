@@ -6,77 +6,45 @@
         <link rel="stylesheet" href="order_history.css">
       <script>src="order_history.js"</script>
         <script>
-            function order_history(){
-                var data = '{"address":"北京","problem":"problem","text":"内容","price":"价格"}'
-                var json_obj=JSON.parse(data);
-
-
-                //window.open("../comment/comment.html",target="_self");
-                const req    = new XMLHttpRequest();
-                req.open("POST", "get_order_history", true);
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca   = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i].trim();
+                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                }
+                return "";
+            }
+            var json = [{"oid": 1},{"oid": 2}];
+            window.onload = function() {
+                var Uid = getCookie("uid");
+                var Type = getCookie("type");
+                const req = new XMLHttpRequest();
+                req.open("POST", "OrderHistory", true);
                 req.setRequestHeader('Content-Type', 'application/json');
-                var jsonObj      = {
-                    pageSize : 1,
-                    pageNumber: 100
-                };
-                req.send(JSON.stringify(
-                    jsonObj
-                ));
-                req.onreadystatechange = function () {
-                    var allOrder;
-                    var addressDiv;
-                    var p;
-                    var problem;
-                    var p2;
-                    var text;
-                    var p3;
-                    var price;
-                    var p4;
+                var jsonObj = new Object();
+                jsonObj.uid = Uid;
+                jsonObj.type = Type;
+                req.send(JSON.stringify(jsonObj));
+                req.onreadystatechange = function() {
                     if (req.readyState === 4) {
                         console.log(req.response);
-                        const json_objs = JSON.parse(req.response);
-                        var allOrder;
-                        var addressDiv;
-                        var p;
-                        var problem;
-                        var p2;
-                        var text;
-                        var p3;
-                        var price;
-                        var p4;
-                        for (let json_obj_index in json_objs) {
-                            json_obj =json_objs[json_obj_index]
-                            allOrder = document.getElementById("allOrder");
-                            addressDiv = document.createElement("div");
-                            console.log(addressDiv)
-
-                            p = document.createElement("p");
-                            p.innerHTML=json_obj.address;
-                            addressDiv.appendChild(p);
-                            allOrder.appendChild(addressDiv);
-
-                            problem = document.createElement("div");
-                            p2 = document.createElement("p");
-                            p2.innerHTML=json_obj.problem;
-                            problem.appendChild(p2);
-                            allOrder.appendChild(problem);
-
-                            text = document.createElement("div");
-                            p3 = document.createElement("p");
-                            p3.innerHTML=json_obj.text;
-                            text.appendChild(p3);
-                            allOrder.appendChild(text);
-
-                            price = document.createElement("div");
-                            p4 = document.createElement("p");
-                            p4.innerHTML=json_obj.price;
-                            price.appendChild(p4);
-                            allOrder.appendChild(price)
+                        const json2 = JSON.parse(req.response);
+                        var table = document.querySelector('table');
+                        for (var temp in json2){
+                            var tr = document.createElement('tr');
+                            for(var temp1 in json2[temp]){
+                                var td = document.createElement('td');
+                                td.innerHTML = json2[temp][temp1];
+                                tr.appendChild(td);
+                            }
+                            table.appendChild(tr);
                         }
 
                     }
                 }
             }
+
         </script>
     </head>
     <body>
@@ -98,35 +66,23 @@
             <div class="nav">
                 <h2>All orders</h2>
             </div>
-            <div class="orderper">
-                <div class="address">
-                    <p>address</p>
-                </div>
-                <div class="problem">
-                    <p>problem</p>
-                </div>
-                <div class="text">
-                    <p>text</p>
-                </div>
-                <div class="price">
-                    <p>The total price: $80</p>
-                </div>
-            </div>
-            <div class="orderper">
-                <div class="address">
-                    <p>address</p>
-                </div>
-                <div class="problem">
-                    <p>problem</p>
-                </div>
-                <div class="text">
-                    <p>text</p>
-                </div>
-                <div class="price">
-                    <p>The total price: $80</p>
-                </div>
-            </div>
-            <button onclick="order_history()"></button>
+            <table border="1">
+                <tr>
+                    <th>OrderID</th>
+                    <th>OrderStartDate</th>
+                    <th>VehiclePlate</th>
+                    <th>Price</th>
+                    <th>Location</th>
+                    <th>Issue</th>
+                    <th>CustomerID</th>
+                    <th>ProfessionalID</th>
+                    <th>OrderEndDate</th>
+                    <th>Review</th>
+                    <th>Rating</th>
+                    <th>CardNumber</th>
+                    <th>PayType</th>
+                </tr>
+            </table>
         </div>
         <div class="bottom"></div>
     </body>
