@@ -28,20 +28,27 @@
                 req.send(JSON.stringify(jsonObj));
                 req.onreadystatechange = function() {
                     if (req.readyState === 4) {
-                        console.log(req.response);
-                        const json2 = JSON.parse(req.response);
-                        var table = document.querySelector('table');
-                        for (var temp in json2){
-                            var tr = document.createElement('tr');
-                            for(var temp1 in json2[temp]){
-                                var td = document.createElement('td');
-                                td.innerHTML = json2[temp][temp1];
-                                tr.appendChild(td);
+                        if(req.response=="]"){
+                            document.getElementById("No_Order").innerHTML = "No Order";
+                        }else{
+                            //document.getElementById("tb").style.display = "block";
+                            const json2                                 = JSON.parse(req.response);
+                            var table = document.querySelector('table');
+                            for (var temp in json2){
+                                var tr = document.createElement('tr');
+                                table.appendChild(tr);
+                                for(var temp1 in json2[temp]){
+                                    var td = document.createElement('td');
+                                    td.innerHTML = json2[temp][temp1];
+                                    tr.appendChild(td);
+                                }
+
                             }
-                            table.appendChild(tr);
                         }
 
+
                     }
+
                 }
             }
 
@@ -66,7 +73,11 @@
             <div class="nav">
                 <h2>All orders</h2>
             </div>
-            <table border="1">
+            <div class="nav">
+                <span id="No_Order"></span>
+            </div>
+            <table id="tb" border="1" >
+<!--                <table id="tb" border="1" style="display: none;">-->
                 <tr>
                     <th>OrderID</th>
                     <th>OrderStartDate</th>
