@@ -21,8 +21,10 @@
         window.onload = function () {
             getLocation();
             var uid = getCookie("uid");
-            var coordinates = getCoordinate();
-            console.log("coor"+coordinates);
+            var coordinates = getCookie("coordinates");
+            window.navigator.geolocation.getCurrentPosition(function (position){
+                document.cookie ="coordinates="+position.coords.latitude+"#"+position.coords.longitude;
+            })
             const req    = new XMLHttpRequest();
             req.open("POST", "proload", true);
             req.setRequestHeader('Content-Type', 'application/json');

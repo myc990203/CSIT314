@@ -16,24 +16,8 @@ function serveHistory(){
 // current location
 var latitude;
 var longitude;
-var site;
-function getCoordinate(){
-    var lat;
-    var lng;
-    var site;
-    if (navigator.geolocation)
-    {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    }
-    function showPosition(position)
-    {
-        lng = position.coords.longitude;
-        lat = position.coords.latitude;
-        site = lat+'#'+lng;
-        return site;
-    }
 
-}
+
 function getLocation()
 {
     var x=document.getElementById("demo");
