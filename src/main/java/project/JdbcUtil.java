@@ -59,6 +59,8 @@ public class JdbcUtil {
             res.put("email",rs.getString("email"));
             res.put("vipStart",rs.getString("vipStart"));
             res.put("vipEnd",rs.getString("vipEnd"));
+            res.put("vehicleModel",rs.getString("vehicleModel"));
+            res.put("plateNum",rs.getString("plateNum"));
         }
         System.out.println(res);
         return res;
