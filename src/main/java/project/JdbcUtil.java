@@ -175,10 +175,9 @@ public class JdbcUtil {
         psmt.setString(1, O_cusNum);
         ResultSet  rs     = psmt.executeQuery();
         Map<String,String> res = new LinkedHashMap<String, String>();
-        Map<String,String> set = new HashMap<String, String>();
         String temp1 ="[";
         while (rs.next()) {
-            res.put("orderid",rs.getString("orderid"));
+            res.put("orderid", String.valueOf(rs.getInt("orderid")));
             res.put("orderStartDate",rs.getString("orderStartDate"));
             res.put("vehiclePlate",rs.getString("vehiclePlate"));
             res.put("price",rs.getString("price"));
