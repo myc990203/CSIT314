@@ -11,37 +11,42 @@ function getCookie(cname)
 }
 
 function modify(){
-    var cusName = document.getElementById("username").value;
+    var proName = document.getElementById("username").value;
     var gender = document.getElementById("gender").value;
     var dob = document.getElementById("dob").value;
     var email = document.getElementById("email").value;
     var phone = document.getElementById("phone").value;
-    var model = document.getElementById("model").value;
-    var plateNum = document.getElementById("plateNum").value;
-    var cusPw = document.getElementById("new_pwd").value;
+    var address = document.getElementById("address").value;
+    var proPw = document.getElementById("new_pwd").value;
     var uid = getCookie("uid");
     var jsonObj      = {
-        cusName : cusName,
+        proName : proName,
         gender: gender,
-        dob: dob,
+        proDOB: dob,
         email:email,
-        phone:phone,
-        model:model,
-        plateNum:plateNum,
-        cusPw:cusPw,
+        phoneNum:phone,
+        location:address,
+        proPw:proPw,
         uid:uid
     };
     const req = new XMLHttpRequest();
-    req.open("POST", "UpdateCus", true);
+    req.open("POST", "UpdatePro", true);
     req.setRequestHeader('Content-Type', 'application/json');
+    console.log(jsonObj);
     req.send(JSON.stringify(jsonObj));
+    req.onreadystatechange = function () {
+        if (req.readyState === 4) {
+            console.log(req.response);
+            alert("修改成功");
+            window.open("../pro_user_info/pro_user_info.html",target="_self");
+        }
+    }
 
-    alert("修改成功");
-    window.open("../user_info/user_info.html",target="_self");
+    // window.open("../pro_user_info/pro_user_info.html",target="_self");
 }
 
 function back(){
-    window.open("../user_info/user_info.html",target="_self");
+    window.open("../pro_user_info/pro_user_info.html",target="_self");
 }
 
 function openNav(){

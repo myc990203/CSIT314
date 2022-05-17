@@ -33,15 +33,15 @@
                 if (req.readyState === 4) {
                     console.log(req.response);
                     const json = JSON.parse(req.response);
-                    document.getElementById("username").innerHTML=json.proName;
-                    document.getElementById("gender").innerHTML=json.gender;
-                    document.getElementById("dob").innerHTML=json.proDOB;
-                    document.getElementById("email").innerHTML=json.email;
-                    document.getElementById("phone").innerHTML=json.phoneNum;
-                    document.getElementById("address").innerHTML=json.location;
-                    document.getElementById("old_pwd").innerHTML=json.proPw;
-                    document.getElementById("new_pwd").innerHTML=json.proPw;
-
+                    console.log(json.proName);
+                    document.getElementById("username").value=json.proName;
+                    document.getElementById("gender").value=json.gender;
+                    document.getElementById("dob").value=json.proDOB;
+                    document.getElementById("email").value=json.email;
+                    document.getElementById("phone").value=json.phoneNum;
+                    document.getElementById("address").value=json.location;
+                    document.getElementById("old_pwd").value=json.proPw;
+                    document.getElementById("new_pwd").value=json.proPw;
                 }
             }
         }

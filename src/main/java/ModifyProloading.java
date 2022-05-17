@@ -28,7 +28,6 @@ public class ModifyProloading extends HttpServlet {
         Map<String, String> map = JSONLIKE.myJson(str);
         String              userID = map.get("uid");
         String userType = map.get("type");
-        System.out.println(userType);
         if (userType.equals("cus")){
             try {
                 res = JdbcUtil.sqlCusSelect(Integer.parseInt(userID));

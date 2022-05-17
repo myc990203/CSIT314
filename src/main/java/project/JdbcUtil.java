@@ -306,21 +306,22 @@ public class JdbcUtil {
     //sql update Professional
     public static void updateProfessional(Map<String,String> map) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
+        System.out.println("updateProfessional");
+        System.out.println(map);
         int    userID   = Integer.parseInt(map.get("uid"));
-        String userName = map.get("userName");
+        String userName = map.get("proName");
         String gender   = map.get("gender");
-        String DOB      = map.get("DOB");
+        String DOB      = map.get("proDOB");
         String phoneNum = map.get("phoneNum");
-        String password = map.get("password");
+        String password = map.get("proPw");
         String email    = map.get("email");
         String location = map.get("location");
         String sql = "" +
-                     "update CUSTOMER " +
+                     "update Professional " +
                      "set proName=?,gender=?,proDOB=?,phoneNum=?,proPw=?,email=?,location=?" +
                      "where proNum=?";
 
         PreparedStatement psmt        = con.prepareStatement(sql);
-
         psmt.setInt(8, userID);
         psmt.setString(1, userName);
         psmt.setString(2, gender);
