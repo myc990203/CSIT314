@@ -1,101 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Order History</title>
-        <link rel="stylesheet" href="order_history.css">
-      <script>src="order_history.js"</script>
-        <script>
-            function getCookie(cname) {
-                var name = cname + "=";
-                var ca   = document.cookie.split(';');
-                for (var i = 0; i < ca.length; i++) {
-                    var c = ca[i].trim();
-                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-                }
-                return "";
+<head>
+    <meta charset="UTF-8">
+    <title>Order History</title>
+    <link rel="stylesheet" href="order_history.css">
+    <script>src="order_history.js"</script>
+    <script>
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca   = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
             }
-            var json = [{"oid": 1},{"oid": 2}];
-            window.onload = function() {
-                var Uid = getCookie("uid");
-                var Type = getCookie("type");
-                const req = new XMLHttpRequest();
-                req.open("POST", "OrderHistory", true);
-                req.setRequestHeader('Content-Type', 'application/json');
-                var jsonObj = new Object();
-                jsonObj.uid = Uid;
-                jsonObj.type = Type;
-                req.send(JSON.stringify(jsonObj));
-                req.onreadystatechange = function() {
-                    if (req.readyState === 4) {
-                        if(req.response=="]"){
-                            document.getElementById("No_Order").innerHTML = "No Order";
-                        }else{
-                            //document.getElementById("tb").style.display = "block";
-                            const json2                                 = JSON.parse(req.response);
-                            var table = document.querySelector('table');
-                            for (var temp in json2){
-                                var tr = document.createElement('tr');
-                                table.appendChild(tr);
-                                for(var temp1 in json2[temp]){
-                                    var td = document.createElement('td');
-                                    td.innerHTML = json2[temp][temp1];
-                                    tr.appendChild(td);
-                                }
+            return "";
+        }
+        var json = [{"oid": 1},{"oid": 2}];
+        window.onload = function() {
+            var Uid = getCookie("uid");
+            var Type = getCookie("type");
+            const req = new XMLHttpRequest();
+            req.open("POST", "OrderHistory", true);
+            req.setRequestHeader('Content-Type', 'application/json');
+            var jsonObj = new Object();
+            jsonObj.uid = Uid;
+            jsonObj.type = Type;
+            req.send(JSON.stringify(jsonObj));
+            req.onreadystatechange = function() {
+                if (req.readyState === 4) {
+                    if(req.response=="]"){
+                        document.getElementById('noOrder').innerHTML = "No Order History";
+                    }else{
+                        const json2 = JSON.parse(req.response);
+                        var table = document.querySelector('table');
 
+                        for (var temp in json2){
+                            var tr = document.createElement('tr');
+                            table.appendChild(tr);
+                            for(var temp1 in json2[temp]){
+                                var td = document.createElement('td');
+                                td.innerHTML = json2[temp][temp1];
+                                tr.appendChild(td);
                             }
                         }
-
-
                     }
-
                 }
             }
+        }
+        function back(){
+            window.open("../payment/payment.html",target="_self");
+        }
+    </script>
+</head>
+<body>
+<div class="top">
 
-        </script>
-    </head>
-    <body>
-        <div class="top">
-            <div class="logo">
-                <p><img src="../image/login_page_back.jpg"></p>
-            </div>
-            <div class="title">
-                <h1>order history</h1>
-            </div>
-        </div>
-        <div class="back">
-            <a href=""><button onclick="back()">back</button></a>
-        </div>
-        <div class="topright">
-            <a href=""><button>account</button></a> <a href=""><button>logout</button></a>
-        </div>
-        <div class="mid">
-            <div class="nav">
-                <h2>All orders</h2>
-            </div>
-            <div class="nav">
-                <span id="No_Order"></span>
-            </div>
-            <table id="tb" border="1" >
-<!--                <table id="tb" border="1" style="display: none;">-->
-                <tr>
-                    <th>OrderID</th>
-                    <th>OrderStartDate</th>
-                    <th>VehiclePlate</th>
-                    <th>Price</th>
-                    <th>Location</th>
-                    <th>Issue</th>
-                    <th>CustomerID</th>
-                    <th>ProfessionalID</th>
-                    <th>OrderEndDate</th>
-                    <th>Review</th>
-                    <th>Rating</th>
-                    <th>CardNumber</th>
-                    <th>PayType</th>
-                </tr>
-            </table>
-        </div>
-        <div class="bottom"></div>
-    </body>
+    <div class="title">
+        <h1>Order History</h1>
+    </div>
+</div>
+<div class="back">
+    <button onclick="back()">Back</button>
+</div>
+<div class="topright">
+    <a href=""><button>Account</button></a>
+    <a href=""><button>Logout</button></a>
+</div>
+<div class="mid">
+    <div class="nav">
+        <h2>All Orders</h2>
+    </div>
+
+    <table class="center">
+        <tr>
+            <th> Order ID </th>
+            <th> Order Start Date </th>
+            <th> Vehicle Plate </th>
+            <th> Price </th>
+            <th> Location </th>
+            <th> Issue </th>
+            <th> Customer ID </th>
+            <th> Professional ID </th>
+            <th> Order End Date </th>
+            <th> Review </th>
+            <th> Rating </th>
+            <th> Card Number </th>
+            <th> Pay Type </th>
+        </tr>
+    </table>
+    <div class="nav">
+        <h1 id="noOrder"></h1>
+    </div>
+</div>
+<div class="bottom"></div>
+</body>
 
 </html>
