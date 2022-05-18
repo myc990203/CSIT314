@@ -51,6 +51,7 @@ h1{
     height: 100%;
     background: #F1F3F4;
     margin-right: -300px;
+    overflow:auto;
 }
 .right-part{
     float: right;

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -98,5 +99,23 @@ class JdbcUtilTest {
         String te = "-34.39350965887256#150.88522712732396";
         String res = JdbcUtil.sqlCurrOrderSelect(te);
         System.out.println(res);
-        }
+    }
+
+
+    @Test
+    void sqlOrderInsert() throws SQLException, ClassNotFoundException {
+        Map<String, String> map = new HashMap<String, String>();
+        map = JdbcUtil.sqlcurOrderSelect("1");
+        map.remove("cur_orderid");
+        map.remove("sstate");
+        map.put("orderid","1");
+        map.put("payType","payType");
+        map.put("payCardNum","payCardNum");
+        map.put("star","4");
+        map.put("comm","comm");
+        map.put("payType","payType");
+        map.put("orderEndDate","2022-05-18");
+        System.out.println(map);
+        JdbcUtil.sqlOrderInsert(map);
+    }
 }

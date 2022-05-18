@@ -16,6 +16,8 @@ function serveHistory(){
 // current location
 var latitude;
 var longitude;
+
+
 function getLocation()
 {
     var x=document.getElementById("demo");
@@ -36,11 +38,26 @@ function getLocation()
         console.log(site)
         // document.getElementById("demo").innerHTML = site;
         showMap();
-        document.getElementById("address").value = latitude+"#"+longitude;
     }
 
 }
 function showMap(){
     // document.getElementById("map").style.display = "block";
     document.getElementById("map").innerHTML = "<iframe width=100% height=100% style=border:0 loading=lazy allowfullscreen referrerpolicy=no-referrer-when-downgrade src=https://www.google.com/maps/embed/v1/place?key=AIzaSyCD3IzyW0QXpfbqQequxGGx2CPVpVZsV1c&q="+latitude+","+longitude+"> </iframe>";
+}
+
+function confirmRequest(requestID){
+    const req = new XMLHttpRequest();
+    req.open("POST", "CurrentRequest", true);
+    req.setRequestHeader('Content-Type', 'application/json');
+    req.send(JSON.stringify({
+        uid: "william"
+    }));
+    req.onreadystatechange = function() {
+        if (req.readyState === 4) {
+            console.log(req.response);
+            const json = JSON.parse(req.response);
+            document.getElementById("userName").innerHTML=json.uid;
+        }
+    }
 }

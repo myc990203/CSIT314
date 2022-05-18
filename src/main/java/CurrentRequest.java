@@ -18,8 +18,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 
-@WebServlet("/professional/proload")
-public class proload extends HttpServlet {
+@WebServlet("/professional/CurrentRequest")
+public class CurrentRequest extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BufferedReader bufferedReader = req.getReader();
