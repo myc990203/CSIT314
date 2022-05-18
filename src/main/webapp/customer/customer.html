@@ -20,7 +20,9 @@
             }
             return "";
         }
-
+        function logOut(){
+            window.open("../index.jsp",target="_self");
+        }
         function getTime() {
             var date  = new Date();
             var year  = date.getFullYear();
@@ -79,17 +81,15 @@
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     const json = JSON.parse(req.response);
-                    alert(json.oid);
                     console.log("oid=" + json);
                     //document.cookie = "oid=" + json.oid ;path=/";
                     document.cookie="oid="+json.oid+"; path=/CSIT314_war_exploded";
                     //setCookie("oid1",json.oid);
                     window.location.href = "../current_order/current_order.html";
-                    // window.open("../current_order/current_order.html",target = "_self");
                 }
             }
         }
-    </script>
+            </script>
 
 </head>
 <body>
@@ -98,7 +98,7 @@
          style="background-image:url(../image/release-bg.jpg); background-position: 80% -102px;">
         <h1>Release Information</h1>
         <div style="text-align:right">
-            <button>Log out</button>
+            <button onclick="logOut()">Log out</button>
         </div>
     </div>
 </div>
@@ -106,7 +106,6 @@
 <div class="navbar">
     <a href="../user_info/user_info.html"><i class="main main-account"></i>My Account</a> <!--user info-->
     <a href="../membership/membership.html"><i class="main main-membership"></i>Membership</a> <!--membership-->
-    <a href="../current_order/current_order.html"><i class="main main-payment"></i>Current Order</a>
     <a href="../order_history/order_history.html"><i class="main main-order"></i>Order History</a>
 </div>
 <div class="row">

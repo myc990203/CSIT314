@@ -5,110 +5,249 @@
 <head>
     <meta charset="UTF-8">
     <title>Determine Payment information</title>
+    <link rel="stylesheet" type="text/css" href="payment.css"/>
+    <script type="text/javascript" src="payment.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
 
-    <link rel="stylesheet" type="text/css" href="payment.css" />
-    <script type="text/javascript" src="payment.js" ></script>
+        $(document).ready(function () {
+            var starRating = 0;
+            $('.photo span').on('mouseenter',function () {
+                var index = $(this).index()+1;
+                $(this).prevAll().find('.high').css('z-index',1)
+                $(this).find('.high').css('z-index',1)
+                $(this).nextAll().find('.high').css('z-index',0)
+                $('.starNum').html((index).toFixed(1)+' Star')
+            })
+            $('.photo').on('mouseleave',function () {
+                $(this).find('.high').css('z-index',0)
+                var count = starRating / 2
+                if(count == 5) {
+                    $('.photo span').find('.high').css('z-index',1);
+                } else {
+                    $('.photo span').eq(count).prevAll().find('.high').css('z-index',1);
+                }
+                $('.starNum').html(starRating.toFixed(1)+' Star')
+            })
+            $('.photo span').on('click',function () {
+                var index = $(this).index()+1;
+                $(this).prevAll().find('.high').css('z-index',1)
+                $(this).find('.high').css('z-index',1)
+                starRating = index;
+                $('.starNum').html(starRating.toFixed(1)+' Star');
+                alert('rating '+(starRating.toFixed(1)+' Star'))
+            })
+            $('.cancleStar').on('click',function () {
+                starRating = 0;
+                $('.photo span').find('.high').css('z-index',0);
+                $('.starNum').html(starRating.toFixed(1)+' Star');
+            })
+
+        })
+
+        function tans_pay_info() {
+            //pay_type
+            var select1  = document.getElementById("select_bank");
+            var index1   = select1.selectedIndex;
+            var pay_type = select1.options[index1].value;
+
+            var bank_num = document.getElementById("bank_num").value;
+
+            //valid_month
+            var select2     = document.getElementById("valid_month");
+            var index2      = select2.selectedIndex;
+            var valid_month = select2.options[index2].value;
+
+            //valid_year
+            var select3    = document.getElementById("valid_year");
+            var index3     = select3.selectedIndex;
+            var valid_year = select3.options[index3].value;
+
+            var security_code = document.getElementById("security_code").value;
+            var l_name        = document.getElementById("l_name").value;
+            var f_name        = document.getElementById("f_name").value;
+            var city          = document.getElementById("city").value;
+            var z_code        = document.getElementById("z_code").value;
+            var bill_post1    = document.getElementById("bill_post1").value;
+            var bill_post2    = document.getElementById("bill_post2").value;
+
+            const req = new XMLHttpRequest();
+
+            var jsonObj_Pay = {
+                Card_type: pay_type,
+                Bank_num: bank_num,
+                Valid_month: valid_month,
+                Valid_year: valid_year,
+                Security_code: security_code,
+                L_name: l_name,
+                F_name: f_name,
+                City: city,
+                Z_code: z_code,
+                Address1: bill_post1,
+                Address2: bill_post2,
+            };
+
+            console.log(jsonObj_Pay);
+            req.open("POST", "Payment", true);
+            req.setRequestHeader('Content-Type', 'application/json');
+            req.send(JSON.stringify(
+                jsonObj_Pay
+            ));
+            req.onreadystatechange = function () {
+                if (req.readyState === 4) {
+                    const json = JSON.parse(req.response);
+
+                }
+            }
+        }
+
+    </script>
+
 </head>
-
-
 <body>
-    <button onclick="back()">Back</button>
-    <div>
-        <form method="post">
 
-            <section>
+<main>
+    <div class='background'>
+        <div id="title">
+            <h1>Determine Payment information</h1>
+            <h2 class="cardin">Choose your payment method</h2>
+        </div>
 
-                <div id="title">
-                    <h1>Determine Payment information</h1>
-                    <img id="state" src="https://mywebspace.net.au/UOWC128/assignment_4/images/initial_state.png" alt="Alternate Text" />
-                    <h2></h2>
-                    <h1 class="cardin">Choose your payment method</h1>
-                    <!-- 选择银行卡 -->
-                    <div id="selectbank">
-
-                        <select>
-
+        <div id="bank">
+            <select name="pay_type" id="select_bank">
                 <option value="Visa">Visa</option>
-                <option value="master card">master card</option> 
-                <form method="post">
-                    <input type="banknumber" required="required" placeholder="Bank number" name="u"></input>
-
-                </form> 
+                <option value="Mastercard">Master card</option>
+                <option value="PayPal">PayPal</option>
+                <!--     input   Bank     number    -->
             </select>
-    </div>
+            <input type="text" id="bank_num" placeholder="Bank number" name="b_num">
+        </div>
 
-    <!-- 银行卡信息 -->
-    <div id="valid">
-        <!-- 日期 -->
+        <!-- 银行卡信息 -->
+        <div id="valid">
+            <!-- 日期 -->
+            <h2>Valid period</h2>
+            <select name="card_month" id="valid_month">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
 
-        <h1>Valid period</h1>
-    <select>
-        <option value="month">1</option>
-        <option value="month">2</option>
-        <option value="month">3</option>
-        <option value="month">4</option>
-        <option value="month">5</option>
-        <option value="month">6</option>
-        <option value="month">7</option>
-        <option value="month">8</option>
-        <option value="month">9</option>
-        <option value="month">10</option>
-        <option value="month">11</option>
-        <option value="month">12</option>
-    </select>
-<!-- 年 -->
-    <select>
-        <option value="year">2022</option>
-        <option value="year">2023</option>
-        <option value="year">2024</option>
-        <option value="year">2025</option>
-        <option value="year">2026</option>
-        <option value="year">2027</option>
-        <option value="year">2028</option>
-        <option value="year">2029</option>
-        <option value="year">2030</option>
-        <option value="year">2031</option>
-        <option value="year">2032</option>
-        <option value="year">2033</option>
-        <option value="year">2034</option>
-        <option value="year">2035</option>
-        <option value="year">2036</option>
-        <option value="year">2037</option>
-        <option value="year">2038</option>
-        <option value="year">2039</option>
-        <option value="year">2040</option>
-        <option value="year">2041</option>
-        <option value="year">2042</option>
-        <option value="year">2043</option>
-        <option value="year">2044</option>
-        <option value="year">2045</option>
-        <option value="year">2046</option>
-        <option value="year">2047</option>
-    </select>
-                        <!-- 安全码-->
-            <input type="securitycode" required="required" placeholder="Security code " name="u"></input>
+            <!-- 年 -->
+            <select name="card_year" id="valid_year">
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+                <option value="2033">2033</option>
+                <option value="2034">2034</option>
+                <option value="2035">2035</option>
+                <option value="2036">2036</option>
+                <option value="2037">2037</option>
+                <option value="2038">2038</option>
+                <option value="2039">2039</option>
+                <option value="2040">2040</option>
+                <option value="2041">2041</option>
+                <option value="2042">2042</option>
+                <option value="2043">2043</option>
+                <option value="2044">2044</option>
+                <option value="2045">2045</option>
+                <option value="2046">2046</option>
+                <option value="2047">2047</option>
+            </select>
+
+            <!-- 安全码-->
+            <label>
+                <input name="s_code" id="security_code" required="required" placeholder="Security code ">
+            </label>
         </div>
 
         <div id="account">
             <!-- 账单信息-->
-            <h1>Account information</h1>
-            <input type="name" required="required" placeholder="Last Name " name="u"></input>
-            <input type="name" required="required" placeholder="Fist Name " name="u"></input>
-            <input type="city" required="required" placeholder="City " name="u"></input>
-            <input type="Zipcode" required="required" placeholder="Zip code " name="u"></input>
-            <input type="Billingaddress" required="required" placeholder="Billing address " name="u"></input>
-            <input type="Billingaddress2" required="required" placeholder="Billing address2 " name="u"></input>
+            <h2>Account information</h2>
+            <label>
+                <input id="l_name" required="required" placeholder="Last Name " name="l_name">
+            </label>
+            <label>
+                <input id="f_name" required="required" placeholder="Fist Name " name="f_name">
+            </label>
+            <label>
+                <input id="city" required="required" placeholder="City " name="city">
+            </label>
+            <label>
+                <input id="z_code" required="required" placeholder="Zip code " name="z_code">
+            </label>
+            <label>
+                <input id="bill_post1" required="required" placeholder="Billing address " name="bill_post1">
+            </label>
+            <label>
+                <input id="bill_post2" placeholder="Billing address2 " name="bill_post2">
+            </label>
 
-            <p class="sizea">You need payment: </p>
+            <h3 class="sizea">You need payment: </h3>
+            <span id="payprice"></span>
+        </div>
+
+        <div>
 
         </div>
 
-        <button class="but" type="submit" onclick="comment()">continue</button>
+        <p style="text-align: center;">
+            <button onclick="tans_pay_info()">Submit</button>
+        </p>
     </div>
-</section>
+</main>
 
-        </form>
+<footer>
+    <div class="comment">
+        <h1>Please make a comment for the service:</h1>
+        <div class="order-evaluation clearfix">
+            <p>Please take this evaluation seriously! Your comments are important to us!</p>
+            <div id="starRating">
+                <p class="photo">
+                    <span><i class="high"></i><i class="nohigh"></i></span>
+                    <span><i class="high"></i><i class="nohigh"></i></span>
+                    <span><i class="high"></i><i class="nohigh"></i></span>
+                    <span><i class="high"></i><i class="nohigh"></i></span>
+                    <span><i class="high"></i><i class="nohigh"></i></span>
+                </p>
+                <p class="starNum" id = "starN">0.0 Star</p>
+
+            </div>
+
+            <h5>What impression does this transaction leave on you? </h5>
+
+
+
+            <!-- create textarea for comment publish -->
+            <div class="order-evaluation-textarea">
+                <label for="TextArea1"></label>
+                <textarea name="content" id="TextArea1" onKeyUp="words_deal();"></textarea>
+                <span> Still can input <em id="textCount"> 140 </em> words </span>
+            </div>
+
+            <a href="" id="order_evaluation">Finish attempt</a>
+            <div id="order_evaluate_modal" class="dmlei_tishi_info"></div>
+        </div>
     </div>
+</footer>
+
 </body>
 
 </html>

@@ -22,6 +22,7 @@ function refreshBtn() {
             document.getElementById("orderStartDate").innerHTML = json.orderStartDate;
             document.getElementById("price").innerHTML          = json.price;
             if (json.sstate=="Finished"){
+                document.getElementById("pay").style.textAlign = "center";
                 document.getElementById("pay").style.display = "block";
             }
         }

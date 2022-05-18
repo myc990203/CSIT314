@@ -49,6 +49,9 @@
             }
             return "";
         }
+        function showPayBTN(){
+
+        }
         window.onload = function() {
             getLocation();
             var curorder_id = getCookie("oid");
@@ -119,8 +122,8 @@
             </div><br>
             <div class="btn">
                 <button onclick="refreshBtn()">Refresh</button>&nbsp;&nbsp;
-                <button onclick="payBtn()" id="pay"> Pay</button>&nbsp;&nbsp;
                 <button onclick="back()">Back</button>
+                <button onclick="payBtn()" id="pay" style="display: none"> Pay</button>&nbsp;&nbsp;
             </div>
         </div>
     </div>
