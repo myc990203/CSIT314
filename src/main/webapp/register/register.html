@@ -8,10 +8,10 @@
     <script src="register.js"></script>
     <script>
         //∑¿÷π“≥√Ê∫ÛÕÀ
-        history.pushState(null, null, document.URL);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, document.URL);
-        });
+        // history.pushState(null, null, document.URL);
+        // window.addEventListener('popstate', function () {
+        //     history.pushState(null, null, document.URL);
+        // });
     </script>
 
 </head>
@@ -24,27 +24,28 @@
 </div>
 <div class="content">
     <div id="loginDiv">
+
         <form action="Register" method="post">
             <h1>Register</h1>
-            <p>Username:<input id="userName" name="username" type="text" autofocus required></p>
+            <p class="text">Username:<input id="userName" name="username" type="text" autofocus required></p>
 
-            <p>Password:<input id="password" name="password" type="password" required></p>
+            <p class="text">Password:<input id="password" name="password" type="password" required></p>
 
-            <p>Check Password:<input id="confirm" type="password" onkeyup="checkPassword()" required></p>
+            <p class="text">Check Password:<input id="confirm" type="password" onkeyup="checkPassword()" required></p>
             <p id="test" style="color: red;"></p>
-            <p>
+            <p class="text">
                 Date of birth:
                 <input id="birthday" name="dob" type="date">
             </p>
-            <p>
+            <p class="text">
                 Email address:
                 <input id="email" name="email" type="email" required>
             </p>
-            <p>
+            <p class="text">
                 Phone number:
                 <input id="phoneNum" name="phoneNum" type="text" required>
             </p>
-            <p>
+            <p class="text">
                 Gender:
                 <input id="gender" name="gender" type="text" required>
             </p>
@@ -56,25 +57,26 @@
                     <option value="pro">Professional</option>
                 </select>
             </p>
-            <p id="cus_plate" style="display: none">
+            <p id="cus_plate" style="display: none" class="text">
                 Plate number:
                 <input id="plateN" name="plateN" type="text" >
             </p>
-            <p id="cus_vm" style="display: none">
+            <p id="cus_vm" style="display: none" class="text">
                 Vehicle Model:
                 <input id="vm" name="vm" type="text" >
             </p>
-            <p id="pro_address" style="display: none">
+            <p id="pro_address" style="display: none" class="text">
                 Address:
                 <input id="address" name="address" type="text">
             </p>
             <p style="text-align: center;">
-                <input type="submit" class="button" value="submit">
+                <input type="submit" class="button" value="Submit">
                 <br />
                 <br />
-                <input type="reset" class="button" onclick="reset()" value="reset">
+                <input type="reset" class="button" onclick="reset()" value="Reset">
             </p>
         </form>
+
     </div>
 </div>
 <div class="wt">
