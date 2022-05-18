@@ -1,6 +1,3 @@
-function back(){
-    window.open("../customer/customer.html",target="_self");
-}
 
 // function comment(){
 //     window.open("../comment/comment.html",target="_self");
@@ -29,5 +26,3 @@ function words_deal(){
     document.getElementById("textCount").innerHTML = 140-tcount;
 }
 var x=document.getElementById("TextArea1");
-x.onkeyup = function (){
-}

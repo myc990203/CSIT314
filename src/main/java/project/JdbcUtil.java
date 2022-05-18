@@ -150,8 +150,8 @@ public class JdbcUtil {
             res.put("c_location", rs.getString("c_location"));
             res.put("issue",rs.getString("issue"));
             res.put("O_cusNum",rs.getString("O_cusNum"));
+            res.put("O_proNum",rs.getString("O_proNum"));
             res.put("sstate",rs.getString("sstate"));
-
         }
         return res;
     }
@@ -274,6 +274,42 @@ public class JdbcUtil {
         psmt.setString(5, issue);
         psmt.setString(6, O_cusNum);
         psmt.setString(7, state);
+
+        psmt.execute();
+        con.close();
+    }
+
+    public static void sqlOrderInsert(Map<String,String> map) throws SQLException, ClassNotFoundException {
+        Connection        con  = connectSql();
+        String oid = map.get("orderid");
+        String payType = map.get("payType");
+        String payCardNum = map.get("payCardNum");
+        float rating = Float.parseFloat(map.get("star"));
+        String review = map.get("comm");
+        String orderEndDate = map.get("orderEndDate");
+        String  orderStartDate = map.get("orderStartDate");
+        String  vehiclePlate = map.get("vehiclePlate");
+        String  price = map.get("price");
+        String  location = map.get("c_location");
+        String  issue = map.get("issue");
+        String  O_cusNum = map.get("O_cusNum");
+        String  O_proNum = map.get("O_proNum");
+
+        String            sql  = "insert into orders values (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        PreparedStatement psmt = con.prepareStatement(sql);
+        psmt.setString(1, oid);
+        psmt.setString(2, orderStartDate);
+        psmt.setString(3, vehiclePlate);
+        psmt.setFloat(4, Float.parseFloat(price));
+        psmt.setString(5, location);
+        psmt.setString(6, issue);
+        psmt.setString(7, O_cusNum);
+        psmt.setString(8, O_proNum);
+        psmt.setString(9, orderEndDate);
+        psmt.setString(10, review);
+        psmt.setFloat(11, rating);
+        psmt.setString(12, payCardNum);
+        psmt.setString(13, payType);
 
         psmt.execute();
         con.close();

@@ -12,11 +12,12 @@ import java.util.Map;
 
 import project.*;
 
-@WebServlet("/payment/Payment")
+@WebServlet("/payment/payment")
 
-public class Payment extends HttpServlet{
+public class Payload extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        System.out.print("Payload");
         BufferedReader bufferedReader_pay = req.getReader();
         StringBuilder  stringBuilder_pay  = new StringBuilder();
         String         line_pay;
@@ -27,39 +28,21 @@ public class Payment extends HttpServlet{
         System.out.println(str);
         Map<String,String> map = JSONLIKE.myJson(str);
         String oid = map.get("oid");
-        String payType = map.get("Card_type");
-        String payCardNum = map.get("Bank_num");
-        String[] starS = map.get("star").split(" ");
-        String star = starS[0];
-        String comm = map.get("comm");
-        String orderEndDate = map.get("endTime");
-
-        Map<String, String> curOmap = new HashMap<String, String>();
+        Map<String, String> res      = new HashMap<String, String>();
         try {
-            curOmap = JdbcUtil.sqlcurOrderSelect(oid);
+            res = JdbcUtil.sqlcurOrderSelect(oid);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
-        curOmap.remove("cur_orderid");
-        map.remove("sstate");
-        curOmap.put("orderid",oid);
-        curOmap.put("payType",payType);
-        curOmap.put("payCardNum",payCardNum);
-        curOmap.put("star",star);
-        curOmap.put("comm",comm);
-        curOmap.put("orderEndDate",orderEndDate);
-        System.out.println(curOmap);
-        try {
-            JdbcUtil.sqlOrderInsert(curOmap);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        PrintWriter pw   = resp.getWriter();
+        String      json = JSONLIKE.myMap2JSON(res);
+        System.out.println(json);
+        System.out.println(json);
+        pw.print(json);
+        pw.flush();
     }
 }

@@ -9,6 +9,34 @@
     <script type="text/javascript" src="payment.js"></script>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script>
+        function getCookie(cname)
+        {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++)
+            {
+                var c = ca[i].trim();
+                if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+            }
+            return "";
+        }
+        window.onload = function() {
+            var oid = getCookie("oid");
+            const req = new XMLHttpRequest();
+            req.open("POST", "payment", true);
+            req.setRequestHeader('Content-Type', 'application/json');
+            var jsonObj = new Object();
+            jsonObj.oid = oid;
+            console.log(oid);
+            req.send(JSON.stringify(jsonObj));
+            req.onreadystatechange = function() {
+                if (req.readyState === 4) {
+                    console.log(req.response);
+                    const json = JSON.parse(req.response);
+                    document.getElementById("payprice").innerHTML=json.price;
+                }
+            }
+        }
 
         $(document).ready(function () {
             var starRating = 0;
@@ -27,26 +55,28 @@
                 } else {
                     $('.photo span').eq(count).prevAll().find('.high').css('z-index',1);
                 }
-                $('.starNum').html(starRating.toFixed(1)+' Star')
+                $('.starNum').html(starRating.toFixed(1)/2+' Star')
             })
             $('.photo span').on('click',function () {
                 var index = $(this).index()+1;
                 $(this).prevAll().find('.high').css('z-index',1)
                 $(this).find('.high').css('z-index',1)
-                starRating = index;
-                $('.starNum').html(starRating.toFixed(1)+' Star');
-                alert('rating '+(starRating.toFixed(1)+' Star'))
-            })
-            $('.cancleStar').on('click',function () {
-                starRating = 0;
-                $('.photo span').find('.high').css('z-index',0);
-                $('.starNum').html(starRating.toFixed(1)+' Star');
+                starRating = index*2;
+                starRating1 = index;
+                $('.starNum').html(starRating1.toFixed(1)+' Star');
+
             })
 
         })
+        function getTime() {
+            var date  = new Date();
+            var year  = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day   = date.getDate();
 
+            return  year + "-" + month + "-" + day;
+        }
         function tans_pay_info() {
-            //pay_type
             var select1  = document.getElementById("select_bank");
             var index1   = select1.selectedIndex;
             var pay_type = select1.options[index1].value;
@@ -70,10 +100,15 @@
             var z_code        = document.getElementById("z_code").value;
             var bill_post1    = document.getElementById("bill_post1").value;
             var bill_post2    = document.getElementById("bill_post2").value;
+            var star = document.getElementById("starN").innerHTML;
+            var comm = document.getElementById("TextArea1").value;
+            var endTime = getTime();
+            var oid = getCookie("oid");
 
             const req = new XMLHttpRequest();
 
             var jsonObj_Pay = {
+                oid:oid,
                 Card_type: pay_type,
                 Bank_num: bank_num,
                 Valid_month: valid_month,
@@ -85,6 +120,9 @@
                 Z_code: z_code,
                 Address1: bill_post1,
                 Address2: bill_post2,
+                star:star,
+                comm:comm,
+                endTime:endTime
             };
 
             console.log(jsonObj_Pay);
@@ -96,7 +134,7 @@
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     const json = JSON.parse(req.response);
-
+                    window.open("../customer/customer.html",target="_self");
                 }
             }
         }
@@ -199,9 +237,41 @@
             <label>
                 <input id="bill_post2" placeholder="Billing address2 " name="bill_post2">
             </label>
+            <footer>
+                <div class="comment">
+                    <h1>Please make a comment for the service:</h1>
+                    <div class="order-evaluation clearfix">
+                        <p>Please take this evaluation seriously! Your comments are important to us!</p>
+                        <div id="starRating">
+                            <p class="photo">
+                                <span><i class="high"></i><i class="nohigh"></i></span>
+                                <span><i class="high"></i><i class="nohigh"></i></span>
+                                <span><i class="high"></i><i class="nohigh"></i></span>
+                                <span><i class="high"></i><i class="nohigh"></i></span>
+                                <span><i class="high"></i><i class="nohigh"></i></span>
+                            </p>
+                            <p class="starNum" id = "starN">0.0 Star</p>
 
-            <h3 class="sizea">You need payment: </h3>
-            <span id="payprice"></span>
+                        </div>
+
+                        <h5>What impression does this transaction leave on you? </h5>
+
+
+
+                        <!-- create textarea for comment publish -->
+                        <div class="order-evaluation-textarea">
+                            <label for="TextArea1"></label>
+                            <textarea name="content" id="TextArea1" onKeyUp="words_deal();"></textarea>
+                            <span> Still can input <em id="textCount"> 140 </em> words </span>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <h3 class="sizea">You need pay: </h3>
+            <div style="font-size: 40px" >
+                <span>$ </span><span id="payprice">123</span>
+            </div>
+
         </div>
 
         <div>
@@ -214,39 +284,7 @@
     </div>
 </main>
 
-<footer>
-    <div class="comment">
-        <h1>Please make a comment for the service:</h1>
-        <div class="order-evaluation clearfix">
-            <p>Please take this evaluation seriously! Your comments are important to us!</p>
-            <div id="starRating">
-                <p class="photo">
-                    <span><i class="high"></i><i class="nohigh"></i></span>
-                    <span><i class="high"></i><i class="nohigh"></i></span>
-                    <span><i class="high"></i><i class="nohigh"></i></span>
-                    <span><i class="high"></i><i class="nohigh"></i></span>
-                    <span><i class="high"></i><i class="nohigh"></i></span>
-                </p>
-                <p class="starNum" id = "starN">0.0 Star</p>
 
-            </div>
-
-            <h5>What impression does this transaction leave on you? </h5>
-
-
-
-            <!-- create textarea for comment publish -->
-            <div class="order-evaluation-textarea">
-                <label for="TextArea1"></label>
-                <textarea name="content" id="TextArea1" onKeyUp="words_deal();"></textarea>
-                <span> Still can input <em id="textCount"> 140 </em> words </span>
-            </div>
-
-            <a href="" id="order_evaluation">Finish attempt</a>
-            <div id="order_evaluate_modal" class="dmlei_tishi_info"></div>
-        </div>
-    </div>
-</footer>
 
 </body>
 
