@@ -192,6 +192,23 @@ public class JdbcUtil {
         System.out.println("this is JDBC: "+temp);
         return temp;
     }
+    public static Map sqlCurrentRequest(String address, String requestID) throws SQLException, ClassNotFoundException {
+        Connection        conn   = connectSql();
+        String            sql    = "select * from cur_orders,customer where cur_orderid = ? and customer.cusNum = cur_orders.O_cusNum;";
+        PreparedStatement psmt   = conn.prepareStatement(sql);
+        psmt.setString(1,requestID);
+        ResultSet  rs     = psmt.executeQuery();
+        Map<String, String> res = new LinkedHashMap<String,String>();
+        while (rs.next()){
+                res.put("curorder",rs.getString("cur_orderid"));
+                res.put("O_cusNum",rs.getString("O_cusNum"));
+                res.put("cusName",rs.getString("cusName"));
+                res.put("c_location",rs.getString("c_location"));
+                res.put("issue",rs.getString("issue"));
+                res.put("vehiclePlate",rs.getString("vehiclePlate"));
+        }
+        return res;
+    }
     private static double rad(double d){
         return d * Math.PI / 180.0;
     }
@@ -379,6 +396,20 @@ public class JdbcUtil {
         psmt.setString(6, email);
         psmt.setString(7, plateNum);
         psmt.setString(8, vehicleModel);
+        //执行SQL语句
+        psmt.execute();
+    }
+    public static void updateCurrentOrder(String oid,String pid,String sstate) throws SQLException, ClassNotFoundException {
+        Connection con = connectSql();
+        String sql = "update cur_orders " +
+                "set O_proNum=? ,sstate = ?" +
+                "where cur_orderid=?";
+        //预编译sql语句
+        PreparedStatement psmt        = con.prepareStatement(sql);
+        //先对应SQL语句，给SQL语句传递参数
+        psmt.setString(1, pid);
+        psmt.setString(2, sstate);
+        psmt.setString(3, oid);
         //执行SQL语句
         psmt.execute();
     }

@@ -47,17 +47,6 @@ function showMap(){
 }
 
 function confirmRequest(requestID){
-    const req = new XMLHttpRequest();
-    req.open("POST", "CurrentRequest", true);
-    req.setRequestHeader('Content-Type', 'application/json');
-    req.send(JSON.stringify({
-        uid: "william"
-    }));
-    req.onreadystatechange = function() {
-        if (req.readyState === 4) {
-            console.log(req.response);
-            const json = JSON.parse(req.response);
-            document.getElementById("userName").innerHTML=json.uid;
-        }
-    }
+    document.cookie="requestID="+requestID+"; path=/CSIT314_war_exploded";
+    window.open("../current_request/current_request.html",target="_self");
 }
