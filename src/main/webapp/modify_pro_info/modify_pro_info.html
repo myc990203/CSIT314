@@ -34,14 +34,14 @@
                     console.log(req.response);
                     const json = JSON.parse(req.response);
                     console.log(json.proName);
-                    document.getElementById("username").value=json.proName;
-                    document.getElementById("gender").value=json.gender;
-                    document.getElementById("dob").value=json.proDOB;
-                    document.getElementById("email").value=json.email;
-                    document.getElementById("phone").value=json.phoneNum;
-                    document.getElementById("address").value=json.location;
-                    document.getElementById("old_pwd").value=json.proPw;
-                    document.getElementById("new_pwd").value=json.proPw;
+                    document.getElementById("username").value = json.proName;
+                    document.getElementById("gender").value   = json.gender;
+                    document.getElementById("dob").value      = json.proDOB;
+                    document.getElementById("email").value    = json.email;
+                    document.getElementById("phone").value    = json.phoneNum;
+                    document.getElementById("address").value  = json.location;
+                    document.getElementById("old_pwd").value  = json.proPw;
+                    document.getElementById("new_pwd").value  = json.proPw;
                 }
             }
         }

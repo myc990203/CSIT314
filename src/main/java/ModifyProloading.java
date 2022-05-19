@@ -1,4 +1,5 @@
-import project.*;
+import project.JSONLIKE;
+import project.JdbcUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,18 +25,18 @@ public class ModifyProloading extends HttpServlet {
         }
         String str = stringBuilder.toString();
         System.out.println(str);
-        Map<String,String>  res = new HashMap<String, String>();
-        Map<String, String> map = JSONLIKE.myJson(str);
-        String              userID = map.get("uid");
-        String userType = map.get("type");
-        if (userType.equals("cus")){
+        Map<String, String> res      = new HashMap<String, String>();
+        Map<String, String> map      = JSONLIKE.myJson(str);
+        String              userID   = map.get("uid");
+        String              userType = map.get("type");
+        if (userType.equals("cus")) {
             try {
                 res = JdbcUtil.sqlCusSelect(Integer.parseInt(userID));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 
-        }else {
+        } else {
             try {
                 res = JdbcUtil.sqlProSelect(Integer.parseInt(userID));
             } catch (Exception e) {

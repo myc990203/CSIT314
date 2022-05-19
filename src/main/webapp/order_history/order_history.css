@@ -1,52 +1,62 @@
-body{
+body {
     background-image: url('../image/orderH_bg.jpg');
     background-size: cover;
     text-align: center;
 }
-.top{
+
+.top {
     padding: 10px 0;
     text-align: center;
     display: flex;
     justify-content: center;
 }
-.title h1{
-    line-height:60px;
-    color:white;
+
+.title h1 {
+    line-height: 60px;
+    color: white;
 }
-.logo{
+
+.logo {
     height: 60px;
     margin-right: 5px;
 }
-.logo img{
+
+.logo img {
     height: 60px;
 }
-.back{
+
+.back {
     position: absolute;
     top: 20px;
     left: 20px;
 }
-button{
+
+button {
     padding: 10px 30px;
     border-radius: 10px;
     border: none;
     background-color: orange;
     color: white;
 }
-.topright{
+
+.topright {
     position: absolute;
     top: 20px;
     right: 20px;
 }
-.mid{
+
+.mid {
     width: 96%;
     margin: 0 auto;
 }
-.nav h2{
+
+.nav h2 {
     line-height: 40px;
     text-align: center;
     color: whitesmoke;
 }
-.orderper{
+
+.orderper {
     background-color: white;
     padding: 2%;
     width: 96%;
@@ -54,34 +64,40 @@ button{
     margin-top: 2%;
 }
 
-.address p,.problem p,.text p{
-    line-height: 30px;
-    font-size: 14px;
-}
-.price{
-    text-align: right;
-}
-.price p{
+.address p, .problem p, .text p {
     line-height: 30px;
     font-size: 14px;
 }
 
-table.center{
+.price {
+    text-align: right;
+}
+
+.price p {
+    line-height: 30px;
+    font-size: 14px;
+}
+
+table.center {
     margin-left: auto;
     margin-right: auto;
 }
-table, th, td{
-    border: 1px solid grey;   
+
+table, th, td {
+    border: 1px solid grey;
     border-collapse: collapse;
-    padding:5px;
+    padding: 5px;
 }
-tr:nth-child(even){
+
+tr:nth-child(even) {
     background: #d6d6d6;
 }
-tr:nth-child(odd){
+
+tr:nth-child(odd) {
     background: rgba(138, 138, 138, 0.829);
 }
-th{
+
+th {
     background-color: #e0a743;
-    font-family:Georgia, serif;
+    font-family: Georgia, serif;
 }

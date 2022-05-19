@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 body {
-    display:block;
+    display: block;
     /*background:url('../image/bg1.jpg');*/
     /*background-size: 120% 120%;*/
     background-repeat: no-repeat;
@@ -14,13 +14,13 @@ body {
     /*background: url(p_image/air_car.jpg);*/
 }
 
-h1{
+h1 {
     text-align: center;
     color: #e8dfdf;
-    font-size:50px;
-    word-spacing:3px;
-    line-height:150%;
-    font-style:italic;
+    font-size: 50px;
+    word-spacing: 3px;
+    line-height: 150%;
+    font-style: italic;
 }
 
 h2 {
@@ -28,7 +28,7 @@ h2 {
     border-radius: 6px;
     box-shadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
     color: #FFFFFF;
-    font-style:italic;
+    font-style: italic;
     font-size: 15px;
     font-weight: bold;
     height: 24px;
@@ -40,12 +40,12 @@ h2 {
 }
 
 
-button{
-    color:white;
-    background-color:#FE4D0C;
-    padding:10px;
-    border:1px solid gray;
-    border-radius:30px;
+button {
+    color: white;
+    background-color: #FE4D0C;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 30px;
     box-shadow: 4px 3px 5px orange;
     margin-top: 24px;
 }
@@ -60,42 +60,50 @@ button{
     border: 1px solid white;
 }
 
-select{
+select {
     background-color: #7DAF57;
     width: 135px;
     height: 40px;
 }
 
-option{
+option {
     background-color: #E76230;
     width: 100px;
     height: 60px;
 }
 
-input{
+input {
     /*background-color:;*/
     width: 100px;
     height: 30px;
 }
 
-.cleanfloat::after{
+.cleanfloat::after {
     display: block;
     clear: both;
-    content:"";
+    content: "";
     visibility: hidden;
-    height: 0;}/*清浮动*/
+    height: 0;
+}
 
-ul li{
-    list-style:none;
-    float:left;
-    font-size:30px;
-    margin:5px;
-    color:#ccc;
-    cursor:pointer;}/*五角星样式*/
+/*清浮动*/
 
-.hs,.cs{
-    color:#f00;
-}/*五角星点击后样式*/
+ul li {
+    list-style: none;
+    float: left;
+    font-size: 30px;
+    margin: 5px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+/*五角星样式*/
+
+.hs, .cs {
+    color: #f00;
+}
+
+/*五角星点击后样式*/
 
 /*.iconfont {*/
 /*    font-family:"iconfont" !important;*/
@@ -112,7 +120,7 @@ ul li{
 /*    margin:1px;*/
 /*}*/
 
-a{
+a {
     text-decoration: none;
 }
 
@@ -129,95 +137,106 @@ a{
     border: 1px solid grey;
     background: rgb(238, 236, 236);
     z-index: 200;
-    margin:50px auto;
+    margin: 50px auto;
     border-radius: 10px;
-    box-shadow:5px 5px 3px #ddd;
-    padding:22px;
+    box-shadow: 5px 5px 3px #ddd;
+    padding: 22px;
 }
 
-.order-evaluation h5{
-    font-size:16px;
-    color:#333333;
-    padding-bottom:20px;
-    border-bottom:1px dashed #dbdbdb;
+.order-evaluation h5 {
+    font-size: 16px;
+    color: #333333;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #dbdbdb;
 }
-.order-evaluation p{
-    font-size:16px;
-    line-height:30px;
-    margin-bottom:0;
+
+.order-evaluation p {
+    font-size: 16px;
+    line-height: 30px;
+    margin-bottom: 0;
 }
-.order-evaluation .order-evaluation-text{
-    font-size:16px;
-    color:#333;
-    line-height:40px;
-    width:809px;
-    padding-left:15px;
-    background:#f3f3f3;
-    margin-bottom:25px;
-    margin-top:20px;
+
+.order-evaluation .order-evaluation-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 40px;
+    width: 809px;
+    padding-left: 15px;
+    background: #f3f3f3;
+    margin-bottom: 25px;
+    margin-top: 20px;
 }
-.order-evaluation-checkbox ul li{
-    width:130px;
-    height:40px;
-    border:1px solid rgb(31, 30, 30);
+
+.order-evaluation-checkbox ul li {
+    width: 130px;
+    height: 40px;
+    border: 1px solid rgb(31, 30, 30);
     border-radius: 6px;
     text-align: center;
     background: rgb(238, 236, 236);
-    font-size:16px;
-    color:#356410;
-    line-height:43px;
-    margin-right:25px;
-    margin-bottom:25px;
-    float:left;
+    font-size: 16px;
+    color: #356410;
+    line-height: 43px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+    float: left;
     cursor: pointer;
     overflow: hidden;
-    position:relative;
+    position: relative;
 }
-.order-evaluation-checkbox ul li.checked i{
+
+.order-evaluation-checkbox ul li.checked i {
     display: block;
 }
-.order-evaluation-checkbox ul li.checked{
-    border:1px solid #e84c3d;
+
+.order-evaluation-checkbox ul li.checked {
+    border: 1px solid #e84c3d;
 }
-.order-evaluation .order-evaluation-textarea{
-    position:relative;
+
+.order-evaluation .order-evaluation-textarea {
+    position: relative;
     width: 784px;
     height: 210px;
 }
-.order-evaluation .order-evaluation-textarea textarea{
-    width:793px;
-    height:178px;
-    border:1px solid #e8e8e8;
-    position:absolute;
-    top:0;
-    left:0;
-    line-height:22px;
-    padding:15px;
-    color:#666;
+
+.order-evaluation .order-evaluation-textarea textarea {
+    width: 793px;
+    height: 178px;
+    border: 1px solid #e8e8e8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 22px;
+    padding: 15px;
+    color: #666;
 }
-.order-evaluation .order-evaluation-textarea span{
-    position:absolute;
-    bottom:10px;
-    font-size:12px;
-    color:#999;
-    right:10px;
+
+.order-evaluation .order-evaluation-textarea span {
+    position: absolute;
+    bottom: 10px;
+    font-size: 12px;
+    color: #999;
+    right: 10px;
 }
-.order-evaluation .order-evaluation-textarea span em{
-    color:#e84c3d;
+
+.order-evaluation .order-evaluation-textarea span em {
+    color: #e84c3d;
 }
-.order-evaluation>a{
-    width:154px;
-    height:48px;
+
+.order-evaluation > a {
+    width: 154px;
+    height: 48px;
     border-radius: 6px;
     display: block;
     text-align: center;
-    line-height:48px;
-    background:#f36a5a;
-    float:right;
-    margin-top:20px;
-    color:#fff;
-    font-size:14px;
+    line-height: 48px;
+    background: #f36a5a;
+    float: right;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 14px;
 }
+
 .order-evaluation-checkbox ul li i {
     display: none;
     color: #e84c3d;
@@ -226,37 +245,44 @@ a{
     bottom: -14px;
     font-size: 20px;
 }
-.order-evaluation>a:hover{
+
+.order-evaluation > a:hover {
     background: #e84c3d;
 }
-.block li label,.con span{
+
+.block li label, .con span {
     font-size: 18px;
     margin-right: 20px;
     line-height: 23px;
 }
-.block li span{
+
+.block li span {
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
 }
-.block li span img{
+
+.block li span img {
     margin-right: -5px;
 }
-.level{
-    color:#e84c3d;
-    font-size:16px;
-    margin-left:15px;
+
+.level {
+    color: #e84c3d;
+    font-size: 16px;
+    margin-left: 15px;
     position: relative;
     top: 3px;
 }
-.dmlei_tishi_info{
-    height:70px;
+
+.dmlei_tishi_info {
+    height: 70px;
     border-radius: 10px;
-    background: rgba(0,0,0,0.5);
-    font-size:18px;color:#fff;
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 18px;
+    color: #fff;
     text-align: center;
     line-height: 70px;
-    position:fixed;
+    position: fixed;
     left: 48%;
     display: none;
     margin-left: -128px;
@@ -275,9 +301,11 @@ a{
     margin-right: 20px;
     cursor: pointer;
 }
+
 #starRating .photo span:last-child {
     margin-right: 0px;
 }
+
 #starRating .photo span .nohigh {
     position: absolute;
     width: 20px;
@@ -286,6 +314,7 @@ a{
     left: 0;
     background: url("./p_image/x1.png");
 }
+
 #starRating .photo span .high {
     position: absolute;
     width: 20px;
@@ -294,25 +323,31 @@ a{
     left: 0;
     background: url("./p_image/x2.png");
 }
+
 #starRating .starNum {
     font-size: 26px;
     color: #de4414;
     margin-top: 4px;
     margin-bottom: 10px;
 }
+
 #starRating .bottoms {
     height: 54px;
     border-top: 1px solid #d8d8d8;
 }
+
 #starRating .photo {
     margin-top: 30px;
 }
+
 #starRating .bottoms a {
     margin-bottom: 0;
 }
+
 #starRating .bottoms .garyBtn {
-    margin-right: 57px!important;
+    margin-right: 57px !important;
 }
+
 #starRating .bottoms a {
     width: 130px;
     height: 35px;
@@ -325,15 +360,18 @@ a{
     text-align: center;
     cursor: pointer;
 }
+
 .garyBtn {
-    margin-right: 60px!important;
+    margin-right: 60px !important;
     background-color: #e1e1e1;
     color: #999999;
 }
+
 .blueBtn {
     background-color: #1968b1;
     color: #fff;
 }
+
 .blueBtn:hover {
     background: #0e73d0;
 }

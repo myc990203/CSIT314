@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet("/renew/renew")
@@ -30,16 +29,16 @@ public class Renew extends HttpServlet {
         String str = stringBuilder.toString();
         System.out.println(str);
         Map<String, String> reqmap = JSONLIKE.myJson(str);
-        int              time   = Integer.parseInt(reqmap.get("time"))*30;
-        String           uid = reqmap.get("uid");
-        Date d = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar ca = Calendar.getInstance();
+        int                 time   = Integer.parseInt(reqmap.get("time")) * 30;
+        String              uid    = reqmap.get("uid");
+        Date                d      = new Date();
+        SimpleDateFormat    format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar            ca     = Calendar.getInstance();
         ca.add(Calendar.DATE, time);// num为增加的天数，可以改变的
         d = ca.getTime();
         String enddate = format.format(d);
         try {
-            JdbcUtil.sqlUpdateVIP(uid,enddate);
+            JdbcUtil.sqlUpdateVIP(uid, enddate);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

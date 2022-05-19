@@ -1,16 +1,14 @@
+import project.JdbcUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
-
-import project.*;
-
-@WebServlet ("/register/Register")
+@WebServlet("/register/Register")
 
 public class Register extends HttpServlet {
     //处理post 请求
@@ -55,7 +53,7 @@ public class Register extends HttpServlet {
             }
         } else if (userT.equals("pro")) {
             try {
-                JdbcUtil.sqlProInsert(name, pw, date, email, phone,gender, location);
+                JdbcUtil.sqlProInsert(name, pw, date, email, phone, gender, location);
                 resp.setCharacterEncoding("utf-8");
                 resp.setContentType("text/html;charset=UTF-8");
                 resp.sendRedirect("../index.jsp");

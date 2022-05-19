@@ -1,19 +1,16 @@
 package project;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-//import org.json.JSONArray;
-
-//import org.json.JSONObject;
-
-import javax.xml.crypto.Data;
-
 
 
 //test
@@ -47,33 +44,33 @@ public class JdbcUtil {
         String            sql  = "select * from Customer where cusNum = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setInt(1, userID);
-        ResultSet rs     = psmt.executeQuery();
-        Map<String,String> res = new HashMap<String, String>();
+        ResultSet           rs  = psmt.executeQuery();
+        Map<String, String> res = new HashMap<String, String>();
 
         while (rs.next()) {
             res.put("cusNum", String.valueOf(rs.getInt("cusNum")));
-            res.put("cusName",rs.getString("cusName"));
-            res.put("gender",rs.getString("gender"));
-            res.put("cusDOB",rs.getString("cusDOB"));
-            res.put("phoneNum",rs.getString("phoneNum"));
-            res.put("cusPw",rs.getString("cusPw"));
-            res.put("email",rs.getString("email"));
-            res.put("vipStart",rs.getString("vipStart"));
-            res.put("vipEnd",rs.getString("vipEnd"));
-            res.put("vehicleModel",rs.getString("vehicleModel"));
-            res.put("plateNum",rs.getString("plateNum"));
+            res.put("cusName", rs.getString("cusName"));
+            res.put("gender", rs.getString("gender"));
+            res.put("cusDOB", rs.getString("cusDOB"));
+            res.put("phoneNum", rs.getString("phoneNum"));
+            res.put("cusPw", rs.getString("cusPw"));
+            res.put("email", rs.getString("email"));
+            res.put("vipStart", rs.getString("vipStart"));
+            res.put("vipEnd", rs.getString("vipEnd"));
+            res.put("vehicleModel", rs.getString("vehicleModel"));
+            res.put("plateNum", rs.getString("plateNum"));
         }
         System.out.println(res);
         return res;
     }
 
     public static Map sqlProSelect(int userID) throws SQLException, ClassNotFoundException {
-        Connection conn = connectSql();
+        Connection        conn = connectSql();
         String            sql  = "select * from Professional where proNum = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setInt(1, userID);
-        ResultSet    rs     = psmt.executeQuery();
-        Map<String,String> res = new HashMap<String, String>();
+        ResultSet           rs  = psmt.executeQuery();
+        Map<String, String> res = new HashMap<String, String>();
         while (rs.next()) {
             res.put("proNum", String.valueOf(rs.getInt("proNum")));
             res.put("proName", rs.getString("proName"));
@@ -89,19 +86,20 @@ public class JdbcUtil {
         System.out.println(res);
         return res;
     }
+
     public static Map sqlCusLoginSelect(String username) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
-        System.out.println("name = "+username);
+        System.out.println("name = " + username);
         String            sql  = "select cusPw,cusNum,vipEnd from Customer where cusName = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, username);
-        ResultSet    rs     = psmt.executeQuery();
-        Map<String,String> res = new HashMap<String, String>();
-        Map<String,String> orders= new HashMap<String, String>();
+        ResultSet           rs     = psmt.executeQuery();
+        Map<String, String> res    = new HashMap<String, String>();
+        Map<String, String> orders = new HashMap<String, String>();
         while (rs.next()) {
-            res.put("cusPw",rs.getString("cusPw"));
-            res.put("cusNum",rs.getString("cusNum"));
-            res.put("vipEnd",rs.getString("vipEnd"));
+            res.put("cusPw", rs.getString("cusPw"));
+            res.put("cusNum", rs.getString("cusNum"));
+            res.put("vipEnd", rs.getString("vipEnd"));
         }
         return res;
     }
@@ -112,50 +110,53 @@ public class JdbcUtil {
         String            sql  = "select proPw,proNum from Professional where proName = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, username);
-        ResultSet    rs     = psmt.executeQuery();
-        Map<String,String> res = new HashMap<String, String>();
+        ResultSet           rs  = psmt.executeQuery();
+        Map<String, String> res = new HashMap<String, String>();
         while (rs.next()) {
             res.put("proPw", rs.getString("proPw"));
-            res.put("proNum",rs.getString("proNum"));
+            res.put("proNum", rs.getString("proNum"));
 
         }
         return res;
     }
-    public static Map sqlcurOrderIdSelect(int  userId) throws SQLException, ClassNotFoundException {
+
+    public static Map sqlcurOrderIdSelect(int userId) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
 
         String            sql  = "select * from cur_orders where O_cusNum = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setInt(1, userId);
-        ResultSet    rs     = psmt.executeQuery();
-        Map<String,String> res = new HashMap<String, String>();
+        ResultSet           rs  = psmt.executeQuery();
+        Map<String, String> res = new HashMap<String, String>();
         while (rs.next()) {
             res.put("oid", rs.getString("cur_orderid"));
         }
         return res;
     }
+
     public static Map sqlcurOrderSelect(String oid) throws SQLException, ClassNotFoundException {
         Connection conn = connectSql();
 
         String            sql  = "select * from cur_orders where cur_orderid = ?;";
         PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setInt(1, Integer.parseInt(oid));
-        ResultSet    rs     = psmt.executeQuery();
-        Map<String,String> res = new HashMap<String, String>();
+        ResultSet           rs  = psmt.executeQuery();
+        Map<String, String> res = new HashMap<String, String>();
         while (rs.next()) {
             res.put("cur_orderid", rs.getString("cur_orderid"));
-            res.put("orderStartDate",rs.getString("orderStartDate"));
+            res.put("orderStartDate", rs.getString("orderStartDate"));
             res.put("vehiclePlate", rs.getString("vehiclePlate"));
-            res.put("price",rs.getString("price"));
+            res.put("price", rs.getString("price"));
             res.put("c_location", rs.getString("c_location"));
-            res.put("issue",rs.getString("issue"));
-            res.put("O_cusNum",rs.getString("O_cusNum"));
-            res.put("O_proNum",rs.getString("O_proNum"));
-            res.put("sstate",rs.getString("sstate"));
+            res.put("issue", rs.getString("issue"));
+            res.put("O_cusNum", rs.getString("O_cusNum"));
+            res.put("O_proNum", rs.getString("O_proNum"));
+            res.put("sstate", rs.getString("sstate"));
         }
         return res;
     }
-//    public static ArrayList sqlVehicleSelect(int cusNum) throws SQLException, ClassNotFoundException {
+
+    //    public static ArrayList sqlVehicleSelect(int cusNum) throws SQLException, ClassNotFoundException {
 //        Connection        conn = connectSql();
 //        String            sql  = "select * from VEHICLE where cusNum = ?";
 //        PreparedStatement psmt = conn.prepareStatement(sql);
@@ -170,71 +171,75 @@ public class JdbcUtil {
 //        return vehicleList;
 //    }-34.4100062#150.8958423
     public static String sqlCurrOrderSelect(String address) throws SQLException, ClassNotFoundException {
-        Connection        conn   = connectSql();
-        String            sql    = "select * from cur_orders,customer where sstate = 'waiting' and cur_orders.O_cusNum = customer.cusNum;";
-        PreparedStatement psmt   = conn.prepareStatement(sql);
-        ResultSet  rs     = psmt.executeQuery();
-        Map<String, String> res = new LinkedHashMap<String,String>();
-        String temp = "[";
-        while (rs.next()){
-            double dis = getDistance(address,rs.getString("c_location"));
-            if (dis <= 50){
-                res.put("curorder",rs.getString("cur_orderid"));
-                res.put("cusName",rs.getString("cusName"));
-                res.put("issue",rs.getString("issue"));
+        Connection          conn = connectSql();
+        String              sql  = "select * from cur_orders,customer where sstate = 'waiting' and cur_orders.O_cusNum = customer.cusNum;";
+        PreparedStatement   psmt = conn.prepareStatement(sql);
+        ResultSet           rs   = psmt.executeQuery();
+        Map<String, String> res  = new LinkedHashMap<String, String>();
+        String              temp = "[";
+        while (rs.next()) {
+            double dis = getDistance(address, rs.getString("c_location"));
+            if (dis <= 50) {
+                res.put("curorder", rs.getString("cur_orderid"));
+                res.put("cusName", rs.getString("cusName"));
+                res.put("issue", rs.getString("issue"));
                 res.put("distance", String.valueOf(dis));
                 String temp1 = JSONLIKE.myMap2JSON(res);
-                temp += temp1+",";
+                temp += temp1 + ",";
             }
         }
-        temp = temp.substring(0,temp.length()-1);
-        temp +="]";
-        System.out.println("this is JDBC: "+temp);
+        temp = temp.substring(0, temp.length() - 1);
+        temp += "]";
+        System.out.println("this is JDBC: " + temp);
         return temp;
     }
+
     public static Map sqlCurrentRequest(String address, String requestID) throws SQLException, ClassNotFoundException {
-        Connection        conn   = connectSql();
-        String            sql    = "select * from cur_orders,customer where cur_orderid = ? and customer.cusNum = cur_orders.O_cusNum;";
-        PreparedStatement psmt   = conn.prepareStatement(sql);
-        psmt.setString(1,requestID);
-        ResultSet  rs     = psmt.executeQuery();
-        Map<String, String> res = new LinkedHashMap<String,String>();
-        while (rs.next()){
-                res.put("curorder",rs.getString("cur_orderid"));
-                res.put("O_cusNum",rs.getString("O_cusNum"));
-                res.put("cusName",rs.getString("cusName"));
-                res.put("c_location",rs.getString("c_location"));
-                res.put("issue",rs.getString("issue"));
-                res.put("vehiclePlate",rs.getString("vehiclePlate"));
+        Connection        conn = connectSql();
+        String            sql  = "select * from cur_orders,customer where cur_orderid = ? and customer.cusNum = cur_orders.O_cusNum;";
+        PreparedStatement psmt = conn.prepareStatement(sql);
+        psmt.setString(1, requestID);
+        ResultSet           rs  = psmt.executeQuery();
+        Map<String, String> res = new LinkedHashMap<String, String>();
+        while (rs.next()) {
+            res.put("curorder", rs.getString("cur_orderid"));
+            res.put("O_cusNum", rs.getString("O_cusNum"));
+            res.put("cusName", rs.getString("cusName"));
+            res.put("c_location", rs.getString("c_location"));
+            res.put("issue", rs.getString("issue"));
+            res.put("vehiclePlate", rs.getString("vehiclePlate"));
         }
         return res;
     }
-    private static double rad(double d){
+
+    private static double rad(double d) {
         return d * Math.PI / 180.0;
     }
-    public static  double getDistance(String ca, String pa){
-        final  double EARTH_RADIUS = 6378.137;
-        String[] caset = ca.split("#");
-        double clon = Double.parseDouble(caset[0]);
-        double clat = Double.parseDouble(caset[1]);
-        String[] paset = pa.split("#");
-        double plon = Double.parseDouble(paset[0]);
-        double plat = Double.parseDouble(paset[1]);
-        double radLat1 = rad(clat);
-        double radLat2 = rad(plat);
-        double a = radLat1 - radLat2;
-        double b = rad(clon) - rad(plon);
-        double s = 2 *Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2)+Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+
+    public static double getDistance(String ca, String pa) {
+        final double EARTH_RADIUS = 6378.137;
+        String[]     caset        = ca.split("#");
+        double       clon         = Double.parseDouble(caset[0]);
+        double       clat         = Double.parseDouble(caset[1]);
+        String[]     paset        = pa.split("#");
+        double       plon         = Double.parseDouble(paset[0]);
+        double       plat         = Double.parseDouble(paset[1]);
+        double       radLat1      = rad(clat);
+        double       radLat2      = rad(plat);
+        double       a            = radLat1 - radLat2;
+        double       b            = rad(clon) - rad(plon);
+        double       s            = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
         s = s * EARTH_RADIUS;
         return s;
     }
+
     public static String sqlOrderSelect(String userNum) throws SQLException, ClassNotFoundException {
-        Connection        conn   = connectSql();
-        String            sql    = "select * from orders where O_cusNum = ?";
-        PreparedStatement psmt   = conn.prepareStatement(sql);
+        Connection        conn = connectSql();
+        String            sql  = "select * from orders where O_cusNum = ?";
+        PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, userNum);
-        ResultSet  rs     = psmt.executeQuery();
-        String res = "";
+        ResultSet rs  = psmt.executeQuery();
+        String    res = "";
         while (rs.next()) {
             res = rs.getString(1);
         }
@@ -243,7 +248,7 @@ public class JdbcUtil {
 
 
     //sql insert customer
-    public static void sqlCusInsert(String username, String password, String DOB, String email, String phoneNum, String gender,String plateNum,String model) throws SQLException, ClassNotFoundException {
+    public static void sqlCusInsert(String username, String password, String DOB, String email, String phoneNum, String gender, String plateNum, String model) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
         String     sql = "";
         sql = "insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender,plateNum,vehicleModel) values (?,?,?,?,?,?,?,?,?,?);";
@@ -279,73 +284,76 @@ public class JdbcUtil {
         psmt.execute();
         con.close();
     }
+
     public static String sqlCusOrderSelect(String O_cusNum) throws SQLException, ClassNotFoundException {
-        Connection        conn   = connectSql();
-        String            sql    = "select * from orders where O_cusNum = ?";
-        PreparedStatement psmt   = conn.prepareStatement(sql);
+        Connection        conn = connectSql();
+        String            sql  = "select * from orders where O_cusNum = ?";
+        PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, O_cusNum);
-        ResultSet  rs     = psmt.executeQuery();
-        Map<String,String> res = new LinkedHashMap<String, String>();
-        String temp1 ="[";
+        ResultSet           rs    = psmt.executeQuery();
+        Map<String, String> res   = new LinkedHashMap<String, String>();
+        String              temp1 = "[";
         while (rs.next()) {
             res.put("orderid", String.valueOf(rs.getInt("orderid")));
-            res.put("orderStartDate",rs.getString("orderStartDate"));
-            res.put("vehiclePlate",rs.getString("vehiclePlate"));
-            res.put("price",rs.getString("price"));
-            res.put("location",rs.getString("location"));
-            res.put("issue",rs.getString("issue"));
-            res.put("O_cusNum",rs.getString("O_cusNum"));
-            res.put("O_proNum",rs.getString("O_proNum"));
-            res.put("OrderEndDate",rs.getString("OrderEndDate"));
-            res.put("review",rs.getString("review"));
-            res.put("rating",rs.getString("rating"));
-            res.put("payCardNum",rs.getString("payCardNum"));
-            res.put("payType",rs.getString("payType"));
+            res.put("orderStartDate", rs.getString("orderStartDate"));
+            res.put("vehiclePlate", rs.getString("vehiclePlate"));
+            res.put("price", rs.getString("price"));
+            res.put("location", rs.getString("location"));
+            res.put("issue", rs.getString("issue"));
+            res.put("O_cusNum", rs.getString("O_cusNum"));
+            res.put("O_proNum", rs.getString("O_proNum"));
+            res.put("OrderEndDate", rs.getString("OrderEndDate"));
+            res.put("review", rs.getString("review"));
+            res.put("rating", rs.getString("rating"));
+            res.put("payCardNum", rs.getString("payCardNum"));
+            res.put("payType", rs.getString("payType"));
             String temp = JSONLIKE.myMap2JSON(res);
-            temp1 += temp+",";
+            temp1 += temp + ",";
         }
-        temp1=temp1.substring(0,temp1.length()-1);
-        temp1+="]";
+        temp1 = temp1.substring(0, temp1.length() - 1);
+        temp1 += "]";
         System.out.println("sqlCusOrderSelect");
         System.out.println(temp1);
         return temp1;
     }
+
     public static String sqlProOrderSelect(String O_proNum) throws SQLException, ClassNotFoundException {
-        Connection        conn   = connectSql();
-        String            sql    = "select * from orders where O_proNum = ?";
-        PreparedStatement psmt   = conn.prepareStatement(sql);
+        Connection        conn = connectSql();
+        String            sql  = "select * from orders where O_proNum = ?";
+        PreparedStatement psmt = conn.prepareStatement(sql);
         psmt.setString(1, O_proNum);
-        ResultSet  rs     = psmt.executeQuery();
-        Map<String,String> res = new LinkedHashMap<String, String>();
-        String temp1 ="[";
+        ResultSet           rs    = psmt.executeQuery();
+        Map<String, String> res   = new LinkedHashMap<String, String>();
+        String              temp1 = "[";
         while (rs.next()) {
             res.put("orderid", String.valueOf(rs.getInt("orderid")));
-            res.put("orderStartDate",rs.getString("orderStartDate"));
-            res.put("vehiclePlate",rs.getString("vehiclePlate"));
-            res.put("price",rs.getString("price"));
-            res.put("location",rs.getString("location"));
-            res.put("issue",rs.getString("issue"));
-            res.put("O_cusNum",rs.getString("O_cusNum"));
-            res.put("O_proNum",rs.getString("O_proNum"));
-            res.put("OrderEndDate",rs.getString("OrderEndDate"));
-            res.put("review",rs.getString("review"));
-            res.put("rating",rs.getString("rating"));
-            res.put("payCardNum",rs.getString("payCardNum"));
-            res.put("payType",rs.getString("payType"));
+            res.put("orderStartDate", rs.getString("orderStartDate"));
+            res.put("vehiclePlate", rs.getString("vehiclePlate"));
+            res.put("price", rs.getString("price"));
+            res.put("location", rs.getString("location"));
+            res.put("issue", rs.getString("issue"));
+            res.put("O_cusNum", rs.getString("O_cusNum"));
+            res.put("O_proNum", rs.getString("O_proNum"));
+            res.put("OrderEndDate", rs.getString("OrderEndDate"));
+            res.put("review", rs.getString("review"));
+            res.put("rating", rs.getString("rating"));
+            res.put("payCardNum", rs.getString("payCardNum"));
+            res.put("payType", rs.getString("payType"));
             String temp = JSONLIKE.myMap2JSON(res);
-            temp1 += temp+",";
+            temp1 += temp + ",";
         }
-        temp1=temp1.substring(0,temp1.length()-1);
-        temp1+="]";
+        temp1 = temp1.substring(0, temp1.length() - 1);
+        temp1 += "]";
         System.out.println("sqlCusOrderSelect");
         System.out.println(temp1);
         return temp1;
     }
+
     public static void sqlCurrOrderInsert(String orderStartDate, String vehiclePlate, float price, String c_location, String issue, String O_cusNum) throws SQLException, ClassNotFoundException {
-        Connection        con  = connectSql();
-        String state = "waiting";
-        String            sql  = "insert into cur_orders (orderStartDate,vehiclePlate,price,c_location,issue,O_cusNum,sstate) values (?,?,?,?,?,?,?);";
-        PreparedStatement psmt = con.prepareStatement(sql);
+        Connection        con   = connectSql();
+        String            state = "waiting";
+        String            sql   = "insert into cur_orders (orderStartDate,vehiclePlate,price,c_location,issue,O_cusNum,sstate) values (?,?,?,?,?,?,?);";
+        PreparedStatement psmt  = con.prepareStatement(sql);
         psmt.setString(1, orderStartDate);
         psmt.setString(2, vehiclePlate);
         psmt.setFloat(3, price);
@@ -358,21 +366,21 @@ public class JdbcUtil {
         con.close();
     }
 
-    public static void sqlOrderInsert(Map<String,String> map) throws SQLException, ClassNotFoundException {
-        Connection        con  = connectSql();
-        String oid = map.get("orderid");
-        String payType = map.get("payType");
-        String payCardNum = map.get("payCardNum");
-        float rating = Float.parseFloat(map.get("star"));
-        String review = map.get("comm");
-        String orderEndDate = map.get("orderEndDate");
-        String  orderStartDate = map.get("orderStartDate");
-        String  vehiclePlate = map.get("vehiclePlate");
-        String  price = map.get("price");
-        String  location = map.get("c_location");
-        String  issue = map.get("issue");
-        String  O_cusNum = map.get("O_cusNum");
-        String  O_proNum = map.get("O_proNum");
+    public static void sqlOrderInsert(Map<String, String> map) throws SQLException, ClassNotFoundException {
+        Connection con            = connectSql();
+        String     oid            = map.get("orderid");
+        String     payType        = map.get("payType");
+        String     payCardNum     = map.get("payCardNum");
+        float      rating         = Float.parseFloat(map.get("star"));
+        String     review         = map.get("comm");
+        String     orderEndDate   = map.get("orderEndDate");
+        String     orderStartDate = map.get("orderStartDate");
+        String     vehiclePlate   = map.get("vehiclePlate");
+        String     price          = map.get("price");
+        String     location       = map.get("c_location");
+        String     issue          = map.get("issue");
+        String     O_cusNum       = map.get("O_cusNum");
+        String     O_proNum       = map.get("O_proNum");
 
         String            sql  = "insert into orders values (?,?,?,?,?,?,?,?,?,?,?,?,?);";
         PreparedStatement psmt = con.prepareStatement(sql);
@@ -395,10 +403,10 @@ public class JdbcUtil {
     }
 
     //sql insert vehicle
-    public static void sqlVehInsert(int userID,String plateNum,String model ) throws SQLException, ClassNotFoundException {
-        Connection con = connectSql();
-        String            sql         = "insert into VEHICLE (cusNum,plateNum,model) values (?,?,?)";
-        PreparedStatement psmt        = con.prepareStatement(sql);
+    public static void sqlVehInsert(int userID, String plateNum, String model) throws SQLException, ClassNotFoundException {
+        Connection        con  = connectSql();
+        String            sql  = "insert into VEHICLE (cusNum,plateNum,model) values (?,?,?)";
+        PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setInt(1, userID);
         psmt.setString(2, plateNum);
         psmt.setString(3, model);
@@ -431,23 +439,23 @@ public class JdbcUtil {
 
     //sql update customer
     public static void updateCustomer(Map<String, String> map) throws SQLException, ClassNotFoundException {
-        Connection con = connectSql();
-        int    userID   = Integer.parseInt(map.get("uid"));
-        String userName = map.get("cusName");
-        String gender   = map.get("gender");
-        String DOB      = map.get("dob");
-        String phoneNum = map.get("phone");
-        String password = map.get("cusPw");
-        String email    = map.get("email");
-        String plateNum = map.get("plateNum");
-        String vehicleModel = map.get("model");
-        System.out.println("New_userName = "+userName);
+        Connection con          = connectSql();
+        int        userID       = Integer.parseInt(map.get("uid"));
+        String     userName     = map.get("cusName");
+        String     gender       = map.get("gender");
+        String     DOB          = map.get("dob");
+        String     phoneNum     = map.get("phone");
+        String     password     = map.get("cusPw");
+        String     email        = map.get("email");
+        String     plateNum     = map.get("plateNum");
+        String     vehicleModel = map.get("model");
+        System.out.println("New_userName = " + userName);
         String sql = "" +
                      "update customer " +
                      "set cusName=?,gender=?,cusDOB=?,phoneNum=?,cusPw=?,email=?,plateNum=?,vehicleModel=?" +
                      "where cusNum=?";
         //预编译sql语句
-        PreparedStatement psmt        = con.prepareStatement(sql);
+        PreparedStatement psmt = con.prepareStatement(sql);
         //先对应SQL语句，给SQL语句传递参数
         psmt.setInt(9, userID);
         psmt.setString(1, userName);
@@ -461,13 +469,14 @@ public class JdbcUtil {
         //执行SQL语句
         psmt.execute();
     }
-    public static void updateCurrentOrder(String oid,String pid,String sstate) throws SQLException, ClassNotFoundException {
+
+    public static void updateCurrentOrder(String oid, String pid, String sstate) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
         String sql = "update cur_orders " +
-                "set O_proNum=? ,sstate = ?" +
-                "where cur_orderid=?";
+                     "set O_proNum=? ,sstate = ?" +
+                     "where cur_orderid=?";
         //预编译sql语句
-        PreparedStatement psmt        = con.prepareStatement(sql);
+        PreparedStatement psmt = con.prepareStatement(sql);
         //先对应SQL语句，给SQL语句传递参数
         psmt.setString(1, pid);
         psmt.setString(2, sstate);
@@ -477,7 +486,7 @@ public class JdbcUtil {
     }
 
     //sql update Professional
-    public static void updateProfessional(Map<String,String> map) throws SQLException, ClassNotFoundException {
+    public static void updateProfessional(Map<String, String> map) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
         System.out.println("updateProfessional");
         System.out.println(map);
@@ -494,7 +503,7 @@ public class JdbcUtil {
                      "set proName=?,gender=?,proDOB=?,phoneNum=?,proPw=?,email=?,location=?" +
                      "where proNum=?";
 
-        PreparedStatement psmt        = con.prepareStatement(sql);
+        PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setInt(8, userID);
         psmt.setString(1, userName);
         psmt.setString(2, gender);
@@ -545,9 +554,9 @@ public class JdbcUtil {
     }
 
     public static void sqlUpdateVIP(String uid, String date) throws SQLException, ClassNotFoundException {
-        Connection con = connectSql();
-        String            sql         = "update customer set vipEnd=? where cusNum=?";
-        PreparedStatement psmt        = con.prepareStatement(sql);
+        Connection        con  = connectSql();
+        String            sql  = "update customer set vipEnd=? where cusNum=?";
+        PreparedStatement psmt = con.prepareStatement(sql);
         psmt.setString(1, date);
         psmt.setString(2, uid);
         psmt.execute();

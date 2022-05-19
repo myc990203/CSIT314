@@ -25,8 +25,8 @@ public class Loadcurorder extends HttpServlet {
         }
         String str = stringBuilder.toString();
         System.out.println(str);
-        Map<String,String>  res = new HashMap<String, String>();
-        Map<String, String> map = JSONLIKE.myJson(str);
+        Map<String, String> res     = new HashMap<String, String>();
+        Map<String, String> map     = JSONLIKE.myJson(str);
         String              orderID = map.get("oid");
         System.out.println(orderID);
         try {

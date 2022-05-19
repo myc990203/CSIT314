@@ -1,3 +1,6 @@
+import project.JSONLIKE;
+import project.JdbcUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -6,16 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Reader;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import project.*;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 
 @WebServlet("/current_request/current_request")
@@ -31,34 +27,34 @@ public class CurrentRequest extends HttpServlet {
         }
         String str = stringBuilder.toString();
         System.out.println(str);
-        Map<String, String> map    = JSONLIKE.myJson(str);
-        String              requestID = map.get("requestID");
-        String pid = map.get("pid");
-        String coordinates = map.get("coordinates");
-        String status = map.get("status");
-            try {
-                JdbcUtil.updateCurrentOrder(requestID, pid,"processing");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println("update finish");
-            Map<String,String> currentRequest = new HashMap<>();
-            try {
-                currentRequest = JdbcUtil.sqlCurrentRequest(coordinates,requestID);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println("select finish");
-            resp.setCharacterEncoding("UTF-8");
-            resp.setContentType("application/json");
-            PrintWriter pw   = resp.getWriter();
-            String      json = JSONLIKE.myMap2JSON(currentRequest);
-            pw.print(json);
-            pw.flush();
+        Map<String, String> map         = JSONLIKE.myJson(str);
+        String              requestID   = map.get("requestID");
+        String              pid         = map.get("pid");
+        String              coordinates = map.get("coordinates");
+        String              status      = map.get("status");
+        try {
+            JdbcUtil.updateCurrentOrder(requestID, pid, "processing");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("update finish");
+        Map<String, String> currentRequest = new HashMap<>();
+        try {
+            currentRequest = JdbcUtil.sqlCurrentRequest(coordinates, requestID);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("select finish");
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        PrintWriter pw   = resp.getWriter();
+        String      json = JSONLIKE.myMap2JSON(currentRequest);
+        pw.print(json);
+        pw.flush();
 
     }
 }

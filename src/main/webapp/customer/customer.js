@@ -1,38 +1,38 @@
-
 // current location
 var latitude;
 var longitude;
-function getLocation()
-{
-    var x=document.getElementById("demo");
+
+function getLocation() {
+    var x = document.getElementById("demo");
     var lat;
     var lng;
-    if (navigator.geolocation)
-    {
+    if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
     }
-    else{x.innerHTML="Geolocation is not supported by this browser.";}
-    function showPosition(position)
-    {
-        lng = position.coords.longitude;
-        lat = position.coords.latitude;
-        latitude = lat;
+
+    function showPosition(position) {
+        lng       = position.coords.longitude;
+        lat       = position.coords.latitude;
+        latitude  = lat;
         longitude = lng;
-        var site = lat.toFixed(6)+','+lng.toFixed(6);
+        var site  = lat.toFixed(6) + ',' + lng.toFixed(6);
         console.log(site)
         // document.getElementById("demo").innerHTML = site;
         showMap();
-        document.getElementById("address").value = latitude+"#"+longitude;
+        document.getElementById("address").value = latitude + "#" + longitude;
     }
 
 }
-function showMap(){
+
+function showMap() {
     document.getElementById("map").style.display = "block";
-    document.getElementById("map").innerHTML = "<iframe width=600 height=450 style=border:0 loading=lazy allowfullscreen referrerpolicy=no-referrer-when-downgrade src=https://www.google.com/maps/embed/v1/place?key=AIzaSyCD3IzyW0QXpfbqQequxGGx2CPVpVZsV1c&q="+latitude+","+longitude+"> </iframe>";
+    document.getElementById("map").innerHTML     = "<iframe width=600 height=450 style=border:0 loading=lazy allowfullscreen referrerpolicy=no-referrer-when-downgrade src=https://www.google.com/maps/embed/v1/place?key=AIzaSyCD3IzyW0QXpfbqQequxGGx2CPVpVZsV1c&q=" + latitude + "," + longitude + "> </iframe>";
 }
 
-function submit(){
-    window.open("../current_order/current_order.html",target="_self");
+function submit() {
+    window.open("../current_order/current_order.html", target = "_self");
 }
 
 

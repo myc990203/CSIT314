@@ -1,3 +1,6 @@
+import project.JSONLIKE;
+import project.JdbcUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -6,15 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Reader;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import project.*;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 //返回用户的详细信息json
 
@@ -29,19 +25,19 @@ public class ShowProInfo extends HttpServlet {
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line);
         }
-        String str = stringBuilder.toString();
-        Map<String,String> res = new HashMap<String, String>();
-        Map<String, String> map = JSONLIKE.myJson(str);
-        String userID = map.get("uid");
-        String userType = map.get("type");
-        if (userType.equals("cus")){
+        String              str      = stringBuilder.toString();
+        Map<String, String> res      = new HashMap<String, String>();
+        Map<String, String> map      = JSONLIKE.myJson(str);
+        String              userID   = map.get("uid");
+        String              userType = map.get("type");
+        if (userType.equals("cus")) {
             try {
                 res = JdbcUtil.sqlCusSelect(Integer.parseInt(userID));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 
-        }else {
+        } else {
             try {
                 res = JdbcUtil.sqlProSelect(Integer.parseInt(userID));
             } catch (Exception e) {

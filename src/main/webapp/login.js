@@ -25,8 +25,9 @@ function setCookie_username() {
     var username    = document.getElementById("username").value;
     document.cookie = "username=" + username;
 }
+
 function setCookie_pwd() {
-    var pwd    = document.getElementById("password").value;
+    var pwd         = document.getElementById("password").value;
     document.cookie = "pwd=" + pwd;
 }
 
@@ -42,8 +43,8 @@ function setType2() {
 }
 
 function login1() {
-    var cus = document.getElementById("cus");
-    var pro = document.getElementById("pro");
+    var cus      = document.getElementById("cus");
+    var pro      = document.getElementById("pro");
     const req    = new XMLHttpRequest();
     var userName = document.getElementById("username").value;
     var password = document.getElementById("password").value;
@@ -52,10 +53,10 @@ function login1() {
     } else if (pro.checked) {
         var usertype = pro.value;
     }
-    var jsonObj      = {
-        userName : userName,
+    var jsonObj = {
+        userName: userName,
         password: password,
-        type:usertype
+        type: usertype
     };
     // jsonObj.userName = userName;
     // jsonObj.password  = password;

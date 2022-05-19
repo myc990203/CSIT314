@@ -11,6 +11,7 @@
         function setCookie(cName, cValue) {
             document.cookie = String(cName) + "=" + String(cValue);
         }
+
         function getCookie(cname) {
             var name = cname + "=";
             var ca   = document.cookie.split(';');
@@ -20,9 +21,11 @@
             }
             return "";
         }
-        function logOut(){
-            window.open("../index.jsp",target="_self");
+
+        function logOut() {
+            window.open("../index.jsp", target = "_self");
         }
+
         function getTime() {
             var date  = new Date();
             var year  = date.getFullYear();
@@ -83,13 +86,13 @@
                     const json = JSON.parse(req.response);
                     console.log("oid=" + json);
                     //document.cookie = "oid=" + json.oid ;path=/";
-                    document.cookie="oid="+json.oid+"; path=/CSIT314_war_exploded";
+                    document.cookie      = "oid=" + json.oid + "; path=/CSIT314_war_exploded";
                     //setCookie("oid1",json.oid);
                     window.location.href = "../current_order/current_order.html";
                 }
             }
         }
-            </script>
+    </script>
 
 </head>
 <body>

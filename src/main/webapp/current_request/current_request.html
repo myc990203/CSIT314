@@ -4,77 +4,79 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../current_request/current_request.css"/>  
+    <link rel="stylesheet" type="text/css" href="../current_request/current_request.css"/>
     <script src="../current_request/current_request.js"></script>
     <title>Professional Road Assistant</title>
     <script>
         // current location
         var latitude;
         var longitude;
-        function getLocation()
-        {
-            var x=document.getElementById("demo");
+
+        function getLocation() {
+            var x = document.getElementById("demo");
             var lat;
             var lng;
-            if (navigator.geolocation)
-            {
+            if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
             }
-            else{x.innerHTML="Geolocation is not supported by this browser.";}
-            function showPosition(position)
-            {
-                lng = position.coords.longitude;
-                lat = position.coords.latitude;
-                latitude = lat;
+
+            function showPosition(position) {
+                lng       = position.coords.longitude;
+                lat       = position.coords.latitude;
+                latitude  = lat;
                 longitude = lng;
-                var site = lat.toFixed(6)+','+lng.toFixed(6);
+                var site  = lat.toFixed(6) + ',' + lng.toFixed(6);
                 console.log(site)
                 // document.getElementById("demo").innerHTML = site;
                 showMap();
             }
 
         }
-        function showMap(){
+
+        function showMap() {
             document.getElementById("map").style.display = "block";
-            document.getElementById("map").innerHTML = "<iframe width=600 height=450 style=border:0 loading=lazy allowfullscreen referrerpolicy=no-referrer-when-downgrade src=https://www.google.com/maps/embed/v1/place?key=AIzaSyCD3IzyW0QXpfbqQequxGGx2CPVpVZsV1c&q="+latitude+","+longitude+"> </iframe>";
+            document.getElementById("map").innerHTML     = "<iframe width=600 height=450 style=border:0 loading=lazy allowfullscreen referrerpolicy=no-referrer-when-downgrade src=https://www.google.com/maps/embed/v1/place?key=AIzaSyCD3IzyW0QXpfbqQequxGGx2CPVpVZsV1c&q=" + latitude + "," + longitude + "> </iframe>";
         }
-        function getCookie(cname)
-        {
+
+        function getCookie(cname) {
             var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0; i<ca.length; i++)
-            {
+            var ca   = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
                 var c = ca[i].trim();
-                if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
             }
             return "";
         }
-        function showPayBTN(){
+
+        function showPayBTN() {
 
         }
-        window.onload = function() {
+
+        window.onload = function () {
             getLocation();
             var currequest_id = getCookie("requestID");
             alert(currequest_id);
             const req = new XMLHttpRequest();
             req.open("POST", "current_request", true);
             req.setRequestHeader('Content-Type', 'application/json');
-            var jsonObj = new Object();
-            jsonObj.requestID = currequest_id;
-            jsonObj.pid = getCookie("uid");
+            var jsonObj         = new Object();
+            jsonObj.requestID   = currequest_id;
+            jsonObj.pid         = getCookie("uid");
             jsonObj.coordinates = getCookie("coordinates");
             console.log(currequest_id);
             req.send(JSON.stringify(jsonObj));
-            req.onreadystatechange = function() {
+            req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     console.log(req.response);
-                    const json = JSON.parse(req.response);
-                    document.getElementById("orderId").innerHTML=json.curorder;
-                    document.getElementById("cusID").innerHTML=json.O_cusNum;
-                    document.getElementById("cusName").innerHTML=json.cusName;
-                    document.getElementById("c_location").innerHTML=json.c_location;
-                    document.getElementById("issue").innerHTML=json.issue;
-                    document.getElementById("vehiclePlate").innerHTML=json.vehiclePlate;
+                    const json                                        = JSON.parse(req.response);
+                    document.getElementById("orderId").innerHTML      = json.curorder;
+                    document.getElementById("cusID").innerHTML        = json.O_cusNum;
+                    document.getElementById("cusName").innerHTML      = json.cusName;
+                    document.getElementById("c_location").innerHTML   = json.c_location;
+                    document.getElementById("issue").innerHTML        = json.issue;
+                    document.getElementById("vehiclePlate").innerHTML = json.vehiclePlate;
                 }
             }
         }
@@ -86,40 +88,47 @@
     <h1>
         Current Serving
     </h1>
-</div><hr>
+</div>
+<hr>
 
 <div>
     <div class="left-part">
         <div class="form">
             <h3>Order Details</h3>
             <div>
-                <div>Order ID: </div>
-                <span id = "orderId"></span>
-            </div><br>
+                <div>Order ID:</div>
+                <span id="orderId"></span>
+            </div>
+            <br>
             <div>
-                <div>Customer ID: </div>
-                <span id = "cusID"></span>
-            </div><br>
+                <div>Customer ID:</div>
+                <span id="cusID"></span>
+            </div>
+            <br>
             <div>
-                <div>Customer Name: </div>
-                <span id = "cusName"></span>
-            </div><br>
+                <div>Customer Name:</div>
+                <span id="cusName"></span>
+            </div>
+            <br>
             <div>
-                <div>Vehicle Plate: </div>
-                <span id = "vehiclePlate"></span>
-            </div><br>
+                <div>Vehicle Plate:</div>
+                <span id="vehiclePlate"></span>
+            </div>
+            <br>
             <div>
-                <div>Issue: </div>
-                <span id = "issue"></span>
-            </div><br>
+                <div>Issue:</div>
+                <span id="issue"></span>
+            </div>
+            <br>
             <div>
-                <div>Customer Location: </div>
-                <span id = "c_location"></span>
-            </div><br>
+                <div>Customer Location:</div>
+                <span id="c_location"></span>
+            </div>
+            <br>
             <div class="btn">
                 <button onclick="finishOrder()">Finish</button>&nbsp;&nbsp;
                 <button onclick="back()">Back</button>
-<!--                <button onclick="payBtn()" id="pay" style="display: none"> Pay</button>&nbsp;&nbsp;-->
+                <!--                <button onclick="payBtn()" id="pay" style="display: none"> Pay</button>&nbsp;&nbsp;-->
             </div>
         </div>
     </div>

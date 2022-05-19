@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,12 +23,12 @@ public class UpdatePro extends HttpServlet {
         while ((line = bufferedReader.readLine()) != null) {
             stringBuilder.append(line);
         }
-        String              str      = stringBuilder.toString();
-        Map<String, String> res      = new HashMap<String, String>();
-        Map<String, String> map      = JSONLIKE.myJson(str);
+        String              str = stringBuilder.toString();
+        Map<String, String> res = new HashMap<String, String>();
+        Map<String, String> map = JSONLIKE.myJson(str);
         System.out.println(map.toString());
-        String              userID   = map.get("uid");
-        String              userType = map.get("type");
+        String userID   = map.get("uid");
+        String userType = map.get("type");
         try {
             JdbcUtil.updateProfessional(map);
         } catch (SQLException e) {

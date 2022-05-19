@@ -1,13 +1,14 @@
-.renewForm{
-    width:500px;
+.renewForm {
+    width: 500px;
     padding: 25px;
-    margin:30px;
+    margin: 30px;
     border: 1px solid #ccc;
-    border-radius:30px;
+    border-radius: 30px;
     box-shadow: 5px 5px gray;
     background-color: #f2f2f2;
 }
-#continue{
+
+#continue {
     background-color: #337ab7;
     color: white;
     padding: 14px 20px;
@@ -15,7 +16,8 @@
     border: none;
     border-radius: 4px;
 }
-#subBtn{
+
+#subBtn {
     background-color: #337ab7;
     color: white;
     padding: 14px 20px;
@@ -23,21 +25,23 @@
     border: none;
     border-radius: 4px;
 }
-#payForm{
+
+#payForm {
     width: 10%;
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    width:500px;
+    width: 500px;
     padding: 25px;
-    margin:30px;
+    margin: 30px;
     border: 1px solid #ccc;
-    border-radius:30px;
+    border-radius: 30px;
     box-shadow: 5px 5px gray
 }
-h1{
-    color:black;
-    width:400px;
+
+h1 {
+    color: black;
+    width: 400px;
     padding: 15px;
-    margin:20px;
+    margin: 20px;
 }

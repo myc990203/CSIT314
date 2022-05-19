@@ -1,9 +1,10 @@
-function back(){
-    window.open("../customer/customer.html",target="_self");
+function back() {
+    window.open("../customer/customer.html", target = "_self");
 }
+
 function refreshBtn() {
     var curorder_id = getCookie("oid");
-    const req = new XMLHttpRequest();
+    const req       = new XMLHttpRequest();
     req.open("POST", "current_order", true);
     req.setRequestHeader('Content-Type', 'application/json');
     var jsonObj = new Object();
@@ -21,16 +22,16 @@ function refreshBtn() {
             document.getElementById("sstate").innerHTML         = json.sstate;
             document.getElementById("orderStartDate").innerHTML = json.orderStartDate;
             document.getElementById("price").innerHTML          = json.price;
-            if (json.sstate=="Finished"){
+            if (json.sstate == "Finished") {
                 document.getElementById("pay").style.display = "inline";
-            }
-            else{
+            } else {
                 document.getElementById("pay").style.display = "none";
             }
         }
     }
 }
-function payBtn(){
+
+function payBtn() {
     window.open("../payment/payment.html")
 }
 

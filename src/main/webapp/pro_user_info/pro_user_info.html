@@ -1,128 +1,127 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Professional information</title>
-	<link rel="stylesheet" href="pro_user_info.css" type="text/css">
-	<script>
-		function getCookie(cname)
-		{
-			var name = cname + "=";
-			var ca = document.cookie.split(';');
-			for(var i=0; i<ca.length; i++)
-			{
-				var c = ca[i].trim();
-				if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-			}
-			return "";
-		}
-		window.onload = function() {
-			var id = getCookie("uid");
-			var usertype = getCookie("type");
-			const req = new XMLHttpRequest();
-			req.open("POST", "pro_user_info", true);
-			req.setRequestHeader('Content-Type', 'application/json');
-			var jsonObj = new Object();
-			jsonObj.uid = id;
-			jsonObj.type = usertype;
-			// req.send(JSON.stringify(
-			// 	jsonObj
-			// ));
-			console.log(usertype);
-			req.send(JSON.stringify(jsonObj));
-			req.onreadystatechange = function() {
-				if (req.readyState === 4) {
-					console.log(req.response);
-					const json = JSON.parse(req.response);
-					document.getElementById("username").innerHTML=json.proName;
-					document.getElementById("gender").innerHTML=json.gender;
-					document.getElementById("dob").innerHTML=json.proDOB;
-					document.getElementById("email").innerHTML=json.email;
-					document.getElementById("phone").innerHTML=json.phoneNum;
-					document.getElementById("address").innerHTML=json.location;
-					document.getElementById("balance").innerHTML=json.balance;
-					document.getElementById("pLevel").innerHTML=json.pLevel;
-				}
-			}
-		}
-	</script>
-	<script  type="text/javascript" src="pro_user_info.js" >
-	</script>
+    <meta charset="UTF-8">
+    <title>Professional information</title>
+    <link rel="stylesheet" href="pro_user_info.css" type="text/css">
+    <script>
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca   = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+
+        window.onload = function () {
+            var id       = getCookie("uid");
+            var usertype = getCookie("type");
+            const req    = new XMLHttpRequest();
+            req.open("POST", "pro_user_info", true);
+            req.setRequestHeader('Content-Type', 'application/json');
+            var jsonObj  = new Object();
+            jsonObj.uid  = id;
+            jsonObj.type = usertype;
+            // req.send(JSON.stringify(
+            // 	jsonObj
+            // ));
+            console.log(usertype);
+            req.send(JSON.stringify(jsonObj));
+            req.onreadystatechange = function () {
+                if (req.readyState === 4) {
+                    console.log(req.response);
+                    const json                                    = JSON.parse(req.response);
+                    document.getElementById("username").innerHTML = json.proName;
+                    document.getElementById("gender").innerHTML   = json.gender;
+                    document.getElementById("dob").innerHTML      = json.proDOB;
+                    document.getElementById("email").innerHTML    = json.email;
+                    document.getElementById("phone").innerHTML    = json.phoneNum;
+                    document.getElementById("address").innerHTML  = json.location;
+                    document.getElementById("balance").innerHTML  = json.balance;
+                    document.getElementById("pLevel").innerHTML   = json.pLevel;
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript" src="pro_user_info.js">
+    </script>
 </head>
 <body>
 <div class="top">
-	<!--<h3>Welcome to user information center!</h3>-->
-	<h1>Professional information</h1>
-	<span onclick="openNav()">&#9776; Menu </span>
+    <!--<h3>Welcome to user information center!</h3>-->
+    <h1>Professional information</h1>
+    <span onclick="openNav()">&#9776; Menu </span>
 </div>
 <div class="wrapper">
-	<div id="nav" class="sideNav">
-		<h2>Menu</h2>
-		<ul>
-			<a href="../customer/customer.html"><i class="main main-home">Home</i></a> <!--release page-->
-			<!-- user info -->
-			<a href="../user_info/user_info.html"><i class="main main-account"></i>My Account</a>
-			<a href="../membership/membership.html"><i class="main main-membership"></i>Membership</a> <!--membership-->
-		</ul>
-	</div>
-	<div class="info-form">
-		<div class="container">
-			<div class="user_info">
-				<div class="one-row">
-					<div class="form-group">
-						<label>Customer Name: </label>
-						<br>
-						<span id="username">Scott M</span>
-					</div>&nbsp;&nbsp;
-					<div class="form-group">
-						<label>Gender: </label>
-						<br>
-						<span id="gender">Male</span>
-					</div>
-				</div>
-				<div class="one-row">
-					<div class="form-group">
-						<label>Date of Birth: </label>
-						<br>
-						<span id="dob">01-01-1990</span>
-					</div>&nbsp;&nbsp;
-					<div class="form-group">
-						<label>Email: </label>
-						<br>
-						<span id="email">123123123@gmail.com</span>
-					</div>
-				</div>
-				<div class="one-row">
-					<div class="form-group">
-						<label>Phone number: </label>
-						<br>
-						<span id="phone">04-121-1233-12</span>
-					</div>&nbsp;&nbsp;
-					<div class="form-group">
-						<label>Address: </label>
-						<br>
-						<span id="address">124a Gipps st, Gwynnevill, Wollongong, NSW</span>
-					</div>
-				</div>
-				<div class="one-row">
-					<div class="form-group">
-						<label>Balance:</label>
-						<br>
-						<span id="balance">0</span>
-					</div>&nbsp;&nbsp;
-					<div class="form-group">
-						<label>Level: </label>
-						<br>
-						<span id="plevel">5</span>
-					</div>
-				</div>
-				<div class="button-center">
-					<button onclick="modify()">Modify Information</button>&nbsp;&nbsp;
-					<button onclick="back()">Back</button>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div id="nav" class="sideNav">
+        <h2>Menu</h2>
+        <ul>
+            <a href="../customer/customer.html"><i class="main main-home">Home</i></a> <!--release page-->
+            <!-- user info -->
+            <a href="../user_info/user_info.html"><i class="main main-account"></i>My Account</a>
+            <a href="../membership/membership.html"><i class="main main-membership"></i>Membership</a> <!--membership-->
+        </ul>
+    </div>
+    <div class="info-form">
+        <div class="container">
+            <div class="user_info">
+                <div class="one-row">
+                    <div class="form-group">
+                        <label>Customer Name: </label>
+                        <br>
+                        <span id="username">Scott M</span>
+                    </div>&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Gender: </label>
+                        <br>
+                        <span id="gender">Male</span>
+                    </div>
+                </div>
+                <div class="one-row">
+                    <div class="form-group">
+                        <label>Date of Birth: </label>
+                        <br>
+                        <span id="dob">01-01-1990</span>
+                    </div>&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Email: </label>
+                        <br>
+                        <span id="email">123123123@gmail.com</span>
+                    </div>
+                </div>
+                <div class="one-row">
+                    <div class="form-group">
+                        <label>Phone number: </label>
+                        <br>
+                        <span id="phone">04-121-1233-12</span>
+                    </div>&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Address: </label>
+                        <br>
+                        <span id="address">124a Gipps st, Gwynnevill, Wollongong, NSW</span>
+                    </div>
+                </div>
+                <div class="one-row">
+                    <div class="form-group">
+                        <label>Balance:</label>
+                        <br>
+                        <span id="balance">0</span>
+                    </div>&nbsp;&nbsp;
+                    <div class="form-group">
+                        <label>Level: </label>
+                        <br>
+                        <span id="plevel">5</span>
+                    </div>
+                </div>
+                <div class="button-center">
+                    <button onclick="modify()">Modify Information</button>&nbsp;&nbsp;
+                    <button onclick="back()">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Professional Page</title>
-    <link rel="stylesheet" type="text/css" href="professional.css" />
+    <link rel="stylesheet" type="text/css" href="professional.css"/>
     <script src="professional.js"></script>
     <script>
         function getCookie(cname) {
@@ -21,16 +21,16 @@
         window.onload = function () {
             getLocation();
 
-            window.navigator.geolocation.getCurrentPosition(function (position){
-                document.cookie ="coordinates="+position.coords.latitude+"#"+position.coords.longitude+"; path=/CSIT314_war_exploded";
+            window.navigator.geolocation.getCurrentPosition(function (position) {
+                document.cookie = "coordinates=" + position.coords.latitude + "#" + position.coords.longitude + "; path=/CSIT314_war_exploded";
             })
-            var uid = getCookie("uid");
+            var uid         = getCookie("uid");
             var coordinates = getCookie("coordinates");
-            const req    = new XMLHttpRequest();
+            const req       = new XMLHttpRequest();
             req.open("POST", "proload", true);
             req.setRequestHeader('Content-Type', 'application/json');
-            var jsonObj = new Object();
-            jsonObj.uid = uid;
+            var jsonObj         = new Object();
+            jsonObj.uid         = uid;
             jsonObj.coordinates = coordinates;
             req.send(JSON.stringify(jsonObj));
             req.onreadystatechange = function () {
@@ -41,9 +41,9 @@
 
                     console.log(json.sstate);
                     document.getElementById("tb").style.visibility = "visible";
-                    var table = document.getElementById("tb");
+                    var table                                      = document.getElementById("tb");
                     //for each line in table
-                    for(var temp1 in json){
+                    for (var temp1 in json) {
                         var tr = document.createElement('tr');
                         table.appendChild(tr);
                         // for(var temp2 in json[temp1]){
@@ -51,24 +51,24 @@
                         //     td.innerHTML = json[temp1][temp2];
                         //     tr.appendChild(td);
                         // }
-                        var td = document.createElement('td');
+                        var td       = document.createElement('td');
                         td.innerHTML = json[temp1].curorder;
                         tr.appendChild(td);
                         // name
-                        var td = document.createElement('td');
+                        var td       = document.createElement('td');
                         td.innerHTML = json[temp1].cusName;
                         tr.appendChild(td);
-                        var td = document.createElement('td');
+                        var td       = document.createElement('td');
                         td.innerHTML = json[temp1].issue;
                         tr.appendChild(td);
-                        var td = document.createElement('td');
-                        var temp = json[temp1].distance;
-                        td.innerHTML = temp.toString().match(/^\d+(?:\.\d{0,2})?/)+"km";
+                        var td       = document.createElement('td');
+                        var temp     = json[temp1].distance;
+                        td.innerHTML = temp.toString().match(/^\d+(?:\.\d{0,2})?/) + "km";
                         tr.appendChild(td);
                         // here we can add a button to confirm the request
-                        var td = document.createElement('td');
+                        var td       = document.createElement('td');
                         // obtain the id of the request and add it to the button
-                        td.innerHTML = "<button onclick='confirmRequest("+json[temp1].curorder +")'>Confirm</button>";
+                        td.innerHTML = "<button onclick='confirmRequest(" + json[temp1].curorder + ")'>Confirm</button>";
                         tr.appendChild(td);
                     }
                 }
@@ -96,7 +96,7 @@
 </div>
 <div class="row">
     <div class="left-part">
-        <table border="1" width="100%" height="100%" id="tb" style="visibility: hidden" >
+        <table border="1" width="100%" height="100%" id="tb" style="visibility: hidden">
             <tr>
                 <th>Request ID</th>
                 <th>Customer Name</th>

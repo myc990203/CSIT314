@@ -5,18 +5,18 @@
     <title>test</title>
 </head>
 <script>
-    window.onload = function() {
+    window.onload = function () {
         const req = new XMLHttpRequest();
         req.open("POST", "test", true);
         req.setRequestHeader('Content-Type', 'application/json');
         req.send(JSON.stringify({
             uid: "william"
         }));
-        req.onreadystatechange = function() {
+        req.onreadystatechange = function () {
             if (req.readyState === 4) {
                 console.log(req.response);
-                const json = JSON.parse(req.response);
-                document.getElementById("userName").innerHTML=json.uid;
+                const json                                    = JSON.parse(req.response);
+                document.getElementById("userName").innerHTML = json.uid;
             }
         }
     };
@@ -25,9 +25,8 @@
 <body>
 <div>
     Welcome
-    <span id = "userName"> </span>
+    <span id="userName"> </span>
 </div>
-
 
 
 </body>

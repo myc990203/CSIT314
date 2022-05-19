@@ -1,8 +1,9 @@
-html{
+html {
     height: 100%;
     width: 100%;
 }
-body{
+
+body {
     margin: 0;
     height: 100%;
     width: 100%;
@@ -11,107 +12,126 @@ body{
 .header {
     color: rgb(68, 67, 67);
 }
-h1{
-    font-size:50px;
+
+h1 {
+    font-size: 50px;
     margin: 0;
 }
-.header-img{
-    width:100%;
-    height:260px;
-    background:url(../image/release-bg.jpg) no-repeat center center;
+
+.header-img {
+    width: 100%;
+    height: 260px;
+    background: url(../image/release-bg.jpg) no-repeat center center;
     background-size: cover;
     background-position: 50% -102px;
 }
-.header-img h1{
+
+.header-img h1 {
     text-align: center;
-    padding:80px;
+    padding: 80px;
 }
-.navbar h2{
+
+.navbar h2 {
     text-align: center;
 }
-.navbar{
-    overflow:hidden;
-    background-color:orange;
+
+.navbar {
+    overflow: hidden;
+    background-color: orange;
 }
-.navbar a{
-    float:left;
-    display:block;
-    color:white;
+
+.navbar a {
+    float: left;
+    display: block;
+    color: white;
     text-align: center;
-    padding:14px 16px;
+    padding: 14px 16px;
     text-decoration: none;
 }
-.navbar a:hover{
-    background-color:#ddd;
-    color:black;
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
 }
-.left-part{
+
+.left-part {
     float: left;
     width: 50%;
     height: 100%;
     background: #F1F3F4;
     margin-right: -300px;
-    overflow:auto;
+    overflow: auto;
 }
-.right-part{
+
+.right-part {
     float: right;
     width: 50%;
     height: 100%;
     background: #efefef;
 }
-.card{
+
+.card {
     background-color: white;
-    padding:20px;
+    padding: 20px;
     margin-top: 20px;
 }
-.cd{
+
+.cd {
     background-color: #ddd;
-    padding:20px;
+    padding: 20px;
     margin-top: 20px;
 }
-.row{
+
+.row {
     width: 100%;
     height: 58%;
 }
-.footer{
-    padding:20px;
+
+.footer {
+    padding: 20px;
     text-align: center;
-    background:#ddd;
+    background: #ddd;
     margin-top: 20px;
 }
-@media screen and (max-width: 800px){
-    .left-part .right-part{
-        width:100%;
-        padding:0;
+
+@media screen and (max-width: 800px) {
+    .left-part .right-part {
+        width: 100%;
+        padding: 0;
     }
 }
-@media screen and (max-width:400px){
-    .navbar a{
-        float:none;
-        width:100%;
+
+@media screen and (max-width: 400px) {
+    .navbar a {
+        float: none;
+        width: 100%;
     }
 }
-button{
-    background-color:orange;
-    border-radius:10px;
-    color:white;
-    box-shadow:4px 3px 3px orange;
-    border:1px solid gainsboro;
-    padding:8px;
+
+button {
+    background-color: orange;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 4px 3px 3px orange;
+    border: 1px solid gainsboro;
+    padding: 8px;
 }
-#submit{
-    background-color:orange;
-    border-radius:10px;
-    color:white;
+
+#submit {
+    background-color: orange;
+    border-radius: 10px;
+    color: white;
     height: 40px;
     width: 80px;
 }
-#map{
-    width:100%;
-    height:100%;
+
+#map {
+    width: 100%;
+    height: 100%;
 }
-tr{
-    height:20px;
+
+tr {
+    height: 20px;
 }
 
 

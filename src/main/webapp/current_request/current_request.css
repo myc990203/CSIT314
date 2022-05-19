@@ -1,56 +1,62 @@
-#header{
+#header {
     text-align: center;
-    margin : 5px;
-    padding:5px;
+    margin: 5px;
+    padding: 5px;
 
 }
-body{
-    background:url("../image/cOrder_bg.jpg");
+
+body {
+    background: url("../image/cOrder_bg.jpg");
     background-repeat: no-repeat;
-    background-position:center;
-    background-size:cover;
+    background-position: center;
+    background-size: cover;
 }
-.left-part{
-    float:left;
-    width:40%;
-    padding:10px;
+
+.left-part {
+    float: left;
+    width: 40%;
+    padding: 10px;
 }
-h3{
+
+h3 {
     text-align: center;
 }
-.form{
-    background-color:#ddd;
-    padding:10px;
+
+.form {
+    background-color: #ddd;
+    padding: 10px;
     margin-top: 40px;
-    border:1px solid #ddd;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow : 4px 3px 3px #ccc;
+    box-shadow: 4px 3px 3px #ccc;
     margin-left: 10px;
 }
 
-.map{
-    padding:3px;
+.map {
+    padding: 3px;
     margin-top: 40px;
-    float:left;
-    width:50%;
-    padding-left:25px;
+    float: left;
+    width: 50%;
+    padding-left: 25px;
 }
-button{
+
+button {
     background-color: rgb(237, 177, 64);
     color: white;
     font-weight: bold;
     border-radius: 10px;
-    box-shadow : 4px 3px 3px rgb(237, 177, 64);
+    box-shadow: 4px 3px 3px rgb(237, 177, 64);
     border: 1px solid #ddd;
-    padding:10px;
+    padding: 10px;
 }
-.btn{
+
+.btn {
     text-align: center;
 }
 
 
-iframe{
+iframe {
     width: 700px;
-    height:550px;
-    border:0;
+    height: 550px;
+    border: 0;
 }

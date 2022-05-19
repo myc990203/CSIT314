@@ -1,3 +1,6 @@
+import project.JSONLIKE;
+import project.JdbcUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,13 +13,11 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import project.*;
-
 @WebServlet("/payment/Payment")
 
-public class Payment extends HttpServlet{
+public class Payment extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BufferedReader bufferedReader_pay = req.getReader();
         StringBuilder  stringBuilder_pay  = new StringBuilder();
         String         line_pay;
@@ -25,14 +26,14 @@ public class Payment extends HttpServlet{
         }
         String str = stringBuilder_pay.toString();
         System.out.println(str);
-        Map<String,String> map = JSONLIKE.myJson(str);
-        String oid = map.get("oid");
-        String payType = map.get("Card_type");
-        String payCardNum = map.get("Bank_num");
-        String[] starS = map.get("star").split(" ");
-        String star = starS[0];
-        String comm = map.get("comm");
-        String orderEndDate = map.get("endTime");
+        Map<String, String> map          = JSONLIKE.myJson(str);
+        String              oid          = map.get("oid");
+        String              payType      = map.get("Card_type");
+        String              payCardNum   = map.get("Bank_num");
+        String[]            starS        = map.get("star").split(" ");
+        String              star         = starS[0];
+        String              comm         = map.get("comm");
+        String              orderEndDate = map.get("endTime");
 
         Map<String, String> curOmap = new HashMap<String, String>();
         try {
@@ -45,12 +46,12 @@ public class Payment extends HttpServlet{
 
         curOmap.remove("cur_orderid");
         map.remove("sstate");
-        curOmap.put("orderid",oid);
-        curOmap.put("payType",payType);
-        curOmap.put("payCardNum",payCardNum);
-        curOmap.put("star",star);
-        curOmap.put("comm",comm);
-        curOmap.put("orderEndDate",orderEndDate);
+        curOmap.put("orderid", oid);
+        curOmap.put("payType", payType);
+        curOmap.put("payCardNum", payCardNum);
+        curOmap.put("star", star);
+        curOmap.put("comm", comm);
+        curOmap.put("orderEndDate", orderEndDate);
         System.out.println(curOmap);
         try {
             JdbcUtil.sqlOrderInsert(curOmap);
@@ -61,7 +62,7 @@ public class Payment extends HttpServlet{
         }
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        PrintWriter pw   = resp.getWriter();
+        PrintWriter pw = resp.getWriter();
         pw.print("{\"oid\":\"43\"}");
         pw.flush();
 

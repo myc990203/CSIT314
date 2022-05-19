@@ -11,48 +11,50 @@
         // current location
         var latitude;
         var longitude;
-        function getLocation()
-        {
-            var x=document.getElementById("demo");
+
+        function getLocation() {
+            var x = document.getElementById("demo");
             var lat;
             var lng;
-            if (navigator.geolocation)
-            {
+            if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
             }
-            else{x.innerHTML="Geolocation is not supported by this browser.";}
-            function showPosition(position)
-            {
-                lng = position.coords.longitude;
-                lat = position.coords.latitude;
-                latitude = lat;
+
+            function showPosition(position) {
+                lng       = position.coords.longitude;
+                lat       = position.coords.latitude;
+                latitude  = lat;
                 longitude = lng;
-                var site = lat.toFixed(6)+','+lng.toFixed(6);
+                var site  = lat.toFixed(6) + ',' + lng.toFixed(6);
                 console.log(site)
                 // document.getElementById("demo").innerHTML = site;
                 showMap();
             }
 
         }
-        function showMap(){
+
+        function showMap() {
             document.getElementById("map").style.display = "block";
-            document.getElementById("map").innerHTML = "<iframe width=600 height=450 style=border:0 loading=lazy allowfullscreen referrerpolicy=no-referrer-when-downgrade src=https://www.google.com/maps/embed/v1/place?key=AIzaSyCD3IzyW0QXpfbqQequxGGx2CPVpVZsV1c&q="+latitude+","+longitude+"> </iframe>";
+            document.getElementById("map").innerHTML     = "<iframe width=600 height=450 style=border:0 loading=lazy allowfullscreen referrerpolicy=no-referrer-when-downgrade src=https://www.google.com/maps/embed/v1/place?key=AIzaSyCD3IzyW0QXpfbqQequxGGx2CPVpVZsV1c&q=" + latitude + "," + longitude + "> </iframe>";
         }
-        function getCookie(cname)
-        {
+
+        function getCookie(cname) {
             var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0; i<ca.length; i++)
-            {
+            var ca   = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
                 var c = ca[i].trim();
-                if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
             }
             return "";
         }
-        function showPayBTN(){
+
+        function showPayBTN() {
             document.getElementById("pay").style.display = "inline";
         }
-        window.onload = function() {
+
+        window.onload = function () {
             getLocation();
 
             var curorder_id = getCookie("oid");
@@ -64,23 +66,22 @@
             jsonObj.oid = curorder_id;
             console.log(curorder_id);
             req.send(JSON.stringify(jsonObj));
-            req.onreadystatechange = function() {
+            req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     console.log(req.response);
-                    const json = JSON.parse(req.response);
-                    document.getElementById("orderId").innerHTML=json.cur_orderid;
-                    document.getElementById("cusID").innerHTML=json.O_cusNum;
-                    document.getElementById("vehicle").innerHTML=json.vehiclePlate;
-                    document.getElementById("issue").innerHTML=json.issue;
-                    document.getElementById("sstate").innerHTML=json.sstate;
-                    if (json.sstate=="Finished"){
+                    const json                                   = JSON.parse(req.response);
+                    document.getElementById("orderId").innerHTML = json.cur_orderid;
+                    document.getElementById("cusID").innerHTML   = json.O_cusNum;
+                    document.getElementById("vehicle").innerHTML = json.vehiclePlate;
+                    document.getElementById("issue").innerHTML   = json.issue;
+                    document.getElementById("sstate").innerHTML  = json.sstate;
+                    if (json.sstate == "Finished") {
                         document.getElementById("pay").style.display = "inline";
-                    }
-                    else{
+                    } else {
                         document.getElementById("pay").style.display = "none";
                     }
-                    document.getElementById("orderStartDate").innerHTML=json.orderStartDate;
-                    document.getElementById("price").innerHTML=json.price;
+                    document.getElementById("orderStartDate").innerHTML = json.orderStartDate;
+                    document.getElementById("price").innerHTML          = json.price;
 
                 }
             }
@@ -94,40 +95,48 @@
     <h1>
         Requesting an Assistant
     </h1>
-</div><hr>
+</div>
+<hr>
 
 <div>
     <div class="left-part">
         <div class="form">
             <h3>Order Details</h3>
             <div>
-                <div>Order ID: </div>
-                <span id = "orderId"></span>
-            </div><br>
+                <div>Order ID:</div>
+                <span id="orderId"></span>
+            </div>
+            <br>
             <div>
-                <div>Customer ID: </div>
-                <span id = "cusID"></span>
-            </div><br>
+                <div>Customer ID:</div>
+                <span id="cusID"></span>
+            </div>
+            <br>
             <div>
-                <div>Vehicle: </div>
-                <span id = "vehicle"></span>
-            </div><br>
+                <div>Vehicle:</div>
+                <span id="vehicle"></span>
+            </div>
+            <br>
             <div>
-                <div>Issue: </div>
-                <span id = "issue"></span>
-            </div><br>
+                <div>Issue:</div>
+                <span id="issue"></span>
+            </div>
+            <br>
             <div>
-                <div>Service state: </div>
-                <span id = "sstate"></span>
-            </div><br>
+                <div>Service state:</div>
+                <span id="sstate"></span>
+            </div>
+            <br>
             <div>
-                <div>Service Date: </div>
-                <span id = "orderStartDate"></span>
-            </div><br>
+                <div>Service Date:</div>
+                <span id="orderStartDate"></span>
+            </div>
+            <br>
             <div>
-                <div>Price: </div>
-                <span id = "price"></span>
-            </div><br>
+                <div>Price:</div>
+                <span id="price"></span>
+            </div>
+            <br>
             <div class="btn">
                 <button onclick="refreshBtn()">Refresh</button>&nbsp;&nbsp;
                 <button onclick="back()">Back</button>

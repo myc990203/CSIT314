@@ -1,3 +1,6 @@
+import project.JSONLIKE;
+import project.JdbcUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -5,17 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Reader;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Map;
 
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import project.*;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 @WebServlet("/current_request/FinishOrder")
 public class FinishOrder extends HttpServlet {
     @Override
@@ -29,13 +24,13 @@ public class FinishOrder extends HttpServlet {
         }
         String str = stringBuilder.toString();
         System.out.println(str);
-        Map<String, String> map    = JSONLIKE.myJson(str);
-        String              requestID = map.get("requestID");
-        String pid = map.get("pid");
-        String coordinates = map.get("coordinates");
-        String status = map.get("status");
+        Map<String, String> map         = JSONLIKE.myJson(str);
+        String              requestID   = map.get("requestID");
+        String              pid         = map.get("pid");
+        String              coordinates = map.get("coordinates");
+        String              status      = map.get("status");
         try {
-            JdbcUtil.updateCurrentOrder(requestID, pid,"Finished");
+            JdbcUtil.updateCurrentOrder(requestID, pid, "Finished");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

@@ -1,17 +1,17 @@
+import project.JSONLIKE;
+import project.JdbcUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-
-import project.*;
 
 //1231
 @WebServlet("/Login")
@@ -48,7 +48,7 @@ public class Login extends HttpServlet {
                 PrintWriter pw = resp.getWriter();
                 map.put("uid", res.get("cusNum"));
                 String json = JSONLIKE.myMap2JSON(map);
-                System.out.println("uid"+json);
+                System.out.println("uid" + json);
                 pw.print(json);
                 pw.flush();
             } else {

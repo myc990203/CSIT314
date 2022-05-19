@@ -1,3 +1,3 @@
-function back(){
-    window.open("../html/professional.html",target="_self");
+function back() {
+    window.open("../html/professional.html", target = "_self");
 }

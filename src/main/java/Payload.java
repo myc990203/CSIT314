@@ -1,3 +1,6 @@
+import project.JSONLIKE;
+import project.JdbcUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,13 +13,11 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import project.*;
-
 @WebServlet("/payment/payment")
 
-public class Payload extends HttpServlet{
+public class Payload extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.print("Payload");
         BufferedReader bufferedReader_pay = req.getReader();
         StringBuilder  stringBuilder_pay  = new StringBuilder();
@@ -26,9 +27,9 @@ public class Payload extends HttpServlet{
         }
         String str = stringBuilder_pay.toString();
         System.out.println(str);
-        Map<String,String> map = JSONLIKE.myJson(str);
-        String oid = map.get("oid");
-        Map<String, String> res      = new HashMap<String, String>();
+        Map<String, String> map = JSONLIKE.myJson(str);
+        String              oid = map.get("oid");
+        Map<String, String> res = new HashMap<String, String>();
         try {
             res = JdbcUtil.sqlcurOrderSelect(oid);
         } catch (SQLException e) {

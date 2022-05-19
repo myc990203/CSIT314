@@ -1,3 +1,5 @@
+import project.JSONLIKE;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -6,14 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Reader;
-import java.util.HashMap;
 import java.util.Map;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import project.*;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 
 @WebServlet("/test")
@@ -29,11 +24,11 @@ public class test extends HttpServlet {
         }
         String str = stringBuilder.toString();
         System.out.println(str);
-        Map<String,String> map = JSONLIKE.myJson(str);
+        Map<String, String> map = JSONLIKE.myJson(str);
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        PrintWriter pw = resp.getWriter();
-        String json = JSONLIKE.myMap2JSON(map);
+        PrintWriter pw   = resp.getWriter();
+        String      json = JSONLIKE.myMap2JSON(map);
         System.out.println(json);
         pw.print(json);
         pw.flush();

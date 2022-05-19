@@ -9,19 +9,18 @@
     <script type="text/javascript" src="payment.js"></script>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
     <script>
-        function getCookie(cname)
-        {
+        function getCookie(cname) {
             var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0; i<ca.length; i++)
-            {
+            var ca   = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
                 var c = ca[i].trim();
-                if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
             }
             return "";
         }
-        window.onload = function() {
-            var oid = getCookie("oid");
+
+        window.onload = function () {
+            var oid   = getCookie("oid");
             const req = new XMLHttpRequest();
             req.open("POST", "payment", true);
             req.setRequestHeader('Content-Type', 'application/json');
@@ -29,53 +28,55 @@
             jsonObj.oid = oid;
             console.log(oid);
             req.send(JSON.stringify(jsonObj));
-            req.onreadystatechange = function() {
+            req.onreadystatechange = function () {
                 if (req.readyState === 4) {
                     console.log(req.response);
-                    const json = JSON.parse(req.response);
-                    document.getElementById("payprice").innerHTML=json.price;
+                    const json                                    = JSON.parse(req.response);
+                    document.getElementById("payprice").innerHTML = json.price;
                 }
             }
         }
 
         $(document).ready(function () {
             var starRating = 0;
-            $('.photo span').on('mouseenter',function () {
-                var index = $(this).index()+1;
-                $(this).prevAll().find('.high').css('z-index',1)
-                $(this).find('.high').css('z-index',1)
-                $(this).nextAll().find('.high').css('z-index',0)
-                $('.starNum').html((index).toFixed(1)+' Star')
+            $('.photo span').on('mouseenter', function () {
+                var index = $(this).index() + 1;
+                $(this).prevAll().find('.high').css('z-index', 1)
+                $(this).find('.high').css('z-index', 1)
+                $(this).nextAll().find('.high').css('z-index', 0)
+                $('.starNum').html((index).toFixed(1) + ' Star')
             })
-            $('.photo').on('mouseleave',function () {
-                $(this).find('.high').css('z-index',0)
+            $('.photo').on('mouseleave', function () {
+                $(this).find('.high').css('z-index', 0)
                 var count = starRating / 2
-                if(count == 5) {
-                    $('.photo span').find('.high').css('z-index',1);
+                if (count == 5) {
+                    $('.photo span').find('.high').css('z-index', 1);
                 } else {
-                    $('.photo span').eq(count).prevAll().find('.high').css('z-index',1);
+                    $('.photo span').eq(count).prevAll().find('.high').css('z-index', 1);
                 }
-                $('.starNum').html(starRating.toFixed(1)/2+' Star')
+                $('.starNum').html(starRating.toFixed(1) / 2 + ' Star')
             })
-            $('.photo span').on('click',function () {
-                var index = $(this).index()+1;
-                $(this).prevAll().find('.high').css('z-index',1)
-                $(this).find('.high').css('z-index',1)
-                starRating = index*2;
+            $('.photo span').on('click', function () {
+                var index = $(this).index() + 1;
+                $(this).prevAll().find('.high').css('z-index', 1)
+                $(this).find('.high').css('z-index', 1)
+                starRating  = index * 2;
                 starRating1 = index;
-                $('.starNum').html(starRating1.toFixed(1)+' Star');
+                $('.starNum').html(starRating1.toFixed(1) + ' Star');
 
             })
 
         })
+
         function getTime() {
             var date  = new Date();
             var year  = date.getFullYear();
             var month = date.getMonth() + 1;
             var day   = date.getDate();
 
-            return  year + "-" + month + "-" + day;
+            return year + "-" + month + "-" + day;
         }
+
         function tans_pay_info() {
             var select1  = document.getElementById("select_bank");
             var index1   = select1.selectedIndex;
@@ -100,15 +101,15 @@
             var z_code        = document.getElementById("z_code").value;
             var bill_post1    = document.getElementById("bill_post1").value;
             var bill_post2    = document.getElementById("bill_post2").value;
-            var star = document.getElementById("starN").innerHTML;
-            var comm = document.getElementById("TextArea1").value;
-            var endTime = getTime();
-            var oid = getCookie("oid");
+            var star          = document.getElementById("starN").innerHTML;
+            var comm          = document.getElementById("TextArea1").value;
+            var endTime       = getTime();
+            var oid           = getCookie("oid");
 
             const req = new XMLHttpRequest();
 
             var jsonObj_Pay = {
-                oid:oid,
+                oid: oid,
                 Card_type: pay_type,
                 Bank_num: bank_num,
                 Valid_month: valid_month,
@@ -120,9 +121,9 @@
                 Z_code: z_code,
                 Address1: bill_post1,
                 Address2: bill_post2,
-                star:star,
-                comm:comm,
-                endTime:endTime
+                star: star,
+                comm: comm,
+                endTime: endTime
             };
 
             console.log(jsonObj_Pay);
@@ -133,7 +134,7 @@
             ));
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
-                    window.open("../customer/customer.html",target="_self");
+                    window.open("../customer/customer.html", target = "_self");
                 }
             }
         }
@@ -249,12 +250,11 @@
                                 <span><i class="high"></i><i class="nohigh"></i></span>
                                 <span><i class="high"></i><i class="nohigh"></i></span>
                             </p>
-                            <p class="starNum" id = "starN">0.0 Star</p>
+                            <p class="starNum" id="starN">0.0 Star</p>
 
                         </div>
 
                         <h5>What impression does this transaction leave on you? </h5>
-
 
 
                         <!-- create textarea for comment publish -->
@@ -267,7 +267,7 @@
                 </div>
             </footer>
             <h3 class="sizea">You need pay: </h3>
-            <div style="font-size: 40px" >
+            <div style="font-size: 40px">
                 <span>$ </span><span id="payprice">123</span>
             </div>
 
@@ -282,7 +282,6 @@
         </p>
     </div>
 </main>
-
 
 
 </body>
