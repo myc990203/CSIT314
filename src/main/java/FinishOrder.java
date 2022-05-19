@@ -35,7 +35,7 @@ public class FinishOrder extends HttpServlet {
         String coordinates = map.get("coordinates");
         String status = map.get("status");
         try {
-            JdbcUtil.updateCurrentOrder(requestID, pid,"finished");
+            JdbcUtil.updateCurrentOrder(requestID, pid,"Finished");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {

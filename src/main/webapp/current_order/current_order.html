@@ -50,10 +50,11 @@
             return "";
         }
         function showPayBTN(){
-
+            document.getElementById("pay").style.display = "inline";
         }
         window.onload = function() {
             getLocation();
+
             var curorder_id = getCookie("oid");
             alert(curorder_id);
             const req = new XMLHttpRequest();
@@ -72,11 +73,18 @@
                     document.getElementById("vehicle").innerHTML=json.vehiclePlate;
                     document.getElementById("issue").innerHTML=json.issue;
                     document.getElementById("sstate").innerHTML=json.sstate;
+                    if (json.sstate=="Finished"){
+                        document.getElementById("pay").style.display = "inline";
+                    }
+                    else{
+                        document.getElementById("pay").style.display = "none";
+                    }
                     document.getElementById("orderStartDate").innerHTML=json.orderStartDate;
                     document.getElementById("price").innerHTML=json.price;
 
                 }
             }
+            showPayBTN();
         }
     </script>
 </head>
