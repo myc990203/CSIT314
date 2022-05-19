@@ -99,24 +99,24 @@ drop table cur_orders;
 drop table Professional;
 
 
-# insert into customer(cusName, phoneNum, vipStart, vipEnd, email, gender)
-#     value ('name', 'phoneNum', '1999-10-12', '2000-10-12', 'email', 'male');
-#
-# insert into professional(proName, phoneNum,pLevel,balance,location, email, gender)
-#     value ('pname2', 'phoneNum',10,1100,'location','email', 'male');
-#
-# insert into orders(orderStartDate,cusNum,price,vehiclePlate,location,issue,proNum,orderEndDate,review,rating,payCardNum,payType)
-# value ('1999-10-12',1,50,'plate','loaction','issue',3,'1999-10-12','124321535145124123review',
-#       3,'12415135','income');
-#
-# insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender) values
-# ('passw', 'name', '1999-10-12', '14141', '1999-10-12', '1999-10-12','111@131','ma');
-#
-# insert into Vehicle(plateNum, model, cusNum) VALUE ('plateNum','BMW',1);
-# commit ;
-#
-#
-# UPDATE customer  SET cusName='123',gender='male',cusDOB='2022-05-19',phoneNum='1231',cusPw='123133',email='123@312.com',plateNum='1231',vehicleModel='123123' WHERE cusNum = 8;
-#
-#
+-- # insert into customer(cusName, phoneNum, vipStart, vipEnd, email, gender)
+-- #     value ('name', 'phoneNum', '1999-10-12', '2000-10-12', 'email', 'male');
+-- #
+-- # insert into professional(proName, phoneNum,pLevel,balance,location, email, gender)
+-- #     value ('pname2', 'phoneNum',10,1100,'location','email', 'male');
+-- #
+-- # insert into orders(orderStartDate,cusNum,price,vehiclePlate,location,issue,proNum,orderEndDate,review,rating,payCardNum,payType)
+-- # value ('1999-10-12',1,50,'plate','loaction','issue',3,'1999-10-12','124321535145124123review',
+-- #       3,'12415135','income');
+-- #
+-- # insert into CUSTOMER (cusPw,cusName,cusDOB,phoneNum,vipStart,vipEnd,email,gender) values
+-- # ('passw', 'name', '1999-10-12', '14141', '1999-10-12', '1999-10-12','111@131','ma');
+-- #
+-- # insert into Vehicle(plateNum, model, cusNum) VALUE ('plateNum','BMW',1);
+-- # commit ;
+-- #
+-- #
+-- # UPDATE customer  SET cusName='123',gender='male',cusDOB='2022-05-19',phoneNum='1231',cusPw='123133',email='123@312.com',plateNum='1231',vehicleModel='123123' WHERE cusNum = 8;
+-- #
+-- #
 
