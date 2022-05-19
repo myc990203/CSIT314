@@ -48,7 +48,15 @@
             }
         }
         function back(){
-            window.open("../payment/payment.html",target="_self");
+            var type = getCookie("type");
+            if(type=="cus"){
+                window.open("../customer/customer.html",target="_self");
+            }else{
+                window.open("../professional/professional.html",target="_self");
+            }
+        }
+        function logOut(){
+            window.open("../index.jsp",target="_self");
         }
     </script>
 </head>
@@ -63,8 +71,7 @@
     <button onclick="back()">Back</button>
 </div>
 <div class="topright">
-    <a href=""><button>Account</button></a>
-    <a href=""><button>Logout</button></a>
+    <button onclick="logOut()">Log out</button>
 </div>
 <div class="mid">
     <div class="nav">

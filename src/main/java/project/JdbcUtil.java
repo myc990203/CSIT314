@@ -310,6 +310,37 @@ public class JdbcUtil {
         System.out.println(temp1);
         return temp1;
     }
+    public static String sqlProOrderSelect(String O_proNum) throws SQLException, ClassNotFoundException {
+        Connection        conn   = connectSql();
+        String            sql    = "select * from orders where O_proNum = ?";
+        PreparedStatement psmt   = conn.prepareStatement(sql);
+        psmt.setString(1, O_proNum);
+        ResultSet  rs     = psmt.executeQuery();
+        Map<String,String> res = new LinkedHashMap<String, String>();
+        String temp1 ="[";
+        while (rs.next()) {
+            res.put("orderid", String.valueOf(rs.getInt("orderid")));
+            res.put("orderStartDate",rs.getString("orderStartDate"));
+            res.put("vehiclePlate",rs.getString("vehiclePlate"));
+            res.put("price",rs.getString("price"));
+            res.put("location",rs.getString("location"));
+            res.put("issue",rs.getString("issue"));
+            res.put("O_cusNum",rs.getString("O_cusNum"));
+            res.put("O_proNum",rs.getString("O_proNum"));
+            res.put("OrderEndDate",rs.getString("OrderEndDate"));
+            res.put("review",rs.getString("review"));
+            res.put("rating",rs.getString("rating"));
+            res.put("payCardNum",rs.getString("payCardNum"));
+            res.put("payType",rs.getString("payType"));
+            String temp = JSONLIKE.myMap2JSON(res);
+            temp1 += temp+",";
+        }
+        temp1=temp1.substring(0,temp1.length()-1);
+        temp1+="]";
+        System.out.println("sqlCusOrderSelect");
+        System.out.println(temp1);
+        return temp1;
+    }
     public static void sqlCurrOrderInsert(String orderStartDate, String vehiclePlate, float price, String c_location, String issue, String O_cusNum) throws SQLException, ClassNotFoundException {
         Connection        con  = connectSql();
         String state = "waiting";

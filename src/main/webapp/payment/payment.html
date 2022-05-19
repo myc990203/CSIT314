@@ -133,7 +133,6 @@
             ));
             req.onreadystatechange = function () {
                 if (req.readyState === 4) {
-                    const json = JSON.parse(req.response);
                     window.open("../customer/customer.html",target="_self");
                 }
             }

@@ -59,7 +59,11 @@ public class Payment extends HttpServlet{
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        PrintWriter pw   = resp.getWriter();
+        pw.print("{\"oid\":\"43\"}");
+        pw.flush();
 
     }
 }

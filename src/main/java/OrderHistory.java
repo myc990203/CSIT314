@@ -37,6 +37,14 @@ public class OrderHistory extends HttpServlet{
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
+        }else{
+            try {
+                res = JdbcUtil.sqlProOrderSelect(map.get("uid"));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         }
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
