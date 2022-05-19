@@ -58,7 +58,6 @@
             getLocation();
 
             var curorder_id = getCookie("oid");
-            alert(curorder_id);
             const req = new XMLHttpRequest();
             req.open("POST", "current_order", true);
             req.setRequestHeader('Content-Type', 'application/json');

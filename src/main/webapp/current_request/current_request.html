@@ -57,7 +57,6 @@
         window.onload = function () {
             getLocation();
             var currequest_id = getCookie("requestID");
-            alert(currequest_id);
             const req = new XMLHttpRequest();
             req.open("POST", "current_request", true);
             req.setRequestHeader('Content-Type', 'application/json');

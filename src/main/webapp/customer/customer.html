@@ -37,6 +37,7 @@
 
         window.onload = function () {
             getTime();
+            getLocation();
             var uid   = getCookie("uid");
             const req = new XMLHttpRequest();
             req.open("POST", "customer", true);
