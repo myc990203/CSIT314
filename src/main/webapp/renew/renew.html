@@ -37,14 +37,15 @@
             time, time
         };
         console.log(jsonObj);
-        req.open("POST", "Renew", true);
+        const req = new XMLHttpRequest();
+        req.open("POST", "renew", true);
         req.setRequestHeader('Content-Type', 'application/json');
         req.send(JSON.stringify(
             jsonObj
         ));
         req.onreadystatechange = function () {
             if (req.readyState === 4) {
-                window.location.href = "./customer/customer.html";
+                window.location.href = "../customer/customer.html";
             }
 
         }
