@@ -14,17 +14,12 @@
     }
 
     window.onload = function() {
-        var userId = getCookie("phone");
-        var usertype = getCookie("type");
+        var userId = getCookie("uid");
         const req = new XMLHttpRequest();
         req.open("POST", "renew", true);
         req.setRequestHeader('Content-Type', 'application/json');
         var jsonObj = new Object();
         jsonObj.uid = userId;
-        jsonObj.type = usertype;
-
-
-
         console.log(usertype);
         req.send(JSON.stringify(jsonObj));
         req.onreadystatechange = function() {
@@ -42,9 +37,6 @@
         }
     }
 </script>
-
-
-
 
 
 
