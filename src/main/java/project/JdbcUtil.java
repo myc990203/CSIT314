@@ -530,17 +530,12 @@ public class JdbcUtil {
         con.close();
 
     }
-    public static void sqlRenewUpdateByMembNum(String membNum,  String birthday, String cardName, String cardNum, String expDate, String cvv) throws SQLException, ClassNotFoundException {
+    public static void sqlUpdateVIP(String uid, String date) throws SQLException, ClassNotFoundException {
         Connection con = connectSql();
-        String            sql         = "update renew set birthday=?,cardName=?,cardNum=?,expDate=?,cvv=?  where membNum=?";
+        String            sql         = "update customer set vipEnd=? where cusNum=?";
         PreparedStatement psmt        = con.prepareStatement(sql);
-
-        psmt.setString(1, birthday);
-        psmt.setString(2, cardName);
-        psmt.setString(3, cardNum);
-        psmt.setString(4, expDate);
-        psmt.setString(5, cvv);
-        psmt.setString(6, membNum);
+        psmt.setString(1, date);
+        psmt.setString(2, uid);
         psmt.execute();
         con.close();
     }

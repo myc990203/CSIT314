@@ -10,13 +10,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-@WebServlet("/Renew")
+
+@WebServlet("/renew/renew")
 public class Renew extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        System.out.println("/renew/renew");
         BufferedReader bufferedReader = req.getReader();
         StringBuilder  stringBuilder  = new StringBuilder();
         String         line;
@@ -25,49 +29,28 @@ public class Renew extends HttpServlet {
         }
         String str = stringBuilder.toString();
         System.out.println(str);
-        Map<String,String> reqmap = JSONLIKE.myJson(str);
-        String              Num = reqmap.get("Num");
-        String              phone     = reqmap.get("phone");
-        String              membNum = reqmap.get("membNum");
-        String              birthday = reqmap.get("birthday");
-        String              cardName     = reqmap.get("cardName");
-        String              cardNum = reqmap.get("cardNum");
-        String              expDate = reqmap.get("expDate");
-        String              CVV     = reqmap.get("cvv");
-        String res      = "";
-        if (Num.equals("mobileNum")) {
-            try {
-                res = JdbcUtil.sqlRenewSelect(phone,true);
-                if (res==null||"".equals(res)){
-                    JdbcUtil.sqlRenewInsert(phone,membNum,birthday,cardName,cardNum,expDate,CVV);
-                }else {
-                    JdbcUtil.sqlRenewUpdateByPhone(phone,birthday,cardName,cardNum,expDate,CVV);
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-
-        } else {
-            try {
-                res = JdbcUtil.sqlRenewSelect(membNum,false);
-                if (res==null||"".equals(res)){
-                    JdbcUtil.sqlRenewInsert(phone,membNum,birthday,cardName,cardNum,expDate,CVV);
-                }else {
-                    JdbcUtil.sqlRenewUpdateByMembNum(membNum,birthday,cardName,cardNum,expDate,CVV);
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
+        Map<String, String> reqmap = JSONLIKE.myJson(str);
+        int              time   = Integer.parseInt(reqmap.get("time"))*30;
+        String           uid = reqmap.get("uid");
+        Date d = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar ca = Calendar.getInstance();
+        ca.add(Calendar.DATE, time);// num为增加的天数，可以改变的
+        d = ca.getTime();
+        String enddate = format.format(d);
+        try {
+            JdbcUtil.sqlUpdateVIP(uid,enddate);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
-        PrintWriter pw   = resp.getWriter();
+        PrintWriter pw = resp.getWriter();
         pw.print("{\"status\":\"success\"}");
         pw.flush();
+
     }
 
 }
