@@ -22,7 +22,7 @@
             getLocation();
 
             window.navigator.geolocation.getCurrentPosition(function (position){
-                document.cookie ="coordinates="+position.coords.latitude+"#"+position.coords.longitude;
+                document.cookie ="coordinates="+position.coords.latitude+"#"+position.coords.longitude+"; path=/CSIT314_war_exploded";
             })
             var uid = getCookie("uid");
             var coordinates = getCookie("coordinates");

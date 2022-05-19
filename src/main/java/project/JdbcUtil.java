@@ -192,6 +192,23 @@ public class JdbcUtil {
         System.out.println("this is JDBC: "+temp);
         return temp;
     }
+    public static Map sqlCurrentRequest(String address, String requestID) throws SQLException, ClassNotFoundException {
+        Connection        conn   = connectSql();
+        String            sql    = "select * from cur_orders,customer where cur_orderid = ? and customer.cusNum = cur_orders.O_cusNum;";
+        PreparedStatement psmt   = conn.prepareStatement(sql);
+        psmt.setString(1,requestID);
+        ResultSet  rs     = psmt.executeQuery();
+        Map<String, String> res = new LinkedHashMap<String,String>();
+        while (rs.next()){
+                res.put("curorder",rs.getString("cur_orderid"));
+                res.put("O_cusNum",rs.getString("O_cusNum"));
+                res.put("cusName",rs.getString("cusName"));
+                res.put("c_location",rs.getString("c_location"));
+                res.put("issue",rs.getString("issue"));
+                res.put("vehiclePlate",rs.getString("vehiclePlate"));
+        }
+        return res;
+    }
     private static double rad(double d){
         return d * Math.PI / 180.0;
     }
@@ -413,6 +430,20 @@ public class JdbcUtil {
         //执行SQL语句
         psmt.execute();
     }
+    public static void updateCurrentOrder(String oid,String pid,String sstate) throws SQLException, ClassNotFoundException {
+        Connection con = connectSql();
+        String sql = "update cur_orders " +
+                "set O_proNum=? ,sstate = ?" +
+                "where cur_orderid=?";
+        //预编译sql语句
+        PreparedStatement psmt        = con.prepareStatement(sql);
+        //先对应SQL语句，给SQL语句传递参数
+        psmt.setString(1, pid);
+        psmt.setString(2, sstate);
+        psmt.setString(3, oid);
+        //执行SQL语句
+        psmt.execute();
+    }
 
     //sql update Professional
     public static void updateProfessional(Map<String,String> map) throws SQLException, ClassNotFoundException {
@@ -482,4 +513,61 @@ public class JdbcUtil {
         return sdate;
     }
 
+    public static String sqlRenewSelect(String num,boolean isPhone) throws SQLException, ClassNotFoundException {
+        Connection        conn   = connectSql();
+        String sql ="";
+        if (isPhone){
+            sql    = "select * from renew where phone = ?";
+        }else {
+            sql    = "select * from renew where membNum = ?";
+        }
+
+        PreparedStatement psmt   = conn.prepareStatement(sql);
+        psmt.setString(1, num);
+        ResultSet  rs     = psmt.executeQuery();
+        String res = "";
+        while (rs.next()) {
+            res = rs.getString(1);
+        }
+        return res;
+    }
+    public static void sqlRenewInsert(String phone,String membNum, String birthday, String cardName, String cardNum, String expDate, String cvv) throws SQLException, ClassNotFoundException {
+        Connection con = connectSql();
+        String            sql         = "insert into renew (phone,birthday,cardName,cardNum,expDate,cvv,membNum) values (?,?,?,?,?,?,?)";
+        PreparedStatement psmt        = con.prepareStatement(sql);
+        psmt.setString(1, phone);
+        psmt.setString(2, birthday);
+        psmt.setString(3, cardName);
+        psmt.setString(4, cardNum);
+        psmt.setString(5, expDate);
+        psmt.setString(6, cvv);
+        psmt.setString(7, membNum);
+        psmt.execute();
+        con.close();
+    }
+
+    public static void sqlRenewUpdateByPhone(String phone,  String birthday, String cardName, String cardNum, String expDate, String cvv) throws SQLException, ClassNotFoundException {
+        Connection con = connectSql();
+        String            sql         = "update renew set birthday=?,cardName=?,cardNum=?,expDate=?,cvv=?  where phone=?";
+        PreparedStatement psmt        = con.prepareStatement(sql);
+
+        psmt.setString(1, birthday);
+        psmt.setString(2, cardName);
+        psmt.setString(3, cardNum);
+        psmt.setString(4, expDate);
+        psmt.setString(5, cvv);
+        psmt.setString(6, phone);
+        psmt.execute();
+        con.close();
+
+    }
+    public static void sqlUpdateVIP(String uid, String date) throws SQLException, ClassNotFoundException {
+        Connection con = connectSql();
+        String            sql         = "update customer set vipEnd=? where cusNum=?";
+        PreparedStatement psmt        = con.prepareStatement(sql);
+        psmt.setString(1, date);
+        psmt.setString(2, uid);
+        psmt.execute();
+        con.close();
+    }
 }

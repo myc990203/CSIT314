@@ -7,70 +7,124 @@
     <link rel="stylesheet" type="text/css" href="../current_request/current_request.css"/>  
     <script src="../current_request/current_request.js"></script>
     <title>Professional Road Assistant</title>
+    <script>
+        // current location
+        var latitude;
+        var longitude;
+        function getLocation()
+        {
+            var x=document.getElementById("demo");
+            var lat;
+            var lng;
+            if (navigator.geolocation)
+            {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+            else{x.innerHTML="Geolocation is not supported by this browser.";}
+            function showPosition(position)
+            {
+                lng = position.coords.longitude;
+                lat = position.coords.latitude;
+                latitude = lat;
+                longitude = lng;
+                var site = lat.toFixed(6)+','+lng.toFixed(6);
+                console.log(site)
+                // document.getElementById("demo").innerHTML = site;
+                showMap();
+            }
+
+        }
+        function showMap(){
+            document.getElementById("map").style.display = "block";
+            document.getElementById("map").innerHTML = "<iframe width=600 height=450 style=border:0 loading=lazy allowfullscreen referrerpolicy=no-referrer-when-downgrade src=https://www.google.com/maps/embed/v1/place?key=AIzaSyCD3IzyW0QXpfbqQequxGGx2CPVpVZsV1c&q="+latitude+","+longitude+"> </iframe>";
+        }
+        function getCookie(cname)
+        {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++)
+            {
+                var c = ca[i].trim();
+                if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+            }
+            return "";
+        }
+        function showPayBTN(){
+
+        }
+        window.onload = function() {
+            getLocation();
+            var currequest_id = getCookie("requestID");
+            alert(currequest_id);
+            const req = new XMLHttpRequest();
+            req.open("POST", "current_request", true);
+            req.setRequestHeader('Content-Type', 'application/json');
+            var jsonObj = new Object();
+            jsonObj.requestID = currequest_id;
+            jsonObj.pid = getCookie("uid");
+            jsonObj.coordinates = getCookie("coordinates");
+            console.log(currequest_id);
+            req.send(JSON.stringify(jsonObj));
+            req.onreadystatechange = function() {
+                if (req.readyState === 4) {
+                    console.log(req.response);
+                    const json = JSON.parse(req.response);
+                    document.getElementById("orderId").innerHTML=json.curorder;
+                    document.getElementById("cusID").innerHTML=json.O_cusNum;
+                    document.getElementById("cusName").innerHTML=json.cusName;
+                    document.getElementById("c_location").innerHTML=json.c_location;
+                    document.getElementById("issue").innerHTML=json.issue;
+                    document.getElementById("vehiclePlate").innerHTML=json.vehiclePlate;
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-    <div id="header">
-        <h1>
-            Professional Road Assistant
-        </h1>
+
+<div id="header">
+    <h1>
+        Current Serving
+    </h1>
+</div><hr>
+
+<div>
+    <div class="left-part">
+        <div class="form">
+            <h3>Order Details</h3>
+            <div>
+                <div>Order ID: </div>
+                <span id = "orderId"></span>
+            </div><br>
+            <div>
+                <div>Customer ID: </div>
+                <span id = "cusID"></span>
+            </div><br>
+            <div>
+                <div>Customer Name: </div>
+                <span id = "cusName"></span>
+            </div><br>
+            <div>
+                <div>Vehicle Plate: </div>
+                <span id = "vehiclePlate"></span>
+            </div><br>
+            <div>
+                <div>Issue: </div>
+                <span id = "issue"></span>
+            </div><br>
+            <div>
+                <div>Customer Location: </div>
+                <span id = "c_location"></span>
+            </div><br>
+            <div class="btn">
+                <button onclick="finishOrder()">Finish</button>&nbsp;&nbsp;
+                <button onclick="back()">Back</button>
+<!--                <button onclick="payBtn()" id="pay" style="display: none"> Pay</button>&nbsp;&nbsp;-->
+            </div>
+        </div>
     </div>
-    <table style="width: 100%;">
-        <table style="width: 25%;">
-            <tbody>
-                <tr>
-                    <h2>
-                        <input type="button" onclick="display_alert()" value="服务开始" />
-                    </h2>
-                </tr>
-                <tr>
-                    <td style="width: 25%;" id="顾客信息">
-                        <table>
-                            <tr>
-                                <td style="width: 30%;">
-                                    <img src="" alt="顾客头像">
-                                </td>
-                                <td>
-                                    姓: <br>
-                                    性别: <br>
-                                    联系电话： <br>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    
-                </tr>
-                <tr>
-                    <td style="width: 50%;" id="事件类型">
-                        维护人员服务界面选择 <br>
-                        <form action="#">
-                            <label for="服务类别">事故类别</label>
-                            <select name="服务类别" id="serving type">
-                              <option value="1">事务类别1</option>
-                              <option value="2">事务类别2</option>
-                              <option value="3">事务类别3</option>
-                              <option value="4">事务类别4</option>
-                              <option value="5">事务类别5</option>
-                              <option value="6">事务类别6</option>
-                              <option value="7">事务类别7</option>
-                              <option value="8">事务类别8</option>
-                            </select>
-                            <input type="submit" value="Submit" />
-                      </form>
-                    </td>
-                </tr>
-                <tr>
-                    <h2>
-                        <input type="button" onclick="display_alert()" value="服务结束" />
-                    </h2>
-                </tr>
-            </tbody>
-        </table>
 
-        <table style="width: 50%;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3291.0801341075103!2d150.89169511616595!3d-34.42471958050633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b1319a5c5b704fb%3A0x3f038f4f50910d82!2sWollongong%20Central!5e0!3m2!1szh-CN!2sau!4v1648952144074!5m2!1szh-CN!2sau" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </table>
-
-    </table>
-    <button onclick="back()">Back</button>
+    <div id="map"></div>
+</div>
 </body>
 </html>

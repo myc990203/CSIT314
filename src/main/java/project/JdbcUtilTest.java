@@ -4,6 +4,9 @@ import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -86,6 +89,17 @@ class JdbcUtilTest {
 
     @Test
     void toSqlData() {
+        int time = 30;
+        Date d = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String currdate = format.format(d);
+        System.out.println("现在的日期是：" + currdate);
+
+        Calendar ca = Calendar.getInstance();
+        ca.add(Calendar.DATE, time);// num为增加的天数，可以改变的
+        d = ca.getTime();
+        String enddate = format.format(d);
+        System.out.println(enddate);
     }
     @Test
     void getDistance(){
@@ -117,5 +131,10 @@ class JdbcUtilTest {
         map.put("orderEndDate","2022-05-18");
         System.out.println(map);
         JdbcUtil.sqlOrderInsert(map);
+    }
+    @Test
+    void sqlUpdateVIP() throws SQLException, ClassNotFoundException {
+        JdbcUtil.sqlUpdateVIP("7","2022-06-18");
+
     }
 }
